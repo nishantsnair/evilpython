@@ -4,10 +4,7 @@
 
 [TOC]
 
-
-## Potentially Dangerous *Shell* Commands
-
-### Shell Review
+## Shell Review
 
 You have opened **Terminal**, **Command Prompt**, **PowerShell** or something equivalent.
 
@@ -26,8 +23,11 @@ You know the following **commands**:
 | `touch <filename>` | Touch | Creates a file called `<filename>` in the present working directory|
 | `mkdir <foldername>`| Make Directory | Creates a folder called `<foldername>` in the present working directory |
 | `echo <text>` or `echo "<text>"`| Echo | Sends `<text>` to the console. If `<text>` contains spaces, enclose it in quotes, like `echo "hello my friend"`|
+| `rm <filename>` | Remove | Removes the file called `<filename>` in the present working directory if it exists|
+| `rm -rf <foldername>` | Remove Recursive | Removes the folder called `<foldername>` in the present working directory, including all its contents. Cannot be undone |
 
-#### Paths
+
+### Paths
 
 You can refer to files and folders relative to other folders with a `/` on Unix (Mac/Linux) or a `\` on Windows, such as `touch folder1/folder2/filename` (or `touch folder1\folder2\filename`) to create a file called `filename` in `folder2`, which is inside `folder1`, which is inside the current directory.
 
@@ -37,9 +37,9 @@ Most paths are **relative** to the current directory, so `folder/file` means *"t
 
 Sometimes **absolute** paths are used, which are built up from the **root directory** (which is usually your `C:` drive). These paths start with a `/`. So `/folder/file` means *"The file called `file` in the folder called `folder`, which is in the root directory"*.
 
-The symbol `~` is an alias for your user's "home" folder, which is different on different systems. On Mac, `~/Desktop` is short for `/Users/username/Desktop`, where `username` is a Mac username. On Windows, `~/Desktop` is short for `C:\Users\username` where `username` is a Windows username.
+The symbol `~` is an alias for your user's "home" folder, which is different on different systems. On Mac, `~/Desktop` is short for `/Users/username/Desktop`, where `username` is a Mac username. On Windows, `~\Desktop` is short for `C:\Users\username` where `username` is a Windows username.
 
-#### Shell Command Examples
+### Shell Command Assignments
 
 Suppose your directory looks like this:
 
@@ -55,15 +55,61 @@ Suppose your directory looks like this:
         └── file_two
 ```
 
+1.
+	**In one command**, create a file called `hello.py` in the directory `midfolder` so that your directory looks like this:
+	```
+	.
+	└── topfolder
+	    ├── file_one
+	    ├── file_two
+	    └── midfolder
+	        ├── deepfolder
+	        │   └── deep_file
+	        ├── file_one
+	        ├── file_two
+	        └── hello.py
+	```
+2.
+	**In one command**, create a directory called `sup` in `midfolder` so that your directory looks like this:
+	```
+	.
+	└── topfolder
+	    ├── file_one
+	    ├── file_two
+	    └── midfolder
+	        ├── deepfolder
+	        │   └── deep_file
+	        ├── file_one
+	        ├── file_two
+	        └── sup
+	```
+3.
+	**In two commands**, make your directory look like this:
+	```
+	.
+	└── topfolder
+	    ├── file_one
+	    ├── file_two
+	    └── midfolder
+	        ├── another_file
+	        ├── file_one
+	        └── file_two
+	```
+4.
+	**BONUS**
+	*Undo* each of the assigned changes using shell commands.
+
+#### Solutions
+
+[View solutions here](https://zsiegel92.github.io/evilpython/lesson_1_solutions.html).
+
 ### Causing Problems with Shell Commands
+
+
 
 ## Creating Files using Code
 
-First, let's talk about
 
-```bash
-$ touch hello
-```
 
 
 ## Sending Emails using Code
