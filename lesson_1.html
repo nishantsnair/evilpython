@@ -1087,11 +1087,105 @@ body .markdown-body
 <div class="toc">
 <ul>
 <li><a href="#evil-python-lesson-1">Evil Python Lesson 1</a><ul>
+<li><a href="#potentially-dangerous-shell-commands">Potentially Dangerous Shell Commands</a><ul>
+<li><a href="#shell-review">Shell Review</a><ul>
+<li><a href="#paths">Paths</a></li>
+<li><a href="#shell-command-examples">Shell Command Examples</a></li>
+</ul>
+</li>
+<li><a href="#causing-problems-with-shell-commands">Causing Problems with Shell Commands</a></li>
+</ul>
+</li>
 <li><a href="#creating-files-using-code">Creating Files using Code</a></li>
 <li><a href="#sending-emails-using-code">Sending Emails using Code</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<h2 id="potentially-dangerous-shell-commands">Potentially Dangerous <em>Shell</em> Commands<a class="headerlink" href="#potentially-dangerous-shell-commands" title="Permanent link"></a></h2>
+<h3 id="shell-review">Shell Review<a class="headerlink" href="#shell-review" title="Permanent link"></a></h3>
+<p>You have opened <strong>Terminal</strong>, <strong>Command Prompt</strong>, <strong>PowerShell</strong> or something equivalent.</p>
+<p>You have seen the <strong>shell</strong>.</p>
+<p>You know the following <strong>commands</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Name</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pwd</code></td>
+<td>Present Working Directory</td>
+<td>Displays the present working directory in the console</td>
+</tr>
+<tr>
+<td><code>ls</code></td>
+<td>List</td>
+<td>Displays all files and folders in the peresent working directory in the console</td>
+</tr>
+<tr>
+<td><code>ls &lt;foldername&gt;</code></td>
+<td>List</td>
+<td>Same as <code>ls</code>, but searches in the folder <code>&lt;foldername&gt;</code>. Note <code>ls .</code> is the same as <code>ls</code> because <code>.</code> refers to the current present working directory</td>
+</tr>
+<tr>
+<td><code>ls -A</code></td>
+<td>List All</td>
+<td>Same as <code>ls</code>, but includes hidden files and folders beginning with <code>.</code> (such as <code>.git</code>)</td>
+</tr>
+<tr>
+<td><code>cd &lt;foldername&gt;</code></td>
+<td>Change Directory</td>
+<td>If <code>&lt;foldername&gt;</code> is the name of a directory <em>inside the current directory</em>, change to that directory</td>
+</tr>
+<tr>
+<td><code>cd ..</code></td>
+<td>Change Directory</td>
+<td><code>..</code> means <em>&ldquo;the directory containing the present working directory&rdquo;</em>, so this goes &ldquo;up one level&rdquo; to that directory</td>
+</tr>
+<tr>
+<td><code>touch &lt;filename&gt;</code></td>
+<td>Touch</td>
+<td>Creates a file called <code>&lt;filename&gt;</code> in the present working directory</td>
+</tr>
+<tr>
+<td><code>mkdir &lt;foldername&gt;</code></td>
+<td>Make Directory</td>
+<td>Creates a folder called <code>&lt;foldername&gt;</code> in the present working directory</td>
+</tr>
+<tr>
+<td><code>echo &lt;text&gt;</code> or <code>echo "&lt;text&gt;"</code></td>
+<td>Echo</td>
+<td>Sends <code>&lt;text&gt;</code> to the console. If <code>&lt;text&gt;</code> contains spaces, enclose it in quotes, like <code>echo "hello my friend"</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="paths">Paths<a class="headerlink" href="#paths" title="Permanent link"></a></h4>
+<p>You can refer to files and folders relative to other folders with a <code>/</code> on Unix (Mac/Linux) or a <code>\</code> on Windows, such as <code>touch folder1/folder2/filename</code> (or <code>touch folder1\folder2\filename</code>) to create a file called <code>filename</code> in <code>folder2</code>, which is inside <code>folder1</code>, which is inside the current directory.</p>
+<p>The symbol <code>.</code> is short for <em>&ldquo;this directory&rdquo;</em> and <code>..</code> is short for <em>&ldquo;the directory enclosing this one&rdquo;</em>. You can <code>cd ..</code> to leave the current directory, and you can even <code>cd ../..</code> to leave the directory containing the current directory.</p>
+<p>Most paths are <strong>relative</strong> to the current directory, so <code>folder/file</code> means <em>&ldquo;the file called <code>file</code> in the folder called <code>folder</code>, which is in the current directory&rdquo;</em>.</p>
+<p>Sometimes <strong>absolute</strong> paths are used, which are built up from the <strong>root directory</strong> (which is usually your <code>C:</code> drive). These paths start with a <code>/</code>. So <code>/folder/file</code> means <em>&ldquo;The file called <code>file</code> in the folder called <code>folder</code>, which is in the root directory&rdquo;</em>.</p>
+<p>The symbol <code>~</code> is an alias for your user&rsquo;s &ldquo;home&rdquo; folder, which is different on different systems. On Mac, <code>~/Desktop</code> is short for <code>/Users/username/Desktop</code>, where <code>username</code> is a Mac username. On Windows, <code>~/Desktop</code> is short for <code>C:\Users\username</code> where <code>username</code> is a Windows username.</p>
+<h4 id="shell-command-examples">Shell Command Examples<a class="headerlink" href="#shell-command-examples" title="Permanent link"></a></h4>
+<p>Suppose your directory looks like this:</p>
+<div class="codehilite"><pre>.
+└── topfolder
+    ├── file_one
+    ├── file_two
+    └── midfolder
+        ├── deepfolder
+        │   └── deep_file
+        ├── file_one
+        └── file_two
+</pre></div>
+
+<h3 id="causing-problems-with-shell-commands">Causing Problems with Shell Commands<a class="headerlink" href="#causing-problems-with-shell-commands" title="Permanent link"></a></h3>
 <h2 id="creating-files-using-code">Creating Files using Code<a class="headerlink" href="#creating-files-using-code" title="Permanent link"></a></h2>
+<p>First, let&rsquo;s talk about</p>
+<div class="codehilite"><pre><span class="nv">$ </span>touch hello
+</pre></div>
+
 <h2 id="sending-emails-using-code">Sending Emails using Code<a class="headerlink" href="#sending-emails-using-code" title="Permanent link"></a></h2></article></body></html>
