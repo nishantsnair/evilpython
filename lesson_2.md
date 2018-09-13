@@ -86,3 +86,86 @@ clean_run("pwd")
 
 By storing our command in a tidy function, we can call it twice very easily!
 
+
+## Using Python to Execute Complicated Shell Commands
+
+What does the following Python script do?
+
+```python
+import subprocess
+
+def clean_run(cmd):
+	output = subprocess.run([cmd],capture_output=True,shell=True).stdout.decode().splitlines()
+	print(output)
+	return output
+
+i = 0
+while i < 5:
+	clean_run("touch file_" + str(i) + ".txt")
+	i = i + 1
+```
+
+> Note that in Python, `'hello' + 5` does NOT return the concatenated `str` variable `'hello5'` (unlike in Javascript). In Python, to concatenate a `str` to a variable that is not an `str` variable, we need to tell Python to turn that other variable into a `str` using the `str(other_variable)` command. This is known as **casting**, and is discussed in [**the string manipulation lesson**](https://zsiegel92.github.io/Eitan_S/Lessons/Lesson_4_Strings/Python4.html).
+
+[Download it](https://github.com/zsiegel92/evilpython/blob/master/iterate_shell.py) and test out your idea!
+
+## Shell Syntax Review: Multiple Shell Commands Combined with `&&`
+
+In the shell, type
+
+```shell
+cd ~/Desktop && ls
+```
+
+> Remember to change the `/` to `\` when using Windows!
+
+This command `cd`s to the `/home/<username>/Desktop` folder and then executes `ls`. The `&&` symbol instructs to wait for the previous command to execute before executing the next command.
+
+Now, run this Python file, and think about how `&&` can be used in our Python workflow!
+
+```python
+import subprocess
+
+def clean_run(cmd):
+	output = subprocess.run([cmd],capture_output=True,shell=True).stdout.decode().splitlines()
+	print(output)
+	return output
+
+clean_run("cd ~/Desktop && ls")
+```
+
+## Assignments
+
+1.
+	Create a Python script called `iterate_shell.py` that creates ten *files* called `file1.txt`, `file2.txt`, etc, **in the current folder**.
+
+	If your directory looks like this:
+
+	```shell
+	.
+	├── iterate_shell.py
+	└── some_file
+	```
+
+	It should now look like this:
+
+	```shell
+	.
+	├── file_0.txt
+	├── file_1.txt
+	├── file_2.txt
+	├── file_3.txt
+	├── file_4.txt
+	├── file_5.txt
+	├── file_6.txt
+	├── file_7.txt
+	├── file_8.txt
+	├── file_9.txt
+	├── iterate_shell.py
+	└── some_file
+	```
+2.
+	Create a Python script called `iterate_shell_desktop.py` that creates ten *files* **on your Desktop**. (Then delete them so your family isn't annoyed).
+
+3.
+	Create a Python script called `iterate_shell_subfolder.py` that creates ten *folders* **in the current directory**, each of which contains an empty file called `content.txt`.

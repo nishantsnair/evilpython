@@ -1089,6 +1089,9 @@ body .markdown-body
 <li><a href="#evil-python-lesson-2-executing-shell-commands-from-python">Evil Python Lesson 2: Executing Shell Commands from Python!</a><ul>
 <li><a href="#python-review">Python Review</a></li>
 <li><a href="#shell-meets-python-subprocess-package">Shell meets Python: subprocess package!</a></li>
+<li><a href="#using-python-to-execute-complicated-shell-commands">Using Python to Execute Complicated Shell Commands</a></li>
+<li><a href="#shell-syntax-review-multiple-shell-commands-combined-with">Shell Syntax Review: Multiple Shell Commands Combined with &amp;&amp;</a></li>
+<li><a href="#assignments">Assignments</a></li>
 </ul>
 </li>
 </ul>
@@ -1152,7 +1155,81 @@ This function imports the <code>subprocess</code> package and uses its function 
 </pre></div>
 
 <blockquote>
-<p><a href="">This script</a> defines a function called <code>clean_run</code>. The <code>clean_run</code> function takes input <code>cmd</code>, which should store a valid shell command as a Python <code>str</code> variable. The function <code>clean_run</code> executes <code>cmd</code> using the function <code>subprocess.run</code>, <code>print</code>s its output, and <code>return</code>s its output.</p>
+<p><a href="https://github.com/zsiegel92/evilpython/blob/master/shell_commands.py">This script</a> defines a function called <code>clean_run</code>. The <code>clean_run</code> function takes input <code>cmd</code>, which should store a valid shell command as a Python <code>str</code> variable. The function <code>clean_run</code> executes <code>cmd</code> using the function <code>subprocess.run</code>, <code>print</code>s its output, and <code>return</code>s its output.</p>
 <p>The <code>shell=True</code> argument tells <code>subprocess.run</code> to execute these commands as though you were executing them from your own shell, which allows <code>run</code> to execute commands more flexibly. For now, just include it in your <code>clean_run</code> function.</p>
 </blockquote>
-<p>By storing our command in a tidy function, we can call it twice very easily!</p></article></body></html>
+<p>By storing our command in a tidy function, we can call it twice very easily!</p>
+<h2 id="using-python-to-execute-complicated-shell-commands">Using Python to Execute Complicated Shell Commands<a class="headerlink" href="#using-python-to-execute-complicated-shell-commands" title="Permanent link"></a></h2>
+<p>What does the following Python script do?</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="k">def</span> <span class="nf">clean_run</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">cmd</span><span class="p">],</span><span class="n">capture_output</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
+
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="n">clean_run</span><span class="p">(</span><span class="s">&quot;touch file_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;.txt&quot;</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+
+<blockquote>
+<p>Note that in Python, <code>'hello' + 5</code> does NOT return the concatenated <code>str</code> variable <code>'hello5'</code> (unlike in Javascript). In Python, to concatenate a <code>str</code> to a variable that is not an <code>str</code> variable, we need to tell Python to turn that other variable into a <code>str</code> using the <code>str(other_variable)</code> command. This is known as <strong>casting</strong>, and is discussed in <a href="https://zsiegel92.github.io/Eitan_S/Lessons/Lesson_4_Strings/Python4.html"><strong>the string manipulation lesson</strong></a>.</p>
+</blockquote>
+<p><a href="https://github.com/zsiegel92/evilpython/blob/master/iterate_shell.py">Download it</a> and test out your idea!</p>
+<h2 id="shell-syntax-review-multiple-shell-commands-combined-with">Shell Syntax Review: Multiple Shell Commands Combined with <code>&amp;&amp;</code><a class="headerlink" href="#shell-syntax-review-multiple-shell-commands-combined-with" title="Permanent link"></a></h2>
+<p>In the shell, type</p>
+<div class="codehilite"><pre><span class="nb">cd</span> ~/Desktop <span class="o">&amp;&amp;</span> ls
+</pre></div>
+
+<blockquote>
+<p>Remember to change the <code>/</code> to <code>\</code> when using Windows!</p>
+</blockquote>
+<p>This command <code>cd</code>s to the <code>/home/&lt;username&gt;/Desktop</code> folder and then executes <code>ls</code>. The <code>&amp;&amp;</code> symbol instructs to wait for the previous command to execute before executing the next command.</p>
+<p>Now, run this Python file, and think about how <code>&amp;&amp;</code> can be used in our Python workflow!</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="k">def</span> <span class="nf">clean_run</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">cmd</span><span class="p">],</span><span class="n">capture_output</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
+
+<span class="n">clean_run</span><span class="p">(</span><span class="s">&quot;cd ~/Desktop &amp;&amp; ls&quot;</span><span class="p">)</span>
+</pre></div>
+
+<h2 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h2>
+<p>1.
+    Create a Python script called <code>iterate_shell.py</code> that creates ten <em>files</em> called <code>file1.txt</code>, <code>file2.txt</code>, etc, <strong>in the current folder</strong>.</p>
+<div class="codehilite"><pre>If your directory looks like this:
+
+```shell
+.
+├── iterate_shell.py
+└── some_file
+```
+
+It should now look like this:
+
+```shell
+.
+├── file_0.txt
+├── file_1.txt
+├── file_2.txt
+├── file_3.txt
+├── file_4.txt
+├── file_5.txt
+├── file_6.txt
+├── file_7.txt
+├── file_8.txt
+├── file_9.txt
+├── iterate_shell.py
+└── some_file
+```
+</pre></div>
+
+
+<p>2.
+    Create a Python script called <code>iterate_shell_desktop.py</code> that creates ten <em>files</em> <strong>on your Desktop</strong>. (Then delete them so your family isn&rsquo;t annoyed).</p>
+<p>3.
+    Create a Python script called <code>iterate_shell_subfolder.py</code> that creates ten <em>folders</em> <strong>in the current directory</strong>, each of which contains an empty file called <code>content.txt</code>.</p></article></body></html>
