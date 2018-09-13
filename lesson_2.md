@@ -87,7 +87,7 @@ clean_run("pwd")
 By storing our command in a tidy function, we can call it twice very easily!
 
 
-## Using Python to Execute Complicated Shell Commands
+### Using Python to Execute Complicated Shell Commands
 
 What does the following Python script do?
 
@@ -109,7 +109,7 @@ while i < 5:
 
 [Download it](https://github.com/zsiegel92/evilpython/blob/master/iterate_shell.py) and test out your idea!
 
-## Shell Syntax Review: Multiple Shell Commands Combined with `&&`
+### Shell Syntax Review: Multiple Shell Commands Combined with `&&`
 
 In the shell, type
 
