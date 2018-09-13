@@ -1089,6 +1089,7 @@ body .markdown-body
 <li><a href="#evil-python-lesson-2-executing-shell-commands-from-python">Evil Python Lesson 2: Executing Shell Commands from Python!</a><ul>
 <li><a href="#python-review">Python Review</a></li>
 <li><a href="#shell-meets-python-subprocess-package">Shell meets Python: subprocess package!</a><ul>
+<li><a href="#capturing-shell-output-in-python">Capturing Shell Output in Python</a></li>
 <li><a href="#using-python-to-execute-complicated-shell-commands">Using Python to Execute Complicated Shell Commands</a></li>
 <li><a href="#shell-syntax-review-multiple-shell-commands-combined-with">Shell Syntax Review: Multiple Shell Commands Combined with &amp;&amp;</a></li>
 </ul>
@@ -1116,6 +1117,7 @@ body .markdown-body
 <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s">&#39;ls&#39;</span><span class="p">])</span>
 </pre></div>
 This function imports the <code>subprocess</code> package and uses its function <code>subprocess.run</code> to execute a shell command, <code>ls</code>! <strong>This runs a <em>shell</em> command from *Python</strong>*!</p>
+<h3 id="capturing-shell-output-in-python">Capturing Shell Output in Python<a class="headerlink" href="#capturing-shell-output-in-python" title="Permanent link"></a></h3>
 <p>What if we want to capture the output of <code>ls</code> and use it in Python?</p>
 <div class="codehilite"><pre><span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s">&#39;ls&#39;</span><span class="p">],</span><span class="n">capture_output</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span>

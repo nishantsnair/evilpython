@@ -29,6 +29,8 @@ subprocess.run(['ls'])
 ```
 This function imports the `subprocess` package and uses its function `subprocess.run` to execute a shell command, `ls`! **This runs a *shell* command from *Python***!
 
+### Capturing Shell Output in Python
+
 What if we want to capture the output of `ls` and use it in Python?
 
 ```python
