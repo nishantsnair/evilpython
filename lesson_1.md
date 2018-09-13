@@ -105,11 +105,9 @@ Suppose your directory looks like this:
 
 ### Causing Problems with Shell Commands
 
+To cause problems with these basic tools, we will need to put together a long **script** consisting of many commands. Shell scripting can be frustrating, though, as shell syntax rarely is updated and can be hard to read.
+
+Rather than struggling with basic shell scripting, **we will build a Python script, and run these commands from there in the next lesson**.
 
 
-## Creating Files using Code
 
-
-
-
-## Sending Emails using Code

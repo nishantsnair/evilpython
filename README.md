@@ -5,8 +5,8 @@ How to cause a ruckus on a PC using Python.
 ## Lessons
 
 * [Lesson 1: Creating files and folders](https://zsiegel92.github.io/evilpython/lesson_1.html)
-
-
+* [Lesson 2: Using Python to Execute Many Commands](https://zsiegel92.github.io/evilpython/lesson_2.html)
+* [<span style="color:red">UNFINISHED</span> Lesson 3: Sending Emails using Code](unfinished)
 
 
 
