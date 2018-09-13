@@ -80,7 +80,7 @@ clean_run("ls")
 clean_run("pwd")
 ```
 
-> [This script]() defines a function called `clean_run`. The `clean_run` function takes input `cmd`, which should store a valid shell command as a Python `str` variable. The function `clean_run` executes `cmd` using the function `subprocess.run`, `print`s its output, and `return`s its output.
+> [This script](https://github.com/zsiegel92/evilpython/blob/master/shell_commands.py) defines a function called `clean_run`. The `clean_run` function takes input `cmd`, which should store a valid shell command as a Python `str` variable. The function `clean_run` executes `cmd` using the function `subprocess.run`, `print`s its output, and `return`s its output.
 
 > The `shell=True` argument tells `subprocess.run` to execute these commands as though you were executing them from your own shell, which allows `run` to execute commands more flexibly. For now, just include it in your `clean_run` function.
 
