@@ -1102,4 +1102,57 @@ body .markdown-body
 <li><a href="https://zsiegel92.github.io/Eitan_S/Lessons/Lesson_6_Lists/Python6.html"><strong>list data structures</strong></a></li>
 </ul>
 <p>and more! <strong>Please review any you don&rsquo;t feel 100% comfortable using</strong>.</p>
-<h2 id="shell-meets-python-subprocess-package">Shell meets Python: <code>subprocess</code> package!<a class="headerlink" href="#shell-meets-python-subprocess-package" title="Permanent link"></a></h2></article></body></html>
+<h2 id="shell-meets-python-subprocess-package">Shell meets Python: <code>subprocess</code> package!<a class="headerlink" href="#shell-meets-python-subprocess-package" title="Permanent link"></a></h2>
+<blockquote>
+<p>We will be using the Python package <code>subprocess</code>. <a href="https://docs.python.org/3.7/library/subprocess.html">Read about it here</a>.</p>
+</blockquote>
+<p>Create a new Python file called <code>shell_commands.py</code>. Add the following code:</p>
+<p><div class="codehilite"><pre><span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s">&#39;ls&#39;</span><span class="p">])</span>
+</pre></div>
+This function imports the <code>subprocess</code> package and uses its function <code>subprocess.run</code> to execute a shell command, <code>ls</code>! <strong>This runs a <em>shell</em> command from *Python</strong>*!</p>
+<p>What if we want to capture the output of <code>ls</code> and use it in Python?</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s">&#39;ls&#39;</span><span class="p">],</span><span class="n">capture_output</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span>
+<span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+
+<blockquote>
+<p><code>capture_output=True</code> prevents commands from sending their output to the console, and instead stores the output in the command&rsquo;s <code>stdout</code> property, which we store in the Python variable <code>output</code>.</p>
+</blockquote>
+<p>This command should have sent some <em>UGLY</em> output to the console! Something like</p>
+<div class="codehilite"><pre>b<span class="s1">&#39;file1.txt\nfile2.txt\na_folder\nshell_commands.py\n&#39;</span>
+</pre></div>
+
+<p>From the <a href="https://zsiegel92.github.io/Eitan_S/Lessons/Lesson_4_Strings/Python4.html"><strong>string manipulation</strong></a> lesson, you should know that <strong><code>\n</code> is the <em>newline</em> character</strong>. The <code>b</code> in front of the output means that Python is storing this as a <code>bytes</code> (<em>byte string</em>) not a regular <code>str</code> variable.</p>
+<p>Let&rsquo;s modify our code to improve our output:</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s">&#39;ls&#39;</span><span class="p">],</span><span class="n">capture_output</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+
+<blockquote>
+<p>Every Python <code>bytes</code> variable has the <code>decode</code> method, which we can call to convert our output to a standard Python <code>str</code> variable. Every Python <code>str</code> variable has the <code>splitlines</code> function, which separates the string on <em>newline</em> characters (<code>'\n'</code>), and stores the separate strings in a Python <code>list</code>.</p>
+</blockquote>
+<p>Now your output should look nicer, kind of like this:</p>
+<div class="codehilite"><pre><span class="o">[</span><span class="s1">&#39;file1.txt&#39;</span>, <span class="s1">&#39;file2.txt&#39;</span>, <span class="s1">&#39;a_folder&#39;</span>, <span class="s1">&#39;shell_commands.py&#39;</span><span class="o">]</span>
+</pre></div>
+
+<p>Much better!</p>
+<p>Since we will use this &ldquo;cleaning up&rdquo; so many times, let&rsquo;s create a Python function taht does this for us:</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="k">def</span> <span class="nf">clean_run</span><span class="p">(</span><span class="n">cmd</span><span class="p">):</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">cmd</span><span class="p">],</span><span class="n">capture_output</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
+
+<span class="n">clean_run</span><span class="p">(</span><span class="s">&quot;ls&quot;</span><span class="p">)</span>
+<span class="n">clean_run</span><span class="p">(</span><span class="s">&quot;pwd&quot;</span><span class="p">)</span>
+</pre></div>
+
+<blockquote>
+<p><a href="">This script</a> defines a function called <code>clean_run</code>. The <code>clean_run</code> function takes input <code>cmd</code>, which should store a valid shell command as a Python <code>str</code> variable. The function <code>clean_run</code> executes <code>cmd</code> using the function <code>subprocess.run</code>, <code>print</code>s its output, and <code>return</code>s its output.</p>
+<p>The <code>shell=True</code> argument tells <code>subprocess.run</code> to execute these commands as though you were executing them from your own shell, which allows <code>run</code> to execute commands more flexibly. For now, just include it in your <code>clean_run</code> function.</p>
+</blockquote>
+<p>By storing our command in a tidy function, we can call it twice very easily!</p></article></body></html>
