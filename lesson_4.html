@@ -1082,66 +1082,95 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>README</title></head><body><article class="markdown-body"><h1 id="evil-python">Evil Python<a class="headerlink" href="#evil-python" title="Permanent link"></a></h1>
-<p>How to cause a ruckus on a PC using Python.</p>
-<h2 id="lessons">Lessons<a class="headerlink" href="#lessons" title="Permanent link"></a></h2>
+</style><title>lesson_4</title></head><body><article class="markdown-body"><h1 id="evil-python-lesson-2-executing-shell-commands-from-python">Evil Python Lesson 2: Executing Shell Commands from Python!<a class="headerlink" href="#evil-python-lesson-2-executing-shell-commands-from-python" title="Permanent link"></a></h1>
+<p><a href="https://zsiegel92.github.io/evilpython/">All Lessons</a></p>
+<div class="toc">
 <ul>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_1.html">Lesson 1: Creating files and folders</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_2.html">Lesson 2: Using Python to Execute Many Commands</a></li>
-<li><a href="unfinished"><span style="color:red">UNFINISHED</span> Lesson 3: Sending Emails using Code</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_4.html">Lesson 4: Integer and String Manipulation</a></li>
+<li><a href="#evil-python-lesson-2-executing-shell-commands-from-python">Evil Python Lesson 2: Executing Shell Commands from Python!</a><ul>
+<li><a href="#python-review">Python Review</a><ul>
+<li><a href="#string-indexing-and-slicing-examples">String Indexing and Slicing Examples</a><ul>
+<li><a href="#slicing-with-an-increment">Slicing with an Increment</a></li>
+<li><a href="#blank-slice-arguments">Blank Slice Arguments</a></li>
 </ul>
-<h2 id="running-python">Running Python<a class="headerlink" href="#running-python" title="Permanent link"></a></h2>
-<p>You are ready to run Python! Your computer&rsquo;s Python installation can run in two important ways:</p>
-<h3 id="1-running-python-code-written-in-py-files">1. Running Python Code Written in <code>.py</code> Files<a class="headerlink" href="#1-running-python-code-written-in-py-files" title="Permanent link"></a></h3>
-<p>Python can execute Python code, which is written in <code>.py</code> files, such as <code>app.py</code>. If you write code in a <code>.py</code> file called <code>app.py</code>, you can tell Python to run <strong>all</strong> the code with the following command (without typing <code>&gt;&gt;</code>):</p>
-<div class="codehilite"><pre>        &gt;&gt; python app.py
+</li>
+<li><a href="#casting-examples">Casting Examples</a><ul>
+<li><a href="#casting-int-as-str">Casting int as str</a></li>
+<li><a href="#casting-str-as-int">Casting str as int</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_1"></a></li>
+<li><a href="#assignments">Assignments</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="python-review">Python Review<a class="headerlink" href="#python-review" title="Permanent link"></a></h2>
+<p>In the <a href="https://zsiegel92.github.io/Eitan_S/Lessons/Lesson_4_Strings/Python4.html">4th Python Lesson (about <code>str</code>s)</a>, we saw how to <strong>concatenate</strong> using <code>+</code>, how to check from <strong>substrings</strong> using <code>in</code>, how to <strong>index</strong> characters in a string using <code>[]</code>, how to <strong>split</strong> and <strong>join</strong> <code>str</code> and <code>list</code> variables using <code>str.join</code> and <code>str.split</code>, and how to <strong>format</strong> strings using <code>str.format</code>.</p>
+<p>We also learned about variable <strong>type</strong> in <a href="https://zsiegel92.github.io/Eitan_S/Lessons/Lesson_2_Variables_and_Conditionals/Python2.html">the 2nd Python Lesson (about variables)</a>. We know <strong>casting</strong> is the process of creating a variable from a variable with another <strong>type</strong>.</p>
+<p>In the <a href="https://zsiegel92.github.io/Eitan_S/Lessons/Lesson_6_Lists/Python6.html#indexing-and-slicing">6th Python Lesson (about <code>list</code>s)</a> we learned about <strong>list slicing</strong>. We also saw slicing, like indexing, works with both <code>list</code> variables and <code>str</code> variables!</p>
+<h3 id="string-indexing-and-slicing-examples">String Indexing and Slicing Examples<a class="headerlink" href="#string-indexing-and-slicing-examples" title="Permanent link"></a></h3>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;Sup, World&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="s">&#39; &#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
+<span class="s">&#39;Sup, Wor&#39;</span>
 </pre></div>
 
-
-<p>This command tells Python to execute every line of code written in the <code>app.py</code> file. Try running this command and, if there are no error messages, navigate to <a href="localhost%3A5000">localhost</a>.</p>
-<h3 id="2-running-python-code-in-the-interactive-console">2. Running Python Code in the Interactive Console<a class="headerlink" href="#2-running-python-code-in-the-interactive-console" title="Permanent link"></a></h3>
-<p>Python has an &ldquo;Interactive Console&rdquo; called the &ldquo;Python Interactive Console&rdquo;.</p>
-<p>Any Python commands can be executed one at a time by writing them in the command prompt and hitting the <kbd>Enter</kbd> key. This is called a <strong>Read-Evaluate-Print-Loop (REPL)</strong> environment, because it &ldquo;reads&rdquo; your input, &ldquo;evaluates&rdquo; it, &ldquo;prints&rdquo; the output, and then &ldquo;loops&rdquo; by starting the process over again.</p>
-<p><strong>Type <code>python</code> to start the Python interactive console.</strong> Then try the following Python commands:</p>
-<ul>
-<li><code>x=5</code> to create a variable named <code>x</code> with the value <code>5</code>.<ul>
-<li><code>x = 5</code> will also work. Spaces (made with the <kbd>spacebar</kbd>) are known as <strong>whitespace</strong>, and are generally ignored by Python.</li>
-</ul>
-</li>
-<li><code>print(x)</code> to print the value of <code>x</code><ul>
-<li><code>x</code> (on its own) is another way to say <code>print(x)</code>, but this only works in the interactive shell.</li>
-</ul>
-</li>
-<li><code>print(x+1)</code><ul>
-<li><code>x+1</code> (on its own) will also work.</li>
-</ul>
-</li>
-<li><code>y = "Eitan"</code><ul>
-<li>(why did we need quotes around <code>Eitan</code> but not around the number <code>5</code>?)</li>
-</ul>
-</li>
-<li><code>z = "Zach"</code></li>
-<li><code>w = y</code></li>
-<li><code>print(y + z)</code><ul>
-<li>How is this different from <code>print(x + 1)</code>? How is it the same?</li>
-</ul>
-</li>
-<li><code>print(y + " " + z)</code></li>
-</ul>
-<h2 id="first-python-script">First Python Script<a class="headerlink" href="#first-python-script" title="Permanent link"></a></h2>
-<p>Create a file called <strong>loops.py</strong> and open it in your favorite text editor (SublimeText is reccommended).</p>
-<p>In this file, add the following code:</p>
-<div class="codehilite"><pre>x = 5
-print(x)
+<blockquote>
+<p>Note that the slicing in <code>x[0:8]</code> takes a <em>start</em> and an <em>end</em> index, and that <em>the end index is <strong>not</strong> included in the slice!</em></p>
+</blockquote>
+<h4 id="slicing-with-an-increment">Slicing with an <em>Increment</em><a class="headerlink" href="#slicing-with-an-increment" title="Permanent link"></a></h4>
+<p>Slicing of a variable <code>x</code> usually looks like <code>x[start:end]</code>, where <code>start</code> and <code>end</code> are the <em>start</em> and <em>end</em> indices of the slice (the <em>end</em> index is not included in the slice).</p>
+<p>But <em>slicing has a third parameter - the </em>increment<em>!</em> We can specify the <em>increment</em> of a slice using <code>x[start:end:increment]</code>. The increment controls how many characters the slice jumps ahead after it reads each one. The <strong>default increment</strong> is 1, so <code>x[start:end:1]</code> is equivalent to <code>x[start:end]</code>, which means</p>
+<p>Observe:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;Sup, World&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+<span class="s">&#39;Sup, Wor&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="s">&#39;Sp o&#39;</span>
 </pre></div>
 
-
-<p>Now, navigate to the folder containing this file and type in your command line</p>
-<div class="codehilite"><pre>python loops.py
+<p><strong>The increment can be negative to produce a <em>backwards</em> slice!</strong></p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;Sup, World&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="s">&#39;lroW ,pu&#39;</span>
 </pre></div>
 
+<blockquote>
+<p>Remember that the <em>end</em> of a slice is <strong>not</strong> included in the slice, so if the <em>end of our </em>backwards<em> slice is set to <code>0</code>, the </em>zeroth* (first) character of our string will not be included in the backwards slice.</p>
+</blockquote>
+<h4 id="blank-slice-arguments">Blank Slice Arguments<a class="headerlink" href="#blank-slice-arguments" title="Permanent link"></a></h4>
+<p>The default <code>start</code> of a slice is <code>0</code>. The default <code>end</code> of a slice is the end of a string. If we leave either one blank, we will slice from or to the default value.</p>
+<div class="codehilite"><pre>
+</pre></div>
 
-<p>You should see the following output:</p>
-<div class="codehilite"><pre>    &gt;&gt; 5
-</pre></div></article></body></html>
+<h3 id="casting-examples">Casting Examples<a class="headerlink" href="#casting-examples" title="Permanent link"></a></h3>
+<h4 id="casting-int-as-str">Casting <code>int</code> as <code>str</code><a class="headerlink" href="#casting-int-as-str" title="Permanent link"></a></h4>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="mi">11</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="s">&#39;56&#39;</span>
+</pre></div>
+
+<h4 id="casting-str-as-int">Casting <code>str</code> as <code>int</code><a class="headerlink" href="#casting-str-as-int" title="Permanent link"></a></h4>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;5&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&quot;2&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="s">&#39;52&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="mi">7</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+<span class="mi">52</span>
+</pre></div>
+
+<p>And more! <strong>Please review any you don&rsquo;t feel 100% comfortable using</strong>.</p>
+<h2 id="_1"><a class="headerlink" href="#_1" title="Permanent link"></a></h2>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Hs_v7rGAdKc?rel=0&amp;start=52" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<h2 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h2>
+<p>1.
+    Complete <a href="http://www.acsl.org/acsl/sample_ques/c_3_palindrome_sr.pdf">this challenge</a> from the American Computer Science League!</p></article></body></html>
