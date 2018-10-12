@@ -153,6 +153,8 @@ By combining *casting* and *slicing*, we can reverse `int` variables!
 
 You will complete [this challenge](http://www.acsl.org/acsl/sample_ques/c_3_palindrome_sr.pdf) from the American Computer Science League!
 
+Start by creating a file called `palindrome.py`.
+
 1. Write a function called `reverse` that takes an `int` argument and returns the "reversed" integer.
 
 	This should get you started:
@@ -161,6 +163,7 @@ You will complete [this challenge](http://www.acsl.org/acsl/sample_ques/c_3_pali
 		return int(str(x)[::-1])
 	print(reverse(521)) # should return 125
 	```
+	> Actually, this function is fully formed. For now, just get `palindrome.py` running and test this function out with several inputs.
 
 2. Write a function called `is_pal` that returns `True` if its argument is an `int` variable that is a palindrome, and returns `False` otherwise. You can use the `reverse` function you've already written.
 
