@@ -142,6 +142,14 @@ By combining *casting* and *slicing*, we can reverse `int` variables!
 ## Assignments
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Hs_v7rGAdKc?rel=0&amp;start=52" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+> Missy Elliott's 2002 hit *Work It* includes the lines:
+> > Put my thing down, flip it, and reverse it.
+>
+> > Ti esrever dna ti pilf, nwod gniht ym tup.
+>
+> This video plays the lines forward and in reverse.
+>
+> Clearly, Ms. Elliott is a master of palindromes and string manipulation.
 
 You will complete [this challenge](http://www.acsl.org/acsl/sample_ques/c_3_palindrome_sr.pdf) from the American Computer Science League!
 
