@@ -1091,6 +1091,7 @@ body .markdown-body
 <li><a href="#string-indexing-and-slicing-examples">String Indexing and Slicing Examples</a><ul>
 <li><a href="#slicing-with-an-increment">Slicing with an Increment</a></li>
 <li><a href="#blank-slice-arguments">Blank Slice Arguments</a></li>
+<li><a href="#reversing-a-str-or-list-variable">&ldquo;Reversing&rdquo; a str or list Variable</a></li>
 </ul>
 </li>
 <li><a href="#casting-examples">Casting Examples</a><ul>
@@ -1098,9 +1099,9 @@ body .markdown-body
 <li><a href="#casting-str-as-int">Casting str as int</a></li>
 </ul>
 </li>
+<li><a href="#reversing-an-int-variable">&ldquo;Reversing&rdquo; an int Variable!</a></li>
 </ul>
 </li>
-<li><a href="#_1"></a></li>
 <li><a href="#assignments">Assignments</a></li>
 </ul>
 </li>
@@ -1142,8 +1143,40 @@ body .markdown-body
 <p>Remember that the <em>end</em> of a slice is <strong>not</strong> included in the slice, so if the <em>end of our </em>backwards<em> slice is set to <code>0</code>, the </em>zeroth* (first) character of our string will not be included in the backwards slice.</p>
 </blockquote>
 <h4 id="blank-slice-arguments">Blank Slice Arguments<a class="headerlink" href="#blank-slice-arguments" title="Permanent link"></a></h4>
-<p>The default <code>start</code> of a slice is <code>0</code>. The default <code>end</code> of a slice is the end of a string. If we leave either one blank, we will slice from or to the default value.</p>
-<div class="codehilite"><pre>
+<p>The default <em>start</em> of a slice is <code>0</code>, the beginning of the <code>str</code> or <code>list</code> from which we are slicing. The default <em>end</em> of a slice is the end of a string. If we leave either one blank, we will slice from or to the default value.</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;Sup, World&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:]</span> <span class="c1"># start is 0 and end is blank/default</span>
+<span class="s">&#39;Sup, World&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[:]</span> <span class="c1"># start AND end are blank/default</span>
+<span class="s">&#39;Sup, World&#39;</span>
+</pre></div>
+
+<p>The default <em>increment</em> of a slice is <code>1</code>, assigned when the increment is blank (or the second <code>:</code> is omitted):</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;Sup, World&quot;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># increment is 1</span>
+<span class="s">&#39;Sup, &#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">:]</span> <span class="c1"># increment is blank, defaults to 1</span>
+<span class="s">&#39;Sup, &#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="c1"># the second : symbol is omitted, increment defaults to 1</span>
+<span class="s">&#39;Sup, &#39;</span>
+</pre></div>
+
+<p>If <em>start</em> and <em>end</em> are left blank/default, but <em>increment</em> is set to <code>-1</code> (or any negative integer), slicing will occur in the <em>negative direction</em>, namely from the back of the string or list.</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;Sup, World&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># start and end are blank and default</span>
+<span class="s">&#39;dlroW ,puS&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># start is -1 (the default value), end is blank and defaults</span>
+<span class="s">&#39;dlroW ,puS&#39;</span>
+</pre></div>
+
+<h4 id="reversing-a-str-or-list-variable">&ldquo;Reversing&rdquo; a <code>str</code> or <code>list</code> Variable<a class="headerlink" href="#reversing-a-str-or-list-variable" title="Permanent link"></a></h4>
+<p>Using the above slicing syntax, a Python <code>str</code> or <code>list</code> variable <code>x</code> can be reversed using <code>x[::-1]</code>.</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;12345&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="s">&#39;54321&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
 
 <h3 id="casting-examples">Casting Examples<a class="headerlink" href="#casting-examples" title="Permanent link"></a></h3>
@@ -1168,9 +1201,59 @@ body .markdown-body
 </pre></div>
 
 <p>And more! <strong>Please review any you don&rsquo;t feel 100% comfortable using</strong>.</p>
-<h2 id="_1"><a class="headerlink" href="#_1" title="Permanent link"></a></h2>
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Hs_v7rGAdKc?rel=0&amp;start=52" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<h3 id="reversing-an-int-variable">&ldquo;Reversing&rdquo; an <code>int</code> Variable!<a class="headerlink" href="#reversing-an-int-variable" title="Permanent link"></a></h3>
+<p>By combining <em>casting</em> and <em>slicing</em>, we can reverse <code>int</code> variables!</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">12345</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># casts int as str, then reverses using slicing</span>
+<span class="s">&#39;54321&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># casts int as str, reverses using slicing, then casts back to int</span>
+<span class="mi">54321</span>
+</pre></div>
 
 <h2 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h2>
-<p>1.
-    Complete <a href="http://www.acsl.org/acsl/sample_ques/c_3_palindrome_sr.pdf">this challenge</a> from the American Computer Science League!</p></article></body></html>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Hs_v7rGAdKc?rel=0&amp;start=52" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<p>You will complete <a href="http://www.acsl.org/acsl/sample_ques/c_3_palindrome_sr.pdf">this challenge</a> from the American Computer Science League!</p>
+<ol>
+<li>
+<p>Write a function called <code>reverse</code> that takes an <code>int</code> argument and returns the &ldquo;reversed&rdquo; integer.</p>
+<p>This should get you started:
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="mi">521</span><span class="p">))</span> <span class="c1"># should return 125</span>
+</pre></div></p>
+</li>
+<li>
+<p>Write a function called <code>is_pal</code> that returns <code>True</code> if its argument is an <code>int</code> variable that is a palindrome, and returns <code>False</code> otherwise. You can use the <code>reverse</code> function you&rsquo;ve already written.</p>
+<p>This should get you started:
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">is_pal</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</pre></div></p>
+</li>
+<li>
+<p>Write a function called <code>add_to_reverse</code> that takes an <code>int</code> argument, then adds it to its &ldquo;reverse&rdquo;, and returns the sum.</p>
+<p>This should get you started:
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">add_to_reverse</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># DO SOMETHING HERE!</span>
+    <span class="k">return</span> <span class="c1"># RETURN SOMETHING</span>
+</pre></div></p>
+</li>
+<li>
+<p>Write a function called <code>pal_count</code> that takes an <code>int</code> argument, then adds it to its &ldquo;reverse&rdquo; several times until a palindrome is produced (see <a href="http://www.acsl.org/acsl/sample_ques/c_3_palindrome_sr.pdf">challenge</a>). When a palindrome is produced, the function should return the number of times the addition was performed.</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">pal_count</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">is_pal</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">add_to_reverse</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="c1"># RETURN SOMETHING</span>
+</pre></div>
+
+</li>
+<li>
+<p>Change <code>pal_count</code> so that a number that takes more than 10 iterations of <code>add_to_reverse</code> to produce a palindrome causes <code>pal_count</code> to return something special, like <code>-1</code>, to indicate that the process failed.</p>
+</li>
+</ol></article></body></html>
