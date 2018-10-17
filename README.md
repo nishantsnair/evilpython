@@ -8,7 +8,7 @@ How to cause a ruckus on a PC using Python.
 * [Lesson 2: Using Python to Execute Many Commands](https://zsiegel92.github.io/evilpython/lesson_2.html)
 * [<span style="color:red">UNFINISHED</span> Lesson 3: Sending Emails using Code](unfinished)
 * [Lesson 4: Integer and String Manipulation](https://zsiegel92.github.io/evilpython/lesson_4.html)
-* [Binary worksheet](https://zsiegel92.github.io/evilpython/binary_worksheet.pdf)
+* [Binary Numbers](https://zsiegel92.github.io/evilpython/binary_resources.html)
 
 
 ## Running Python
