@@ -14,3 +14,4 @@
 ## Worksheets
 * [Binary worksheet EASY](https://zsiegel92.github.io/evilpython/binary_worksheet.pdf)
 * [Binary worksheet MEDIUM](https://zsiegel92.github.io/evilpython/binary_worksheet_2.pdf)
+* [Write your name in binary!](https://www.sciencefriday.com/educational-resources/write-your-name-in-binary-code/)
