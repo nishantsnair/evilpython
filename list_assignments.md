@@ -11,8 +11,8 @@ Recall that Python `list` variables are **data structures** that *contain* other
 
 <iframe height="400px" width="100%" src="https://repl.it/@ZSiegel/Listsindexingslicing?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
-> Accessing an element of list `x` using brackets (like `x[2]` or `x[0]`) is called ***indexing***. **Indices range from `0` to *one less than the number of elements in the list***.
-> The `len` function returns the number of elements in a `list`
+> * Accessing an element of list `x` using brackets (like `x[2]` or `x[0]`) is called ***indexing***. **Indices range from `0` to *one less than the number of elements in the list*.**
+> * The `len` function returns the number of elements in a `list`
 
 
 ## Assignments
