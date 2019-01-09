@@ -1082,69 +1082,77 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>README</title></head><body><article class="markdown-body"><h1 id="evil-python">Evil Python<a class="headerlink" href="#evil-python" title="Permanent link"></a></h1>
-<p>How to cause a ruckus on a PC using Python.</p>
-<h2 id="lessons">Lessons<a class="headerlink" href="#lessons" title="Permanent link"></a></h2>
+</style><title>games</title></head><body><article class="markdown-body"><h1 id="evil-python-lesson-5-games">Evil Python Lesson 5: Games!<a class="headerlink" href="#evil-python-lesson-5-games" title="Permanent link"></a></h1>
+<p><a href="https://zsiegel92.github.io/evilpython/">All Lessons</a></p>
+<div class="toc">
 <ul>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_1.html">Lesson 1: Creating files and folders</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_2.html">Lesson 2: Using Python to Execute Many Commands</a></li>
-<li><a href="unfinished"><span style="color:red">UNFINISHED</span> Lesson 3: Sending Emails using Code</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_4.html">Lesson 4: Integer and String Manipulation</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/binary_resources.html">Binary Numbers</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/list_assignments.html">Working with Lists</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/games.html">Games</a></li>
+<li><a href="#evil-python-lesson-5-games">Evil Python Lesson 5: Games!</a><ul>
+<li><a href="#python-review">Python Review</a><ul>
+<li><a href="#python-input">Python input</a></li>
+<li><a href="#infinite-input-loops-while-true">Infinite Input Loops: while True</a></li>
 </ul>
-<h2 id="running-python">Running Python<a class="headerlink" href="#running-python" title="Permanent link"></a></h2>
-<p>You are ready to run Python! Your computer&rsquo;s Python installation can run in two important ways:</p>
-<h3 id="1-running-python-code-written-in-py-files">1. Running Python Code Written in <code>.py</code> Files<a class="headerlink" href="#1-running-python-code-written-in-py-files" title="Permanent link"></a></h3>
-<p>Python can execute Python code, which is written in <code>.py</code> files, such as <code>app.py</code>. If you write code in a <code>.py</code> file called <code>app.py</code>, you can tell Python to run <strong>all</strong> the code with the following command (without typing <code>&gt;&gt;</code>):</p>
-<div class="codehilite"><pre>        &gt;&gt; python app.py
+</li>
+<li><a href="#assignments">Assignments</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="python-review">Python Review<a class="headerlink" href="#python-review" title="Permanent link"></a></h2>
+<h3 id="python-input">Python <code>input</code><a class="headerlink" href="#python-input" title="Permanent link"></a></h3>
+<p>The function <code>input</code> returns a variable of type <code>str</code>. If <code>x = input()</code> is executed and <code>5</code> <kbd>Enter</kbd> is typed, then <code>type(x)</code> will yield <code>&lt;class 'str'&gt;</code>.</p>
+<iframe height="400px" width="100%" src="https://repl.it/@ZSiegel/Input2?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
+<p>Notice that the variable <code>age</code> stores a number but its type is <code>str</code>.</p>
+<h3 id="infinite-input-loops-while-true">Infinite Input Loops: <code>while True</code><a class="headerlink" href="#infinite-input-loops-while-true" title="Permanent link"></a></h3>
+<p>Many programs (like <strong>games</strong>) keep running and accepting input until the user exits. We can create an <strong>infinite loop</strong> using <code>while</code> without terminating.</p>
+<p>Recall that <code>while</code> loops need a terminating condition:
+<div class="codehilite"><pre><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># initializing x</span>
+<span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Executing the loop&quot;</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1"># incrementing x</span>
+</pre></div></p>
+<p>Since <code>x += 1</code> increases <code>x</code> by <code>1</code> on each loop iteration, eventually the condition <code>x &lt; 5</code> will evaluate to <code>False</code> and the loop will stop executing!</p>
+<p>We can create an infinite loop easily, but it doesn&rsquo;t do us much good:</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="s">&quot;Executing the loop&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">Executing</span> <span class="n">the</span> <span class="n">loop</span>
+<span class="n">Executing</span> <span class="n">the</span> <span class="n">loop</span>
+<span class="n">Executing</span> <span class="n">the</span> <span class="n">loop</span>
+<span class="n">Executing</span> <span class="n">the</span> <span class="n">loop</span>
+<span class="n">Executing</span> <span class="n">the</span> <span class="n">loop</span>
+<span class="n">Executing</span> <span class="n">the</span> <span class="n">loop</span>
+<span class="n">Executing</span> <span class="n">the</span> <span class="n">loop</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="o">.</span>
+</pre></div>
+
+<p><strong>With <code>input()</code>, we can create infinite loops that are actually useful!</strong></p>
+<iframe height="400px" width="100%" src="https://repl.it/@ZSiegel/Inputinfiniteloop?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
+
+<h2 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h2>
+<p>1.</p>
+<div class="codehilite"><pre>**Create a game** that asks for a direction on an infinite loop and keeps track of your coordinates. Your coordinates should start at `x = 0` and `y = 0`, and you should use the following directions:
+
+    * If input is `a`, **move left** by decreasing your `x` coordinate using `x -= 1`
+    * If input is `s`, **move down** by decreasing your `y` coordinate using `y -= 1`
+    * If input is `d`, **move right** by increasing your `x` coordinate using `x += 1`
+    * If input is `w`, **move up** by increasing your `y` coordinate using `y += 1`
+
+    &lt;iframe height=&quot;400px&quot; width=&quot;100%&quot; src=&quot;https://repl.it/@ZSiegel/InputNavigationGame?lite=true&quot; scrolling=&quot;no&quot; frameborder=&quot;no&quot; allowtransparency=&quot;true&quot; allowfullscreen=&quot;true&quot; sandbox=&quot;allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals&quot;&gt;&lt;/iframe&gt;
+
+    ***NOTE:*** An **ordered pair** is two numbers in parentheses that give coordinates. For example, `(1,2)` means &quot;The point where \\(x\\) is \\(1\\) and \\(y\\) is \\(2\\)&quot;.
+
+    &lt;div style=&quot;text-align: center;&quot;&gt;
+        &lt;img src=&quot;coordinates.jpg&quot; width=&quot;500&quot; alt=&quot;coordinates&quot;/&gt;
+        Ordered Pairs
+    &lt;/div&gt;
 </pre></div>
 
 
-<p>This command tells Python to execute every line of code written in the <code>app.py</code> file. Try running this command and, if there are no error messages, navigate to <a href="localhost%3A5000">localhost</a>.</p>
-<h3 id="2-running-python-code-in-the-interactive-console">2. Running Python Code in the Interactive Console<a class="headerlink" href="#2-running-python-code-in-the-interactive-console" title="Permanent link"></a></h3>
-<p>Python has an &ldquo;Interactive Console&rdquo; called the &ldquo;Python Interactive Console&rdquo;.</p>
-<p>Any Python commands can be executed one at a time by writing them in the command prompt and hitting the <kbd>Enter</kbd> key. This is called a <strong>Read-Evaluate-Print-Loop (REPL)</strong> environment, because it &ldquo;reads&rdquo; your input, &ldquo;evaluates&rdquo; it, &ldquo;prints&rdquo; the output, and then &ldquo;loops&rdquo; by starting the process over again.</p>
-<p><strong>Type <code>python</code> to start the Python interactive console.</strong> Then try the following Python commands:</p>
-<ul>
-<li><code>x=5</code> to create a variable named <code>x</code> with the value <code>5</code>.<ul>
-<li><code>x = 5</code> will also work. Spaces (made with the <kbd>spacebar</kbd>) are known as <strong>whitespace</strong>, and are generally ignored by Python.</li>
-</ul>
-</li>
-<li><code>print(x)</code> to print the value of <code>x</code><ul>
-<li><code>x</code> (on its own) is another way to say <code>print(x)</code>, but this only works in the interactive shell.</li>
-</ul>
-</li>
-<li><code>print(x+1)</code><ul>
-<li><code>x+1</code> (on its own) will also work.</li>
-</ul>
-</li>
-<li><code>y = "Eitan"</code><ul>
-<li>(why did we need quotes around <code>Eitan</code> but not around the number <code>5</code>?)</li>
-</ul>
-</li>
-<li><code>z = "Zach"</code></li>
-<li><code>w = y</code></li>
-<li><code>print(y + z)</code><ul>
-<li>How is this different from <code>print(x + 1)</code>? How is it the same?</li>
-</ul>
-</li>
-<li><code>print(y + " " + z)</code></li>
-</ul>
-<h2 id="first-python-script">First Python Script<a class="headerlink" href="#first-python-script" title="Permanent link"></a></h2>
-<p>Create a file called <strong>loops.py</strong> and open it in your favorite text editor (SublimeText is reccommended).</p>
-<p>In this file, add the following code:</p>
-<div class="codehilite"><pre>x = 5
-print(x)
-</pre></div>
-
-
-<p>Now, navigate to the folder containing this file and type in your command line</p>
-<div class="codehilite"><pre>python loops.py
-</pre></div>
-
-
-<p>You should see the following output:</p>
-<div class="codehilite"><pre>    &gt;&gt; 5
-</pre></div></article></body></html>
+<p>2.
+    Try to create the following games:
+    * <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/runner.py">Treasure Walker</a>
+    * <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure.py">Treasure Walker</a>
+    * <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure_snake.py">Treasure Snake</a></p></article></body></html>
