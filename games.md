@@ -71,19 +71,20 @@ Executing the loop
 	</div>
 
 2. Try to create the following **basic** games:
-	* <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure.py" download>Treasure Walker</a>
-	* <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure_snake.py" download>Treasure Snake</a>
-	* <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/runner.py" download>Runner</a>
+	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/treasure.py" download>Treasure Walker</a>
+	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/treasure_snake.py" download>Treasure Snake</a>
+	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/runner.py" download>Runner</a>
 
 3. Try to create the following **advanced** games:
-	* <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure_snake_continuous.py" download>Treasure Snake (continuous input)</a>
-	* <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/runner_continuous.py" download>Runner (continuous input)</a>
+	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/treasure_snake_continuous.py" download>Treasure Snake (continuous input)</a>
+	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/runner_continuous.py" download>Runner (continuous input)</a>
 
+	>**NOTE**: To run these games, you may need to install the `pynput` Python package, which allows Python to "listen" to keyboard input continuously.
 
-	* [Walker](https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/runner.py)
-	* [Treasure Walker](https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure.py)
-	* [Treasure Snake](https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure_snake.py)
 
 	<script type="text/javascript" async
 	  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
 	</script>
+
+
+
