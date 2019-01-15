@@ -80,7 +80,7 @@ Executing the loop
 	> * Change the game so that every 5 rounds, the symbols denoting player, the obstacles, and the boundaries change
 
 3. Try to create the following **advanced** games:
-	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/treasure_continuous.py" download="treasure.py">Treasure Walker</a>
+	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/treasure_continuous.py" download="treasure_continuous.py">Treasure Walker (continuous input)</a>
 	> * Add **hazards** so that when certain locations are accessed, the player loses
 	> * Change the game so that every 5 rounds, the symbols denoting player, treasure, and boundaries change
 	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/treasure_snake_continuous.py" download="treasure_snake_continuous.py">Treasure Snake (continuous input)</a>
