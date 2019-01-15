@@ -79,12 +79,21 @@ Executing the loop
 	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/treasure_snake_continuous.py" download>Treasure Snake (continuous input)</a>
 	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/runner_continuous.py" download>Runner (continuous input)</a>
 
-	>**NOTE**: To run these games, you may need to install the `pynput` Python package, which allows Python to "listen" to keyboard input continuously.
+	>**NOTE**: To run these games, you may need to install the `pynput` Python package, which allows Python to "listen" to keyboard input continuously. To do so, complete the following:
+	>
+	> * Navigate to folder containing the `.py` file using `cd foldername1/foldername2`, etc.
+	> * Type `pip install pynput` (see warning below)
+	> > **WARNING**: This installs the `pynput` package on your computer. If you instead just want to download and run the `pynput` package in the folder you're in to easily delete later, or if you have an error, such as <span style="color:red">`Could not find an activated virtualenv (required)`</span>, do the following:
+	> >
+	> > * Type `python -m venv venv`
+	> > * Type `source venv/bin/activate`
+	> > * Type `pip install pynput` again
+	> * Run a game called, for example, `filename.py` using `python filename.py`
 
 
-	<script type="text/javascript" async
-	  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-	</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
 
 
