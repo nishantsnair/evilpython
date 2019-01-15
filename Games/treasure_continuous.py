@@ -22,23 +22,6 @@ def move(coordinates, direction, size):
 	elif direction == "":
 		pass
 
-def play():
-	playing = True
-	coordinates = [0,0]
-	board = [[blank]*size for i in range(size)]
-	board[random.randint(0,size-1)][random.randint(0,size-1)]=treasure_symbol
-	print("Find the treasure! It is marked {}".format(treasure_symbol))
-	while playing:
-		board[coordinates[0]][coordinates[1]]=player
-		print_board(board)
-		board[coordinates[0]][coordinates[1]]=blank
-		print("Enter a direction (asdw)")
-		direction = input()
-		move(coordinates,direction,size)
-		if board[coordinates[0]][coordinates[1]] == treasure_symbol:
-			print_board(board)
-			print("You win!\n")
-			playing = False
 
 def show(a_board,a_coordinates):
 	print()
