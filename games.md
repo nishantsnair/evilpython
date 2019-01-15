@@ -70,22 +70,23 @@ Executing the loop
 		Ordered Pairs
 	</div>
 
+
 2. Try to mod the following **basic** games:
-	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure.py" download="treasure.py">Treasure Walker</a>
+	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure.py" download="treasure.py">Treasure Walker</a> ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/treasure.py))
 		* Add **hazards** so that when certain locations are accessed, the player loses
 		* Change the game so that every 5 rounds, the symbols denoting player, treasure, and boundaries change
-	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure_snake.py" download="treasure_snake.py">Treasure Snake</a>
+	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure_snake.py" download="treasure_snake.py">Treasure Snake</a> ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/treasure_snake.py))
 		* Change the game so that every 5 rounds, the symbols denoting snake, the food, and the boundaries change
-	* <a href="https://zsiegel92.github.io/evilpython/Games/runner.py" download="runner.py">Runner</a>
+	* <a href="https://zsiegel92.github.io/evilpython/Games/runner.py" download="runner.py">Runner</a> ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/runner.py))
 		* Change the game so that every 5 rounds, the symbols denoting player, the obstacles, and the boundaries change
 
 3. Try to create the following **advanced** games:
-	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure_continuous.py" download="treasure_continuous.py">Treasure Walker (continuous input)</a>
+	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure_continuous.py" download="treasure_continuous.py">Treasure Walker (continuous input)</a> ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/treasure_continuous.py))
 		* Add **hazards** so that when certain locations are accessed, the player loses
 		* Change the game so that every 5 rounds, the symbols denoting player, treasure, and boundaries change
-	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure_snake_continuous.py" download="treasure_snake_continuous.py">Treasure Snake (continuous input)</a>
+	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure_snake_continuous.py" download="treasure_snake_continuous.py">Treasure Snake (continuous input)</a> ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/treasure_snake_continuous.py))
 		* Change the game so that every 5 rounds, the symbols denoting snake, the food, and the boundaries change
-	* <a href="https://zsiegel92.github.io/evilpython/Games/runner_continuous.py" download="runner_continuous.py">Runner (continuous input)</a>
+	* <a href="https://zsiegel92.github.io/evilpython/Games/runner_continuous.py" download="runner_continuous.py">Runner (continuous input)</a> ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/runner_continuous.py))
 		* Change the game so that every 5 rounds, the symbols denoting player, the obstacles, and the boundaries change
 
 	>**NOTE**: To run these games, you may need to install the `pynput` Python package, which allows Python to "listen" to keyboard input continuously. To do so, complete the following:
