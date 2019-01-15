@@ -1,4 +1,5 @@
 from random import randint
+from pynput import keyboard
 
 
 class Runner:
@@ -37,29 +38,34 @@ class Runner:
 		return True
 
 
-	def play(self):
-		playing = True
-
+	def play_continuous(self):
 		print("Avoid the walls!")
+		self.print_board()
+		print("Enter a direction: a, s, w, or d")
 
-		while playing:
-
-
-			self.print_board()
-
-
-			print("Enter a direction: a, s, w, d, or nothing, then ENTER.")
-			direction = input()
-
+		def one_move(key):
+			try:
+				direction = key.char # single-char keys
+			except:
+				return True
+			if direction not in ['a', 's', 'd', 'w']: # keys interested
+				return True
 			if not self.valid_move(direction) or (self.board[1][self.position]==self.wall):
-				playing = False
+				return False
 			else:
 				self.board.pop(0)
 				self.board[0][self.position]=self.player
 				self.board += [self.one_row()]
 
+			self.print_board()
+			print("Enter a direction: a, s, w, or d")
+
+		with keyboard.Listener(on_press=one_move) as lis:
+			lis.join() # no this if main thread is polling self.keys
+
 		print("YOU LOSE!")
 
 
+
 r=Runner() #must run sudo python treasure_snake.py
-r.play()
+r.play_continuous()

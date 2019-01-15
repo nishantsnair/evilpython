@@ -70,7 +70,16 @@ Executing the loop
 		Ordered Pairs
 	</div>
 
-2. Try to create the following games:
+2. Try to create the following **basic** games:
+	* <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure.py" download>Treasure Walker</a>
+	* <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure_snake.py" download>Treasure Snake</a>
+	* <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/runner.py" download>Runner</a>
+
+3. Try to create the following **advanced** games:
+	* <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure_snake_continuous.py" download>Treasure Snake (continuous input)</a>
+	* <a href="https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/runner_continuous.py" download>Runner (continuous input)</a>
+
+
 	* [Walker](https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/runner.py)
 	* [Treasure Walker](https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure.py)
 	* [Treasure Snake](https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure_snake.py)
