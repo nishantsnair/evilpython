@@ -62,7 +62,7 @@ Executing the loop
 
 	<iframe height="400px" width="100%" src="https://repl.it/@ZSiegel/InputNavigationGame?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
 
-	***NOTE:*** An **ordered pair** is two numbers in parentheses that give coordinates. For example, `(1,2)` means "The point where \\(x\\) is \\(1\\) and \\(y\\) is \\(2\\)".
+	***NOTE:*** An **ordered pair** is two numbers in parentheses that give coordinates. For example, `(1,2)` means "The point where $x$ is $1$ and $y$ is $2$".
 
 	<div style="text-align: center;">
 		<img src="coordinates.jpg" width="500" alt="coordinates"/>
