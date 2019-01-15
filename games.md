@@ -71,7 +71,7 @@ Executing the loop
 	</div>
 
 2. Try to create the following games:
-	* [Treasure Walker](https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/runner.py)
+	* [Walker](https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/runner.py)
 	* [Treasure Walker](https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure.py)
 	* [Treasure Snake](https://raw.githubusercontent.com/zsiegel92/evilpython/master/Games/treasure_snake.py)
 
