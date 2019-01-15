@@ -1,9 +1,7 @@
 from random import randint
 from pynput import keyboard
 
-
 class Runner:
-
 	def __init__(self,blank=" ",player="0",wall="_",w = 12,h = 12,wall_size=2):
 		self.position = w//2
 		self.blank = blank
@@ -12,7 +10,6 @@ class Runner:
 		self.w = w
 		self.h = h
 		self.wall_size=wall_size
-
 		self.board = [[blank]*w] + [self.one_row() for i in range(h-1)]
 		self.board[0][self.position] = player
 
@@ -24,7 +21,6 @@ class Runner:
 		for row in self.board[::-1]:
 			print("#" + "".join(row) + "#")
 
-
 	def valid_move(self,direction):
 		if direction == "a" and self.position > 0:
 			self.position-=1
@@ -34,9 +30,7 @@ class Runner:
 			pass
 		else:
 			return False
-
 		return True
-
 
 	def play_continuous(self):
 		print("Avoid the walls!")
@@ -59,13 +53,9 @@ class Runner:
 
 			self.print_board()
 			print("Enter a direction: a, s, w, or d")
-
 		with keyboard.Listener(on_press=one_move) as lis:
 			lis.join() # no this if main thread is polling self.keys
-
 		print("YOU LOSE!")
-
-
 
 r=Runner() #must run sudo python treasure_snake.py
 r.play_continuous()

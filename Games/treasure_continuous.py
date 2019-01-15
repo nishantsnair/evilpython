@@ -22,7 +22,6 @@ def move(coordinates, direction, size):
 	elif direction == "":
 		pass
 
-
 def show(a_board,a_coordinates):
 	print()
 	a_board[a_coordinates[0]][a_coordinates[1]]=player
@@ -36,7 +35,6 @@ def play_continuous():
 	board = [[blank]*size for i in range(size)]
 	board[random.randint(1,size-1)][random.randint(1,size-1)]=treasure_symbol
 	print("Find the treasure! It is marked {}".format(treasure_symbol))
-
 
 	def on_press(key):
 		try:
@@ -58,7 +56,6 @@ def play_continuous():
 	with keyboard.Listener(on_press=on_press) as lis:
 		lis.join() # no this if main thread is polling self.keys
 	print("YOU WIN!")
-
 
 while True:
 	play_continuous()

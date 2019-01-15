@@ -34,13 +34,11 @@ def valid_move(coordinates, direction, size):
 		return False
 	return True
 
-
 def play_continuous(size=6,player="0",blank=" ",treasure_symbol="X",frame="#"):
 	class Game:
 		board = [[blank]*size for i in range(size)]
 		body = [[randint(0,size-1),randint(0,size-1)]]
 		treasure = place_treasure(board,body,treasure_symbol)
-
 
 	game = Game()
 	mark(game.board,game.body[0],player)
@@ -57,20 +55,14 @@ def play_continuous(size=6,player="0",blank=" ",treasure_symbol="X",frame="#"):
 		if k not in ['a', 's', 'd', 'w']: # keys interested
 			print("KEY NOT IN SET")
 			return False
-
-
 		game.head = game.body[0][:]
 		game.tail = game.body.pop()
-
 		direction = k
-
 		if not valid_move(game.head,direction,size) or (game.head in game.body):
 			return False
 		else:
 			mark(game.board,game.head,player)
-
 		game.body = [game.head] + game.body
-
 		if game.head == game.treasure:
 			game.body = game.body + [game.tail]
 			game.treasure = place_treasure(game.board,game.body,treasure_symbol)
@@ -79,19 +71,15 @@ def play_continuous(size=6,player="0",blank=" ",treasure_symbol="X",frame="#"):
 		else:
 			mark(game.board,game.tail,blank)
 			mark(game.board,game.head,player)
-
 		print_board(game.board,frame=frame)
 		print("Enter a direction (asdw)")
-
 	with keyboard.Listener(on_press=on_press) as lis:
 		lis.join() # no this if main thread is polling self.keys
-
 
 	if len(game.body) == size*size:
 		print("YOU WIN!")
 	else:
 		print("YOU LOSE!")
 	keyboard.Listener.stop
-
 
 play_continuous() #must run sudo python treasure_snake.py

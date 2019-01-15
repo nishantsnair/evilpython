@@ -39,16 +39,12 @@ def play(size=6,player="0",blank=" ",treasure_symbol="X",frame="#"):
 	board = [[blank]*size for i in range(size)]
 	body = [[randint(0,size-1),randint(0,size-1)]]
 	treasure = place_treasure(board,body,treasure_symbol)
-
 	print("Find the treasure! It is marked {}".format(treasure_symbol))
-
 	while playing:
 		head = body[0][:]
 		tail = body.pop()
 		mark(board,head,player)
 		print_board(board,frame=frame)
-
-
 		print("Enter a direction (asdw) then ENTER")
 		direction = input()
 
@@ -61,11 +57,9 @@ def play(size=6,player="0",blank=" ",treasure_symbol="X",frame="#"):
 			treasure = place_treasure(board,body,treasure_symbol)
 		else:
 			mark(board,tail,blank)
-
 	if len(body) == size*size:
 		print("YOU WIN!")
 	else:
 		print("YOU LOSE!")
-
 
 play()

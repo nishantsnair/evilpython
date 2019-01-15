@@ -1,8 +1,6 @@
 from random import randint
 
-
 class Runner:
-
 	def __init__(self,blank=" ",player="0",wall="_",w = 12,h = 12,wall_size=2):
 		self.position = w//2
 		self.blank = blank
@@ -11,7 +9,6 @@ class Runner:
 		self.w = w
 		self.h = h
 		self.wall_size=wall_size
-
 		self.board = [[blank]*w] + [self.one_row() for i in range(h-1)]
 		self.board[0][self.position] = player
 
@@ -23,7 +20,6 @@ class Runner:
 		for row in self.board[::-1]:
 			print("#" + "".join(row) + "#")
 
-
 	def valid_move(self,direction):
 		if direction == "a" and self.position > 0:
 			self.position-=1
@@ -33,31 +29,21 @@ class Runner:
 			pass
 		else:
 			return False
-
 		return True
-
 
 	def play(self):
 		playing = True
-
 		print("Avoid the walls!")
-
 		while playing:
-
-
 			self.print_board()
-
-
 			print("Enter a direction: a, s, w, d, or nothing, then ENTER.")
 			direction = input()
-
 			if not self.valid_move(direction) or (self.board[1][self.position]==self.wall):
 				playing = False
 			else:
 				self.board.pop(0)
 				self.board[0][self.position]=self.player
 				self.board += [self.one_row()]
-
 		print("YOU LOSE!")
 
 
