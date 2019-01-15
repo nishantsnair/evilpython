@@ -101,6 +101,7 @@ Executing the loop
 	> * Type `python -m venv venv`
 	> * Type `source venv/bin/activate`
 	> * Type `pip install pynput` again
+	>
 	> Then, every time you navicate to the folder with the game, you have to type `source venv/bin/activate`
 
 <script type="text/javascript" async
