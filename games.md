@@ -72,33 +72,34 @@ Executing the loop
 
 2. Try to mod the following **basic** games:
 	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/treasure.py" download="treasure.py">Treasure Walker</a>
-	> * Add **hazards** so that when certain locations are accessed, the player loses
-	> * Change the game so that every 5 rounds, the symbols denoting player, treasure, and boundaries change
+		* Add **hazards** so that when certain locations are accessed, the player loses
+		* Change the game so that every 5 rounds, the symbols denoting player, treasure, and boundaries change
 	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/treasure_snake.py" download="treasure_snake.py">Treasure Snake</a>
-	> * Change the game so that every 5 rounds, the symbols denoting snake, the food, and the boundaries change
+		* Change the game so that every 5 rounds, the symbols denoting snake, the food, and the boundaries change
 	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/runner.py" download="runner.py">Runner</a>
-	> * Change the game so that every 5 rounds, the symbols denoting player, the obstacles, and the boundaries change
+		* Change the game so that every 5 rounds, the symbols denoting player, the obstacles, and the boundaries change
 
 3. Try to create the following **advanced** games:
 	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/treasure_continuous.py" download="treasure_continuous.py">Treasure Walker (continuous input)</a>
-	> * Add **hazards** so that when certain locations are accessed, the player loses
-	> * Change the game so that every 5 rounds, the symbols denoting player, treasure, and boundaries change
+		* Add **hazards** so that when certain locations are accessed, the player loses
+		* Change the game so that every 5 rounds, the symbols denoting player, treasure, and boundaries change
 	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/treasure_snake_continuous.py" download="treasure_snake_continuous.py">Treasure Snake (continuous input)</a>
-	> * Change the game so that every 5 rounds, the symbols denoting snake, the food, and the boundaries change
+		* Change the game so that every 5 rounds, the symbols denoting snake, the food, and the boundaries change
 	* <a href="https://github.com/zsiegel92/evilpython/raw/master/Games/runner_continuous.py" download="runner_continuous.py">Runner (continuous input)</a>
-	> * Change the game so that every 5 rounds, the symbols denoting player, the obstacles, and the boundaries change
+		* Change the game so that every 5 rounds, the symbols denoting player, the obstacles, and the boundaries change
 
 	>**NOTE**: To run these games, you may need to install the `pynput` Python package, which allows Python to "listen" to keyboard input continuously. To do so, complete the following:
 	>
 	> * Navigate to folder containing the `.py` file using `cd foldername1/foldername2`, etc.
-	> * Type `pip install pynput` (see warning below)
-	> > **WARNING**: This installs the `pynput` package on your computer. If you instead just want to download and run the `pynput` package in the folder you're in to easily delete later, or if you have an error, such as <span style="color:red">`Could not find an activated virtualenv (required)`</span>, do the following:
-	> >
-	> > * Type `python -m venv venv`
-	> > * Type `source venv/bin/activate`
-	> > * Type `pip install pynput` again
-	> * Run a game called, for example, `filename.py` using `python filename.py`
-
+	> * Read the **PACKAGE INSTALL NOTE** below, then type `pip install pynput`
+	> * Run a game called (for example) `filename.py` using `python filename.py`
+	>
+	> <br>
+	> **PACKAGE INSTALL NOTE**: This installs the `pynput` package on your computer. If you instead just want to download and run the `pynput` package in the folder you're in to easily drag to the trash later, or if you have an error, such as <span style="color:red">`Could not find an activated virtualenv (required)`</span>, do the following:
+	>
+	> * Type `python -m venv venv`
+	> * Type `source venv/bin/activate`
+	> * Type `pip install pynput` again
 
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
