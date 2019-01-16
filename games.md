@@ -74,19 +74,35 @@ Executing the loop
 2. Try to mod the following **basic** games:
 	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure.py" download="treasure.py">Treasure Walker</a> --- ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/treasure.py))
 		* Add **hazards** so that when certain locations are accessed, the player loses
+			* Make sure the hazards are not placed atop the treasure!
+			* Add a variable called `num_hazards` that controls the **number of hazards**
+		* Add scorekeeping to keep track of the number of treasures found
+		* Add a timer using the Python `time` module (`import time`)
 		* Change the game so that every 5 rounds, the symbols denoting player, treasure, and boundaries change
-	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure_snake.py" download="treasure_snake.py">Treasure Snake</a> --- ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/treasure_snake.py))
+	* <a href="https://zsiegel92.github.io/evilpython/Games/snake.py" download="snake.py">Snake</a> --- ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/snake.py))
+		* Add scorekeeping
+		* Add timekeeping
 		* Change the game so that every 5 rounds, the symbols denoting snake, the food, and the boundaries change
 	* <a href="https://zsiegel92.github.io/evilpython/Games/runner.py" download="runner.py">Runner</a> --- ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/runner.py))
+		* Add scorekeeping
+		* Add timekeeping
 		* Change the game so that every 5 rounds, the symbols denoting player, the obstacles, and the boundaries change
 
 3. Try to create the following **advanced** games:
 	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure_continuous.py" download="treasure_continuous.py">Treasure Walker (continuous input)</a> --- ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/treasure_continuous.py))
 		* Add **hazards** so that when certain locations are accessed, the player loses
+			* Make sure the hazards are not placed atop the treasure!
+			* Add a variable called `num_hazards` that controls the **number of hazards**
+		* Add scorekeeping to keep track of the number of treasures found
+		* Add a timer using the Python `time` module (`import time`)
 		* Change the game so that every 5 rounds, the symbols denoting player, treasure, and boundaries change
-	* <a href="https://zsiegel92.github.io/evilpython/Games/treasure_snake_continuous.py" download="treasure_snake_continuous.py">Treasure Snake (continuous input)</a> --- ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/treasure_snake_continuous.py))
+	* <a href="https://zsiegel92.github.io/evilpython/Games/snake_continuous.py" download="snake_continuous.py">Snake (continuous input)</a> --- ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/snake_continuous.py))
+		* Add scorekeeping
+		* Add timekeeping
 		* Change the game so that every 5 rounds, the symbols denoting snake, the food, and the boundaries change
 	* <a href="https://zsiegel92.github.io/evilpython/Games/runner_continuous.py" download="runner_continuous.py">Runner (continuous input)</a> --- ([view code](https://github.com/zsiegel92/evilpython/blob/master/Games/runner_continuous.py))
+		* Add scorekeeping
+		* Add timekeeping
 		* Change the game so that every 5 rounds, the symbols denoting player, the obstacles, and the boundaries change
 
 	>**NOTE**: To run these games, you may need to install the `pynput` Python package, which allows Python to "listen" to keyboard input continuously. To do so, complete the following:
