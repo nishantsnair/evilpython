@@ -10,7 +10,9 @@ How to cause a ruckus on a PC using Python.
 * [Lesson 4: Integer and String Manipulation](https://zsiegel92.github.io/evilpython/lesson_4.html)
 * [Binary Numbers](https://zsiegel92.github.io/evilpython/binary_resources.html)
 * [Working with Lists](https://zsiegel92.github.io/evilpython/list_assignments.html)
-* [Games](https://zsiegel92.github.io/evilpython/games.html)
+* [Lesson 5: Games](https://zsiegel92.github.io/evilpython/lesson_5.html)
+* [Lesson 6: Capturing Keyboard Input with Callbacks](https://zsiegel92.github.io/evilpython/lesson_6.html)
+
 
 ## Running Python
 
