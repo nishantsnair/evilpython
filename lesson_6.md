@@ -99,9 +99,9 @@ def press_callback(key):
 def release_callback(key):
 	print('{} released'.format(key))
 
-	l = keyboard.Listener(on_press=press_callback,on_release=release_callback)
-	l.start()
-	l.join()
+l = keyboard.Listener(on_press=press_callback,on_release=release_callback)
+l.start()
+l.join()
 ```
 
 ### The `key` Variable is not a Python String: `key.char`
