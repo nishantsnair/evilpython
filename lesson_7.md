@@ -152,3 +152,7 @@ def play():
 while True:
 	play()
 ```
+
+2. Create Tic-Tac-Toe from [Practice Python](https://www.practicepython.org)'s lessons [24](https://www.practicepython.org/solution/2015/11/01/24-draw-a-game-board-solutions.html), [25](https://www.practicepython.org/solution/2015/11/08/25-guessing-game-two-solutions.html), [26](https://www.practicepython.org/solution/2015/11/23/26-check-tic-tac-toe-solutions.html), and [27](https://www.practicepython.org/solution/2016/03/17/27-tic-tac-toe-draw-solutions.html).
+	* Use continuous input with callbacks, using the `pynput` package
+	* Keep score!
