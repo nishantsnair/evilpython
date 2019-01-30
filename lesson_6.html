@@ -1324,9 +1324,9 @@ That&rsquo;s because <code>key.__str__</code> returns a nicely-formatted string 
         <span class="n">c</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="s">&quot;h&quot;</span><span class="p">)</span>
         <span class="n">c</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="s">&quot;h&quot;</span><span class="p">)</span>
 
-<span class="k">with</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span>
-        <span class="n">on_press</span><span class="o">=</span><span class="n">press_callback</span><span class="p">)</span> <span class="k">as</span> <span class="n">listener</span><span class="p">:</span>
-    <span class="n">listener</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">press_callback</span><span class="p">)</span>
+<span class="n">l</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">l</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </pre></div>
 
 </li>

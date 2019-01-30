@@ -271,9 +271,9 @@ l.join()
 			c.press("h")
 			c.release("h")
 
-	with keyboard.Listener(
-			on_press=press_callback) as listener:
-		listener.join()
+	l = Listener(on_press=press_callback)
+	l.start()
+	l.join()
 	```
 
 2. Make an **autocomplete** tool. Write some code so that when you type the first letter of your name, the rest of your name is typed out. If your name contains two copies of the letter it starts with, you will have difficulty, so pick another word!
