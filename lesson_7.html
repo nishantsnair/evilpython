@@ -1082,71 +1082,154 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>README</title></head><body><article class="markdown-body"><h1 id="evil-python">Evil Python<a class="headerlink" href="#evil-python" title="Permanent link"></a></h1>
-<p>How to cause a ruckus on a PC using Python.</p>
-<h2 id="lessons">Lessons<a class="headerlink" href="#lessons" title="Permanent link"></a></h2>
+</style><title>lesson_7</title></head><body><article class="markdown-body"><h1 id="evil-python-lesson-7-more-games">Evil Python Lesson 7: More Games!<a class="headerlink" href="#evil-python-lesson-7-more-games" title="Permanent link"></a></h1>
+<p><a href="https://zsiegel92.github.io/evilpython/">All Lessons</a></p>
+<div class="toc">
 <ul>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_1.html">Lesson 1: Creating files and folders</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_2.html">Lesson 2: Using Python to Execute Many Commands</a></li>
-<li><a href="unfinished"><span style="color:red">UNFINISHED</span> Lesson 3: Sending Emails using Code</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_4.html">Lesson 4: Integer and String Manipulation</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/binary_resources.html">Binary Numbers</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/list_assignments.html">Working with Lists</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_5.html">Lesson 5: Games</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_6.html">Lesson 6: Capturing Keyboard Input with Callbacks</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_7.html">Lesson 7: More Games</a></li>
+<li><a href="#evil-python-lesson-7-more-games">Evil Python Lesson 7: More Games!</a><ul>
+<li><a href="#review">Review</a><ul>
+<li><a href="#python-input">Python input</a></li>
+<li><a href="#continuous-input-pynput">Continuous Input: pynput</a></li>
+<li><a href="#installing-pynput">Installing pynput</a></li>
 </ul>
-<h2 id="running-python">Running Python<a class="headerlink" href="#running-python" title="Permanent link"></a></h2>
-<p>You are ready to run Python! Your computer&rsquo;s Python installation can run in two important ways:</p>
-<h3 id="1-running-python-code-written-in-py-files">1. Running Python Code Written in <code>.py</code> Files<a class="headerlink" href="#1-running-python-code-written-in-py-files" title="Permanent link"></a></h3>
-<p>Python can execute Python code, which is written in <code>.py</code> files, such as <code>app.py</code>. If you write code in a <code>.py</code> file called <code>app.py</code>, you can tell Python to run <strong>all</strong> the code with the following command (without typing <code>&gt;&gt;</code>):</p>
-<div class="codehilite"><pre>        &gt;&gt; python app.py
+</li>
+<li><a href="#overview-listening-to-input">Overview: &ldquo;Listening&rdquo; to Input</a></li>
+<li><a href="#events-and-callbacks">Events and Callbacks</a></li>
+<li><a href="#keyboard-listening-pynputkeyboardlistener">Keyboard Listening: pynput.keyboard.Listener</a><ul>
+<li><a href="#press-and-release-on_press-and-on_release">&ldquo;Press&rdquo; and &ldquo;Release&rdquo;: on_press and on_release</a></li>
+</ul>
+</li>
+<li><a href="#assignments">Assignments</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="review">Review<a class="headerlink" href="#review" title="Permanent link"></a></h2>
+<h3 id="python-input">Python <code>input</code><a class="headerlink" href="#python-input" title="Permanent link"></a></h3>
+<p>The function <code>input</code> returns a variable of type <code>str</code>. If <code>x = input()</code> is executed and <code>5</code> <kbd>Enter</kbd> is typed, then <code>type(x)</code> will yield <code>&lt;class 'str'&gt;</code>.</p>
+<div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="mi">5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+<span class="s">&#39;5&#39;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">str</span><span class="s">&#39;&gt;</span>
 </pre></div>
 
-
-<p>This command tells Python to execute every line of code written in the <code>app.py</code> file. Try running this command and, if there are no error messages, navigate to <a href="localhost%3A5000">localhost</a>.</p>
-<h3 id="2-running-python-code-in-the-interactive-console">2. Running Python Code in the Interactive Console<a class="headerlink" href="#2-running-python-code-in-the-interactive-console" title="Permanent link"></a></h3>
-<p>Python has an &ldquo;Interactive Console&rdquo; called the &ldquo;Python Interactive Console&rdquo;.</p>
-<p>Any Python commands can be executed one at a time by writing them in the command prompt and hitting the <kbd>Enter</kbd> key. This is called a <strong>Read-Evaluate-Print-Loop (REPL)</strong> environment, because it &ldquo;reads&rdquo; your input, &ldquo;evaluates&rdquo; it, &ldquo;prints&rdquo; the output, and then &ldquo;loops&rdquo; by starting the process over again.</p>
-<p><strong>Type <code>python</code> to start the Python interactive console.</strong> Then try the following Python commands:</p>
+<blockquote>
+<p>Notice that the variable <code>age</code> stores a number but its type is <code>str</code>.</p>
+</blockquote>
+<h3 id="continuous-input-pynput">Continuous Input: <code>pynput</code><a class="headerlink" href="#continuous-input-pynput" title="Permanent link"></a></h3>
+<p>Recall from <a href="https://zsiegel92.github.io/evilpython/lesson_5.html#assignments">the previous lesson&rsquo;s assignments</a> that games can be created using Python&rsquo;s built-in <code>input</code> function, while more advanced (and more fun) games can be created in which the user does not have to press <kbd>Enter</kbd> after every key press.</p>
+<h3 id="installing-pynput">Installing <code>pynput</code><a class="headerlink" href="#installing-pynput" title="Permanent link"></a></h3>
+<p>The <code>pynput</code> package allows Python to &ldquo;listen&rdquo; to keyboard input continuously.</p>
+<p>To install <code>pynput</code>, complete the following:</p>
 <ul>
-<li><code>x=5</code> to create a variable named <code>x</code> with the value <code>5</code>.<ul>
-<li><code>x = 5</code> will also work. Spaces (made with the <kbd>spacebar</kbd>) are known as <strong>whitespace</strong>, and are generally ignored by Python.</li>
+<li>Navigate to folder containing the <code>.py</code> file using <code>cd foldername1/foldername2</code>, etc.</li>
+<li>Read the <strong>PACKAGE INSTALL NOTE</strong> below, then type <code>pip install pynput</code></li>
+<li>Run a game called (for example) <code>filename.py</code> using <code>python filename.py</code>.<ul>
+<li>If you get an error that contains the words <span style="color:red"><code>user</code></span> or <span style="color:red"><code>permissions</code></span>, run the program using <code>sudo python filename.py</code>. You may be prompted for a password.</li>
 </ul>
 </li>
-<li><code>print(x)</code> to print the value of <code>x</code><ul>
-<li><code>x</code> (on its own) is another way to say <code>print(x)</code>, but this only works in the interactive shell.</li>
 </ul>
-</li>
-<li><code>print(x+1)</code><ul>
-<li><code>x+1</code> (on its own) will also work.</li>
+<blockquote>
+<p><strong>PACKAGE INSTALL NOTE</strong>: This installs the <code>pynput</code> package on your computer. If you instead just want to download and run the <code>pynput</code> package in the folder you&rsquo;re in to easily drag to the trash later, or if you have an error, such as <span style="color:red"><code>Could not find an activated virtualenv (required)</code></span>, do the following:</p>
+<ul>
+<li>Type <code>python -m venv venv</code></li>
+<li>Type <code>source venv/bin/activate</code></li>
+<li>Type <code>pip install pynput</code></li>
 </ul>
-</li>
-<li><code>y = "Eitan"</code><ul>
-<li>(why did we need quotes around <code>Eitan</code> but not around the number <code>5</code>?)</li>
-</ul>
-</li>
-<li><code>z = "Zach"</code></li>
-<li><code>w = y</code></li>
-<li><code>print(y + z)</code><ul>
-<li>How is this different from <code>print(x + 1)</code>? How is it the same?</li>
-</ul>
-</li>
-<li><code>print(y + " " + z)</code></li>
-</ul>
-<h2 id="first-python-script">First Python Script<a class="headerlink" href="#first-python-script" title="Permanent link"></a></h2>
-<p>Create a file called <strong>loops.py</strong> and open it in your favorite text editor (SublimeText is reccommended).</p>
-<p>In this file, add the following code:</p>
-<div class="codehilite"><pre>x = 5
-print(x)
+<p>Then, every time you navicate to the folder with the game, you have to type <code>source venv/bin/activate</code> before running your program.</p>
+</blockquote>
+<h2 id="overview-listening-to-input">Overview: &ldquo;Listening&rdquo; to Input<a class="headerlink" href="#overview-listening-to-input" title="Permanent link"></a></h2>
+<p>So far, we have written Python code that prompts the user for textual input through the command prompt with the built-in Python <code>input</code> function. While typing our responses into the command prompt, we can navigate away from the window or type and erase, and Python won&rsquo;t know the difference until we press <kbd>Enter</kbd>.</p>
+<p>By contrast, <code>pynput</code> is a <strong><em>keyboard listener</em></strong>, which means it interacts with your operating system (<em>Windows</em>, <em>Mac OS</em>, or <em>Linux</em>) so that it knows about all keyboard actions. In fact, <code>pynput</code> can even <em>control</em> the keyboard and trigger automated key-presses.</p>
+<p><img alt="Keyboard typing on its own 'PLAY AGAIN?'" src="keyboard_moving.gif"></p>
+<p>You can view the official <code>pynput</code> keyboard documentation <a href="https://pynput.readthedocs.io/en/latest/keyboard.html">here</a>.</p>
+<h2 id="events-and-callbacks"><em>Events</em> and <em>Callbacks</em><a class="headerlink" href="#events-and-callbacks" title="Permanent link"></a></h2>
+<p>The way <code>pynput</code> handles keyboard input is by being aware of all keyboard actions, called &ldquo;<em>events</em>&rdquo;, and to respond to them by executing functions, called &ldquo;<em>callbacks</em>&rdquo;.</p>
+<p>The <em>events</em> that <code>pynput</code> can respond to are <strong><em>key-presses</em></strong> and <strong><em>key-releases</em></strong>.</p>
+<p>A very simple key-press callback function that prints the pressed key looks like this:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">press_callback</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;{} was pressed&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
 </pre></div>
 
+<blockquote>
+<p>Callbacks take a parameter - here it is called <code>key</code>. When we register this function as a callback, <code>pynput</code> sends the identity of the pressed key as an argument to this function when it executes.</p>
+</blockquote>
+<p>To register this function as a callback, we create an object of the the <code>pynput.keyboard.Listener</code> class and its <code>start</code> and <code>join</code> method. For now, just copy this syntax to implement a keyboard listener:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
 
-<p>Now, navigate to the folder containing this file and type in your command line</p>
-<div class="codehilite"><pre>python loops.py
+<span class="k">def</span> <span class="nf">press_callback</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;{} was pressed&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">press_callback</span><span class="p">)</span>
+<span class="n">l</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">l</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </pre></div>
 
+<p>The <code>keyboard.Listener</code> method takes a keyword parameter called <code>on_press</code>, which is here set to our callback <code>press_callback</code>. This function is executed whenever any key is pressed, with an argument that gives the identity of the pressed key, which becomes the parameter of the callback, <code>key</code>.</p>
+<h2 id="keyboard-listening-pynputkeyboardlistener">Keyboard Listening: <code>pynput.keyboard.Listener</code><a class="headerlink" href="#keyboard-listening-pynputkeyboardlistener" title="Permanent link"></a></h2>
+<h3 id="press-and-release-on_press-and-on_release">&ldquo;Press&rdquo; and &ldquo;Release&rdquo;: <code>on_press</code> and <code>on_release</code><a class="headerlink" href="#press-and-release-on_press-and-on_release" title="Permanent link"></a></h3>
+<p>We can implement a more complicated listener that responds to key-presses as well as key-releases.</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
 
-<p>You should see the following output:</p>
-<div class="codehilite"><pre>    &gt;&gt; 5
+<span class="k">def</span> <span class="nf">press_callback</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;{} was pressed&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">release_callback</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;{} released&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">press_callback</span><span class="p">,</span><span class="n">on_release</span><span class="o">=</span><span class="n">release_callback</span><span class="p">)</span>
+<span class="n">l</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">l</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+
+<h2 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h2>
+<ol>
+<li>Make <a href="https://zsiegel92.github.io/evilpython/Games/rock_paper_scissors_skeleton.py" download="rock_paper_scissors_skeleton.py">This Rock-Paper-Scissors &lsquo;Skeleton&rsquo;</a> &mdash; (<a href="https://github.com/zsiegel92/evilpython/blob/master/Games/rock_paper_scissors_skeleton.py">view code</a>) into a functioning Rock-Paper-Scissors game that tells you who won! Then,<ul>
+<li>Add a move-timer</li>
+<li>Make the game keep score based on how many wins each player has, and print the score after each round</li>
+<li>Add a score limit, which ends the game after a certain score!</li>
+</ul>
+</li>
+</ol>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
+
+<span class="n">p1_move</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">p2_move</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="k">def</span> <span class="nf">press_callback</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">p1_move</span><span class="p">,</span><span class="n">p2_move</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">p1_move</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">char</span> <span class="o">==</span> <span class="s">&#39;a&#39;</span><span class="p">:</span>
+            <span class="n">p1_move</span> <span class="o">=</span> <span class="s">&#39;rock&#39;</span>
+        <span class="k">elif</span> <span class="n">key</span><span class="o">.</span><span class="n">char</span> <span class="o">==</span> <span class="s">&#39;s&#39;</span><span class="p">:</span>
+            <span class="n">p1_move</span> <span class="o">=</span> <span class="s">&#39;paper&#39;</span>
+        <span class="k">elif</span> <span class="n">key</span><span class="o">.</span><span class="n">char</span> <span class="o">==</span> <span class="s">&#39;d&#39;</span><span class="p">:</span>
+            <span class="n">p1_move</span> <span class="o">=</span> <span class="s">&#39;scissors&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">p2_move</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">char</span> <span class="o">==</span> <span class="s">&#39;j&#39;</span><span class="p">:</span>
+            <span class="n">p2_move</span> <span class="o">=</span> <span class="s">&#39;rock&#39;</span>
+        <span class="k">elif</span> <span class="n">key</span><span class="o">.</span><span class="n">char</span> <span class="o">==</span> <span class="s">&#39;k&#39;</span><span class="p">:</span>
+            <span class="n">p2_move</span> <span class="o">=</span> <span class="s">&#39;paper&#39;</span>
+        <span class="k">elif</span> <span class="n">key</span><span class="o">.</span><span class="n">char</span> <span class="o">==</span> <span class="s">&#39;l&#39;</span><span class="p">:</span>
+            <span class="n">p2_move</span> <span class="o">=</span> <span class="s">&#39;scissors&#39;</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="o">*</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># Hides previous move by moving command prompt</span>
+    <span class="k">if</span> <span class="n">p1_move</span> <span class="ow">and</span> <span class="n">p2_move</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">def</span> <span class="nf">play</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">p1_move</span><span class="p">,</span><span class="n">p2_move</span>
+    <span class="n">p1_move</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">p2_move</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">press_callback</span><span class="p">)</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n\n\n</span><span class="s">Ready!&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Player 1 presses &#39;a&#39;,&#39;s&#39;, and &#39;d&#39; to play rock-paper-scissors&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Player 2 presses &#39;j&#39;,&#39;k&#39;, and &#39;l&#39; to play rock-paper-scissors&quot;</span><span class="p">)</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">&quot;</span><span class="se">\n\n\n</span><span class="s">Player 1 played {p1_move} and Player 2 played {p2_move}&quot;</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">play</span><span class="p">()</span>
 </pre></div></article></body></html>

@@ -21,6 +21,25 @@ The function `input` returns a variable of type `str`. If `x = input()` is execu
 ```
 > Notice that the variable `age` stores a number but its type is `str`.
 
+### Keyboard Listening Using the `pynput` Package
+
+Recall that we can create a *keyboard listener* using the `pynput` package's `keyboard` module. We define two ***callback functions*** to which we set the `on_press` and `on_release` parameters of the `keyboard.Listener` function, which returns a keyboard listener. The callback functions `press_callback` and `release_callback` will then execute every time a key is *pressed* or *released*, respectively.
+
+```python
+from pynput import keyboard
+
+def press_callback(key):
+    print('{} was pressed'.format(key))
+
+def release_callback(key):
+    print('{} released'.format(key))
+
+l = keyboard.Listener(on_press=press_callback,on_release=release_callback)
+l.start()
+l.join()
+```
+> The reason we need to use `l.start()` *and* `l.join()` is a bit complicated, so just remember that `pynput` keyboard listeners need to do both!
+
 ### Continuous Input: `pynput`
 
 Recall from [the previous lesson's assignments](https://zsiegel92.github.io/evilpython/lesson_5.html#assignments) that games can be created using Python's built-in `input` function, while more advanced (and more fun) games can be created in which the user does not have to press <kbd>Enter</kbd> after every key press.
