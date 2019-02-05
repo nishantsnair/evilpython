@@ -1082,72 +1082,80 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>README</title></head><body><article class="markdown-body"><h1 id="evil-python">Evil Python<a class="headerlink" href="#evil-python" title="Permanent link"></a></h1>
-<p>How to cause a ruckus on a PC using Python.</p>
-<h2 id="lessons">Lessons<a class="headerlink" href="#lessons" title="Permanent link"></a></h2>
+</style><title>lesson_8</title></head><body><article class="markdown-body"><h1 id="evil-python-lesson-8-file-io">Evil Python Lesson 8: File I/O<a class="headerlink" href="#evil-python-lesson-8-file-io" title="Permanent link"></a></h1>
+<p><a href="https://zsiegel92.github.io/evilpython/">All Lessons</a></p>
+<div class="toc">
 <ul>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_1.html">Lesson 1: Creating files and folders</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_2.html">Lesson 2: Using Python to Execute Many Commands</a></li>
-<li><a href="unfinished"><span style="color:red">UNFINISHED</span> Lesson 3: Sending Emails using Code</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_4.html">Lesson 4: Integer and String Manipulation</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/binary_resources.html">Binary Numbers</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/list_assignments.html">Working with Lists</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_5.html">Lesson 5: Games</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_6.html">Lesson 6: Capturing Keyboard Input with Callbacks</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_7.html">Lesson 7: More Games</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_8.html">Lesson 8: File I/O</a></li>
+<li><a href="#evil-python-lesson-8-file-io">Evil Python Lesson 8: File I/O</a><ul>
+<li><a href="#io-inputoutput">I/O: &ldquo;Input/Output&rdquo;</a><ul>
+<li><a href="#opening-and-closing-files">Opening and Closing Files</a></li>
+<li><a href="#reading-file">Reading File</a></li>
+<li><a href="#writing-to-a-file">Writing to a File</a></li>
 </ul>
-<h2 id="running-python">Running Python<a class="headerlink" href="#running-python" title="Permanent link"></a></h2>
-<p>You are ready to run Python! Your computer&rsquo;s Python installation can run in two important ways:</p>
-<h3 id="1-running-python-code-written-in-py-files">1. Running Python Code Written in <code>.py</code> Files<a class="headerlink" href="#1-running-python-code-written-in-py-files" title="Permanent link"></a></h3>
-<p>Python can execute Python code, which is written in <code>.py</code> files, such as <code>app.py</code>. If you write code in a <code>.py</code> file called <code>app.py</code>, you can tell Python to run <strong>all</strong> the code with the following command (without typing <code>&gt;&gt;</code>):</p>
-<div class="codehilite"><pre>        &gt;&gt; python app.py
-</pre></div>
-
-
-<p>This command tells Python to execute every line of code written in the <code>app.py</code> file. Try running this command and, if there are no error messages, navigate to <a href="localhost%3A5000">localhost</a>.</p>
-<h3 id="2-running-python-code-in-the-interactive-console">2. Running Python Code in the Interactive Console<a class="headerlink" href="#2-running-python-code-in-the-interactive-console" title="Permanent link"></a></h3>
-<p>Python has an &ldquo;Interactive Console&rdquo; called the &ldquo;Python Interactive Console&rdquo;.</p>
-<p>Any Python commands can be executed one at a time by writing them in the command prompt and hitting the <kbd>Enter</kbd> key. This is called a <strong>Read-Evaluate-Print-Loop (REPL)</strong> environment, because it &ldquo;reads&rdquo; your input, &ldquo;evaluates&rdquo; it, &ldquo;prints&rdquo; the output, and then &ldquo;loops&rdquo; by starting the process over again.</p>
-<p><strong>Type <code>python</code> to start the Python interactive console.</strong> Then try the following Python commands:</p>
+</li>
+<li><a href="#assignments">Assignments</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="io-inputoutput">I/O: &ldquo;Input/Output&rdquo;<a class="headerlink" href="#io-inputoutput" title="Permanent link"></a></h2>
+<p><strong>File I/O</strong> is short for &ldquo;file input and output&rdquo;.</p>
+<p>We have <em>written</em> to the <strong>console</strong> using the built-in <em>Python</em> <code>print</code> function. We have also used the <em>shell</em> command <code>touch</code> to create empty files from the command line. <strong>We will use Python functions to <em>open</em> files and to <em>write</em> content to open files.</strong></p>
+<p>We have <em>read</em> content from the <strong>console</strong> using the built-in <em>Python</em> <code>input</code> function, and we have captured keyboard input using the <code>pynput</code> package. <strong>We will use Python functions to <em>open</em> and <em>read</em> content from open files</strong>.</p>
+<h3 id="opening-and-closing-files">Opening and Closing Files<a class="headerlink" href="#opening-and-closing-files" title="Permanent link"></a></h3>
+<p>To open a file, Python has a built-in function called <code>open</code>. We can <strong>read</strong> and <strong>write</strong> to open files. <a href="https://docs.python.org/3/library/functions.html#open">Read about it in the Python documentation</a>!</p>
 <ul>
-<li><code>x=5</code> to create a variable named <code>x</code> with the value <code>5</code>.<ul>
-<li><code>x = 5</code> will also work. Spaces (made with the <kbd>spacebar</kbd>) are known as <strong>whitespace</strong>, and are generally ignored by Python.</li>
+<li><code>open_file = open('some_file.txt','r')</code> ← Read file.</li>
+<li><code>open_file = open('some_file.txt','w')</code> ← Write to file, clearing if it exists.</li>
+<li><code>open_file = open('some_file.txt','x')</code> ← Create file if it doesn&rsquo;t exist.</li>
+<li><code>open_file = open('some_file.txt','a')</code> ← Write to file, appending to the end.</li>
+<li><code>open_file = open('some_file.txt','+')</code> ← Read and write to file.</li>
 </ul>
-</li>
-<li><code>print(x)</code> to print the value of <code>x</code><ul>
-<li><code>x</code> (on its own) is another way to say <code>print(x)</code>, but this only works in the interactive shell.</li>
-</ul>
-</li>
-<li><code>print(x+1)</code><ul>
-<li><code>x+1</code> (on its own) will also work.</li>
-</ul>
-</li>
-<li><code>y = "Eitan"</code><ul>
-<li>(why did we need quotes around <code>Eitan</code> but not around the number <code>5</code>?)</li>
-</ul>
-</li>
-<li><code>z = "Zach"</code></li>
-<li><code>w = y</code></li>
-<li><code>print(y + z)</code><ul>
-<li>How is this different from <code>print(x + 1)</code>? How is it the same?</li>
-</ul>
-</li>
-<li><code>print(y + " " + z)</code></li>
-</ul>
-<h2 id="first-python-script">First Python Script<a class="headerlink" href="#first-python-script" title="Permanent link"></a></h2>
-<p>Create a file called <strong>loops.py</strong> and open it in your favorite text editor (SublimeText is reccommended).</p>
-<p>In this file, add the following code:</p>
-<div class="codehilite"><pre>x = 5
-print(x)
+<p>When we are finished with a file, we <strong>close</strong> the file, using the command</p>
+<div class="codehilite"><pre><span class="n">open_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 
-
-<p>Now, navigate to the folder containing this file and type in your command line</p>
-<div class="codehilite"><pre>python loops.py
+<h3 id="reading-file">Reading File<a class="headerlink" href="#reading-file" title="Permanent link"></a></h3>
+<p>To <strong>read</strong> a file and store its contents in a Python <code>str</code> variable, use the <code>.read</code> function:</p>
+<div class="codehilite"><pre><span class="n">f</span> <span class="o">=</span> <span class="n">open_file</span><span class="p">(</span><span class="s">&#39;some_file.txt&#39;</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">contents</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
 </pre></div>
 
+<blockquote>
+<p>Copy this code into a file in a folder that contains another file called <code>some_file.txt</code> containing the text <code>Hello, World!</code>.</p>
+</blockquote>
+<h3 id="writing-to-a-file">Writing to a File<a class="headerlink" href="#writing-to-a-file" title="Permanent link"></a></h3>
+<div class="codehilite"><pre><span class="n">f</span> <span class="o">=</span> <span class="n">open_file</span><span class="p">(</span><span class="s">&#39;new_file.txt&#39;</span><span class="p">,</span><span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Hello, World!&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
 
-<p>You should see the following output:</p>
-<div class="codehilite"><pre>    &gt;&gt; 5
+<blockquote>
+<p>Run this code and then open the file <code>new_file.txt</code>.</p>
+</blockquote>
+<p>Remember that you can open a file with the <code>w</code> parameter to <strong>overwrite</strong> the file, or <code>a</code> parameter to <strong>append</strong> to the file.</p>
+<h2 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h2>
+<ol>
+<li>
+<p>Create a program that asks the user for their name as input, then writes to a file called <code>yournameis.txt</code>:</p>
+</li>
+<li>
+<p>Create a program that asks the user for the name of a file, then writes <code>Hello!</code> to that file.</p>
+</li>
+<li>
+<p>Create a program that asks the user for an integer, then prints an &ldquo;asterisk triangle&rdquo; with that many rows to the file <code>asterisk_triangle.txt</code>. An &ldquo;asterisk triangle&rdquo; with 10 rows looks like this:</p>
+</li>
+</ol>
+<div class="codehilite"><pre><span class="o">*</span>
+<span class="o">**</span>
+<span class="o">***</span>
+<span class="o">****</span>
+<span class="o">*****</span>
+<span class="o">******</span>
+<span class="o">*******</span>
+<span class="o">********</span>
+<span class="o">*********</span>
+<span class="o">**********</span>
 </pre></div></article></body></html>

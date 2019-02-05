@@ -13,7 +13,7 @@ How to cause a ruckus on a PC using Python.
 * [Lesson 5: Games](https://zsiegel92.github.io/evilpython/lesson_5.html)
 * [Lesson 6: Capturing Keyboard Input with Callbacks](https://zsiegel92.github.io/evilpython/lesson_6.html)
 * [Lesson 7: More Games](https://zsiegel92.github.io/evilpython/lesson_7.html)
-
+* [Lesson 8: File I/O](https://zsiegel92.github.io/evilpython/lesson_8.html)
 
 ## Running Python
 
