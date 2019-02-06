@@ -43,7 +43,7 @@ print(contents)
 ### Writing to a File
 
 ```python
-f = open_file('new_file.txt','w')
+f = open('new_file.txt','w')
 f.write("Hello, World!")
 f.close()
 ```
