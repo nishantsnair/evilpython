@@ -1089,6 +1089,7 @@ body .markdown-body
 <li><a href="#evil-python-lesson-6-keyboard-input">Evil Python Lesson 6: Keyboard Input!</a><ul>
 <li><a href="#review">Review</a><ul>
 <li><a href="#python-input">Python input</a></li>
+<li><a href="#keyboard-listening-using-the-pynput-package">Keyboard Listening Using the pynput Package</a></li>
 <li><a href="#continuous-input-pynput">Continuous Input: pynput</a></li>
 <li><a href="#installing-pynput">Installing pynput</a></li>
 </ul>
@@ -1122,6 +1123,24 @@ body .markdown-body
 
 <blockquote>
 <p>Notice that the variable <code>age</code> stores a number but its type is <code>str</code>.</p>
+</blockquote>
+<h3 id="keyboard-listening-using-the-pynput-package">Keyboard Listening Using the <code>pynput</code> Package<a class="headerlink" href="#keyboard-listening-using-the-pynput-package" title="Permanent link"></a></h3>
+<p>Recall that we can create a <em>keyboard listener</em> using the <code>pynput</code> package&rsquo;s <code>keyboard</code> module. We define two <strong><em>callback functions</em></strong> to which we set the <code>on_press</code> and <code>on_release</code> parameters of the <code>keyboard.Listener</code> function, which returns a keyboard listener. The callback functions <code>press_callback</code> and <code>release_callback</code> will then execute every time a key is <em>pressed</em> or <em>released</em>, respectively.</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
+
+<span class="k">def</span> <span class="nf">press_callback</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;{} was pressed&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">release_callback</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&#39;{} released&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="n">keyboard</span><span class="o">.</span><span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">press_callback</span><span class="p">,</span><span class="n">on_release</span><span class="o">=</span><span class="n">release_callback</span><span class="p">)</span>
+<span class="n">l</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">l</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</pre></div>
+
+<blockquote>
+<p>The reason we need to use <code>l.start()</code> <em>and</em> <code>l.join()</code> is a bit complicated, so just remember that <code>pynput</code> keyboard listeners need to do both!</p>
 </blockquote>
 <h3 id="continuous-input-pynput">Continuous Input: <code>pynput</code><a class="headerlink" href="#continuous-input-pynput" title="Permanent link"></a></h3>
 <p>Recall from <a href="https://zsiegel92.github.io/evilpython/lesson_5.html#assignments">the previous lesson&rsquo;s assignments</a> that games can be created using Python&rsquo;s built-in <code>input</code> function, while more advanced (and more fun) games can be created in which the user does not have to press <kbd>Enter</kbd> after every key press.</p>
@@ -1312,7 +1331,7 @@ That&rsquo;s because <code>key.__str__</code> returns a nicely-formatted string 
 <li>
 <p>Describe what the following code does:</p>
 <div class="codehilite"><pre><span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
-<span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Controller</span>
+<span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Controller</span><span class="p">,</span> <span class="n">Listener</span>
 <span class="n">c</span> <span class="o">=</span> <span class="n">Controller</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">press_callback</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>

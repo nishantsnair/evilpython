@@ -278,7 +278,7 @@ l.join()
 
 	```python
 	from pynput import keyboard
-	from pynput.keyboard import Controller
+	from pynput.keyboard import Controller, Listener
 	c = Controller()
 
 	def press_callback(key):
