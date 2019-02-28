@@ -54,7 +54,12 @@ Note that $\sqrt{407} = 20.17424\ldots$. So, if $407$ is not prime, it must be d
 
 1. Write a function called `primetest` that tests whether numbers are prime. Maintain a list of prime numbers called `primes` that `primetest` uses, and each time you find a prime number, add it (in order!) to `primes`. Write code that finds the first 1000 prime numbers!
 
-
+2. Write a Python `class` called `primer` that tells you the `n`'th prime number. Creating and using a `primer` object should look like this once you're done:
+	```python
+	p = primer()
+	print(p.prime(15)) #prints 47
+	```
+	The `primer` class should have a dynamic field called `primes` that is a list containing primes (which gets updated), as in the previous problem.
 
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
