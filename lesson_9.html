@@ -1082,73 +1082,54 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>README</title></head><body><article class="markdown-body"><h1 id="evil-python">Evil Python<a class="headerlink" href="#evil-python" title="Permanent link"></a></h1>
-<p>How to cause a ruckus on a PC using Python.</p>
-<h2 id="lessons">Lessons<a class="headerlink" href="#lessons" title="Permanent link"></a></h2>
+</style><title>lesson_9</title></head><body><article class="markdown-body"><h1 id="evil-python-lesson-9-primes-and-binary-search">Evil Python Lesson 9: Primes and Binary Search<a class="headerlink" href="#evil-python-lesson-9-primes-and-binary-search" title="Permanent link"></a></h1>
+<p><a href="https://zsiegel92.github.io/evilpython/">All Lessons</a></p>
+<div class="toc">
 <ul>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_1.html">Lesson 1: Creating files and folders</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_2.html">Lesson 2: Using Python to Execute Many Commands</a></li>
-<li><a href="unfinished"><span style="color:red">UNFINISHED</span> Lesson 3: Sending Emails using Code</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_4.html">Lesson 4: Integer and String Manipulation</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/binary_resources.html">Binary Numbers</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/list_assignments.html">Working with Lists</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_5.html">Lesson 5: Games</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_6.html">Lesson 6: Capturing Keyboard Input with Callbacks</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_7.html">Lesson 7: More Games</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_8.html">Lesson 8: File I/O</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_9.html">Lesson 9: Primes and Binary Search</a></li>
+<li><a href="#evil-python-lesson-9-primes-and-binary-search">Evil Python Lesson 9: Primes and Binary Search</a><ul>
+<li><a href="#prime-numbers">Prime Numbers</a><ul>
+<li><a href="#prime-testing-example">Prime Testing Example</a></li>
+<li><a href="#a-lesson-on-algorithms">A Lesson on Algorithms</a></li>
+<li><a href="#assignments">Assignments</a></li>
 </ul>
-<h2 id="running-python">Running Python<a class="headerlink" href="#running-python" title="Permanent link"></a></h2>
-<p>You are ready to run Python! Your computer&rsquo;s Python installation can run in two important ways:</p>
-<h3 id="1-running-python-code-written-in-py-files">1. Running Python Code Written in <code>.py</code> Files<a class="headerlink" href="#1-running-python-code-written-in-py-files" title="Permanent link"></a></h3>
-<p>Python can execute Python code, which is written in <code>.py</code> files, such as <code>app.py</code>. If you write code in a <code>.py</code> file called <code>app.py</code>, you can tell Python to run <strong>all</strong> the code with the following command (without typing <code>&gt;&gt;</code>):</p>
-<div class="codehilite"><pre>        &gt;&gt; python app.py
-</pre></div>
-
-
-<p>This command tells Python to execute every line of code written in the <code>app.py</code> file. Try running this command and, if there are no error messages, navigate to <a href="localhost%3A5000">localhost</a>.</p>
-<h3 id="2-running-python-code-in-the-interactive-console">2. Running Python Code in the Interactive Console<a class="headerlink" href="#2-running-python-code-in-the-interactive-console" title="Permanent link"></a></h3>
-<p>Python has an &ldquo;Interactive Console&rdquo; called the &ldquo;Python Interactive Console&rdquo;.</p>
-<p>Any Python commands can be executed one at a time by writing them in the command prompt and hitting the <kbd>Enter</kbd> key. This is called a <strong>Read-Evaluate-Print-Loop (REPL)</strong> environment, because it &ldquo;reads&rdquo; your input, &ldquo;evaluates&rdquo; it, &ldquo;prints&rdquo; the output, and then &ldquo;loops&rdquo; by starting the process over again.</p>
-<p><strong>Type <code>python</code> to start the Python interactive console.</strong> Then try the following Python commands:</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="prime-numbers">Prime Numbers<a class="headerlink" href="#prime-numbers" title="Permanent link"></a></h2>
+<p><strong>Question:</strong> What is a prime number?</p>
+<p><strong>Answer:</strong> A prime number is a whole number greater than 1 whose only factors are 1 and itself</p>
+<p><strong>Question:</strong> How do we test whether a number, called <span class="arithmatex">\(n\)</span>, is prime?</p>
+<p><strong>Answer:</strong> We <em>test</em> whether a number <span class="arithmatex">\(n\)</span> is prime by <em>testing</em> whether it is divisible by any of the integers between <span class="arithmatex">\(1\)</span> and <span class="arithmatex">\(n\)</span>.</p>
+<p><strong>Question:</strong> Is there an easier test?</p>
+<p><strong>Answer:</strong> If we have a list of all the <strong>prime numbers</strong> less than <span class="arithmatex">\(n\)</span>, we can test whether <span class="arithmatex">\(n\)</span> is divisible by any of those. If <span class="arithmatex">\(n\)</span> is divisible by any divisor <span class="arithmatex">\(d\)</span> between <span class="arithmatex">\(1\)</span> and itself (<span class="arithmatex">\(1 &lt; d &lt; n\)</span>), then it is divisible by some prime number between <span class="arithmatex">\(1\)</span> and itself.</p>
+<p><strong>Question:</strong> Do we have to test whether <span class="arithmatex">\(n\)</span> is divisibleby <strong>all</strong> the primes less than <span class="arithmatex">\(n\)</span>?</p>
+<p><strong>Answer:</strong> <strong>NO!</strong> We only have to test whether <span class="arithmatex">\(n\)</span> is divisible by primes less than <span class="arithmatex">\(\sqrt{n}\)</span>.</p>
+<blockquote>
+<p><strong>Proof:</strong> Suppose <span class="arithmatex">\(n\)</span> is not prime (meaning it is divisible by at least two prime numbers between <span class="arithmatex">\(1\)</span> and itself), but that none of those prime numbers are less than or equal to <span class="arithmatex">\(\sqrt{n}\)</span>. Let <span class="arithmatex">\(p\)</span> and <span class="arithmatex">\(q\)</span> be prime divisors of <span class="arithmatex">\(n\)</span>. By our assumption, we know <span class="arithmatex">\(p &gt; \sqrt{n}\)</span> and <span class="arithmatex">\(q &gt; \sqrt{n}\)</span>, so <span class="arithmatex">\(pq &gt; \sqrt{n}\sqrt{n} = n\)</span>. We know that in the prime factorization of <span class="arithmatex">\(n\)</span>, we have at least one <span class="arithmatex">\(p\)</span> and at least one <span class="arithmatex">\(q\)</span>, so <span class="arithmatex">\(pq \le n\)</span>. But we can&rsquo;t have <span class="arithmatex">\(pq &gt; n\)</span> and <span class="arithmatex">\(pq \le n\)</span>. So, if <span class="arithmatex">\(n\)</span> is not prime, then at least one prime factor of <span class="arithmatex">\(p\)</span> must be less than or equal to <span class="arithmatex">\(\sqrt{n}\)</span>. <span class="arithmatex">\(\square\)</span></p>
+<p>The first <span class="arithmatex">\(15\)</span> prime numbers are <span class="arithmatex">\(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47\)</span>.</p>
+</blockquote>
+<h3 id="prime-testing-example">Prime Testing Example<a class="headerlink" href="#prime-testing-example" title="Permanent link"></a></h3>
+<p><strong>Question:</strong> Is <span class="arithmatex">\(407\)</span> a prime number?</p>
+<p>We could test whether <span class="arithmatex">\(407\)</span> is divisible by <span class="arithmatex">\(1, 2, 3, 4, \ldots, 405, 406\)</span>, and if it&rsquo;s not, then it&rsquo;s prime! But that would be overkill.</p>
+<p>To be more efficient, we could just test whether <span class="arithmatex">\(407\)</span> is divisible by any <strong>primes</strong> less than <span class="arithmatex">\(407\)</span>. Those are <span class="arithmatex">\(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401\)</span>. <strong>Even that is too many!</strong></p>
+<p>Note that <span class="arithmatex">\(\sqrt{407} = 20.17424\ldots\)</span>. So, if <span class="arithmatex">\(407\)</span> is not prime, it must be divisible by some prime number less than <span class="arithmatex">\(20\)</span>! That means we only have to test whether it is divisible by <span class="arithmatex">\(2, 3, 5, 7, 11, 13, 17, 19\)</span>.</p>
+<p><strong>Anwer:</strong> So, is <span class="arithmatex">\(407\)</span> prime?</p>
+<p><strong>Question:</strong> Which of the following are prime?</p>
 <ul>
-<li><code>x=5</code> to create a variable named <code>x</code> with the value <code>5</code>.<ul>
-<li><code>x = 5</code> will also work. Spaces (made with the <kbd>spacebar</kbd>) are known as <strong>whitespace</strong>, and are generally ignored by Python.</li>
+<li>403</li>
+<li>851</li>
+<li>953</li>
+<li>827</li>
+<li>1891</li>
 </ul>
-</li>
-<li><code>print(x)</code> to print the value of <code>x</code><ul>
-<li><code>x</code> (on its own) is another way to say <code>print(x)</code>, but this only works in the interactive shell.</li>
-</ul>
-</li>
-<li><code>print(x+1)</code><ul>
-<li><code>x+1</code> (on its own) will also work.</li>
-</ul>
-</li>
-<li><code>y = "Eitan"</code><ul>
-<li>(why did we need quotes around <code>Eitan</code> but not around the number <code>5</code>?)</li>
-</ul>
-</li>
-<li><code>z = "Zach"</code></li>
-<li><code>w = y</code></li>
-<li><code>print(y + z)</code><ul>
-<li>How is this different from <code>print(x + 1)</code>? How is it the same?</li>
-</ul>
-</li>
-<li><code>print(y + " " + z)</code></li>
-</ul>
-<h2 id="first-python-script">First Python Script<a class="headerlink" href="#first-python-script" title="Permanent link"></a></h2>
-<p>Create a file called <strong>loops.py</strong> and open it in your favorite text editor (SublimeText is reccommended).</p>
-<p>In this file, add the following code:</p>
-<div class="codehilite"><pre>x = 5
-print(x)
-</pre></div>
-
-
-<p>Now, navigate to the folder containing this file and type in your command line</p>
-<div class="codehilite"><pre>python loops.py
-</pre></div>
-
-
-<p>You should see the following output:</p>
-<div class="codehilite"><pre>    &gt;&gt; 5
-</pre></div></article></body></html>
+<h3 id="a-lesson-on-algorithms">A Lesson on Algorithms<a class="headerlink" href="#a-lesson-on-algorithms" title="Permanent link"></a></h3>
+<p><a href="https://medium.com/@e.rajasekar/how-you-can-teach-computer-science-algorithms-to-middle-school-students-873310874c92">This lesson on algorithms</a> is great!</p>
+<h3 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h3>
+<ol>
+<li>Write a function called <code>primetest</code> that tests whether numbers are prime. Maintain a list of prime numbers called <code>primes</code> that <code>primetest</code> uses, and each time you find a prime number, add it (in order!) to <code>primes</code>. Write code that finds the first 1000 prime numbers!</li>
+</ol>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script></article></body></html>
