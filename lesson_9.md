@@ -61,6 +61,13 @@ Note that $\sqrt{407} = 20.17424\ldots$. So, if $407$ is not prime, it must be d
 	```
 	The `primer` class should have a dynamic field called `primes` that is a list containing primes (which gets updated), as in the previous problem.
 
+	The `primer` class should also have a method called `primetest` that operates as above, as in
+	```python
+	p = primer()
+	print(p.primetest(7))
+	```
+
+
 <script type="text/javascript" async
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
