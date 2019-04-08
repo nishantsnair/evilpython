@@ -1087,14 +1087,31 @@ body .markdown-body
 <div class="toc">
 <ul>
 <li><a href="#evil-python-lesson-3-email">Evil Python Lesson 3: Email!</a><ul>
-<li><a href="#what-is-email">What is email?</a></li>
+<li><a href="#what-is-email">What is email?</a><ul>
+<li><a href="#making-an-email-account-for-development">Making an Email Account for Development</a></li>
+</ul>
+</li>
+<li><a href="#environment-variables">Environment Variables</a><ul>
+<li><a href="#access-environment-variables-from-python">Access Environment Variables from Python?</a><ul>
+<li><a href="#getting-environment-variables">Getting Environment Variables</a></li>
+<li><a href="#setting-environment-variables">Setting Environment Variables</a></li>
+<li><a href="#python-doesnt-change-the-outer-environment">Python Doesn&rsquo;t Change the Outer Environment</a></li>
+<li><a href="#never-store-credentials-in-code">Never Store Credentials in Code!!</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#email-client">Email Client</a><ul>
+<li><a href="#goal-sending-email-using-email-client">Goal: Sending Email using Email Client</a></li>
+<li><a href="#building-an-email-client-using-smtplib">Building an Email Client Using smtplib</a></li>
+</ul>
+</li>
 <li><a href="#assignments">Assignments</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <h2 id="what-is-email">What is email?<a class="headerlink" href="#what-is-email" title="Permanent link"></a></h2>
-<p>Read <a href="https://en.wikipedia.org/wiki/Email#Operation">the Wikipedia page on &ldquo;Email&rdquo;</a>.</p>
 <p><img alt="How email works." src="/Users/Zach/code/pynaughty/email_overview.png"></p>
 <blockquote>
 <p>&ldquo;The diagram to the right shows a typical sequence of events that takes place when sender Alice transmits a message using a mail user agent (MUA) addressed to the email address of the recipient.[28]</p>
@@ -1108,5 +1125,110 @@ body .markdown-body
     <li>Bob&rsquo;s MUA picks up the message using either the Post Office Protocol (POP3) or the Internet Message Access Protocol (IMAP).&rdquo; - <em><a href="https://en.wikipedia.org/wiki/Email#Operation">Wikipedia &ldquo;Email&rdquo;</a></em></li>
     </ol></p>
 </blockquote>
+<h3 id="making-an-email-account-for-development">Making an Email Account for Development<a class="headerlink" href="#making-an-email-account-for-development" title="Permanent link"></a></h3>
+<p>When programatically sending emails, <strong>SECURITY IS OF THE UTMOST IMPORTANCE!</strong>.</p>
+<ol>
+<li>Start by <a href="https://accounts.google.com/signup">creating a &ldquo;dummy&rdquo; email account with GMail</a> using a real email account as the &ldquo;backup&rdquo; for the account.</li>
+<li><strong>Create a secure password, and WRITE IT DOWN!</strong></li>
+<li>In your inbox, click the user badge, and select &ldquo;Google Account&rdquo; (top right-hand corner of the page). Click on &ldquo;Security&rdquo; on the left.</li>
+<li>Go down to &ldquo;Less secure app access&rdquo; and TURN IT ON! We are building a &ldquo;less secure&rdquo; app.</li>
+</ol>
+<h2 id="environment-variables">Environment Variables<a class="headerlink" href="#environment-variables" title="Permanent link"></a></h2>
+<p>Try running the following command in the shell (NOT in Python):</p>
+<ul>
+<li><code>export hello="sup"</code></li>
+<li><code>echo $hello</code><blockquote>
+<p>On Windows, you may need to use <code>set hello="sup"</code>.</p>
+</blockquote>
+</li>
+</ul>
+<p>Clearly the shell saves those variables somewhere! These are called <strong><em>environment variables</em></strong>.</p>
+<h3 id="access-environment-variables-from-python">Access Environment Variables from Python?<a class="headerlink" href="#access-environment-variables-from-python" title="Permanent link"></a></h3>
+<h4 id="getting-environment-variables">Getting Environment Variables<a class="headerlink" href="#getting-environment-variables" title="Permanent link"></a></h4>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;hello&#39;</span><span class="p">])</span>
+</pre></div>
+
+<blockquote>
+<p>If you are on Windows, you may need to use <code>os.getenv('hello')</code>.</p>
+</blockquote>
+<h4 id="setting-environment-variables">Setting Environment Variables<a class="headerlink" href="#setting-environment-variables" title="Permanent link"></a></h4>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;hello&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s">&quot;Sup, my friend?&quot;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;hello&#39;</span><span class="p">])</span>
+</pre></div>
+
+<blockquote>
+<p>On Windows, you may need to use <code>os.putenv('hello','Sup, my friend?')</code> and <code>print(os.getenv('hello'))</code>.</p>
+</blockquote>
+<h4 id="python-doesnt-change-the-outer-environment">Python Doesn&rsquo;t Change the Outer Environment<a class="headerlink" href="#python-doesnt-change-the-outer-environment" title="Permanent link"></a></h4>
+<p>Run this snippet from Python, then quit Python and, from the shell, type <code>echo hello</code>. <strong><em>Nothing changed! Why?</em></strong></p>
+<p>Python&rsquo;s interaction with the environment variables is one-way. You can read and alter the environment variables within a Python environment, but they will revert once Python quits.</p>
+<h4 id="never-store-credentials-in-code">Never Store Credentials in Code!!<a class="headerlink" href="#never-store-credentials-in-code" title="Permanent link"></a></h4>
+<p><strong><em>Never store login credentials in code!</em></strong> Your code might get backed up, synced to a cloud server, uploaded to a version control manager (like GitHub), might float around the internet forever in potentially insecure ways, etc. So, <strong>do not store credentials in code!!</strong>.</p>
+<p>How to use credentials in code:</p>
+<ol>
+<li>Okay: <code>pasword = input("Please enter your password")</code></li>
+<li>Better: <code>password = os.getenv('PASSWORD')</code></li>
+<li>Even Better: store password in encrypted database.</li>
+<li>Best: Require all logins to use 2-factor authentication. Then, whenever code tries to use your login, you will just authorize the access from a separate device (phone, email, etc).</li>
+</ol>
+<h2 id="email-client">Email Client<a class="headerlink" href="#email-client" title="Permanent link"></a></h2>
+<p>There is <a href="https://github.com/zsiegel92/evilpython/blob/master/emailer.py">a fully-functional email client here</a>. We will now make one ourselves!</p>
+<h3 id="goal-sending-email-using-email-client">Goal: Sending Email using Email Client<a class="headerlink" href="#goal-sending-email-using-email-client" title="Permanent link"></a></h3>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">emailer</span> <span class="kn">import</span> <span class="n">Emailer</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter username&quot;</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter password&quot;</span><span class="p">)</span>
+<span class="n">to_address</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;To whom should a message be sent?&quot;</span><span class="p">)</span>
+
+<span class="c1"># Set environment variables.</span>
+<span class="c1"># The Emailer object automatically reads these for credentials.</span>
+<span class="c1"># This is relatively secure.</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;EMAIL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">username</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;EMAIL_PASSWORD&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">password</span>
+
+<span class="n">emailer</span> <span class="o">=</span> <span class="n">Emailer</span><span class="p">()</span>
+<span class="n">emailer</span><span class="o">.</span><span class="n">email</span><span class="p">(</span><span class="n">to_address</span><span class="p">,</span><span class="n">message</span><span class="o">=</span><span class="s">&quot;generic_emailer_message&quot;</span><span class="p">,</span><span class="n">subject</span><span class="o">=</span><span class="s">&quot;generic_emailer_subject&quot;</span><span class="p">)</span>
+</pre></div>
+
+<h3 id="building-an-email-client-using-smtplib">Building an Email Client Using <code>smtplib</code><a class="headerlink" href="#building-an-email-client-using-smtplib" title="Permanent link"></a></h3>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">smtplib</span>
+
+<span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter username&quot;</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;Enter password&quot;</span><span class="p">)</span>
+<span class="n">to_address</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;To whom should a message be sent?&quot;</span><span class="p">)</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="s">&quot;the message&quot;</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s">&quot;the subject&quot;</span>
+
+<span class="n">fullMessage</span> <span class="o">=</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+    <span class="s">&quot;From: &quot;</span> <span class="o">+</span> <span class="n">username</span><span class="p">,</span>
+    <span class="s">&quot;To: &quot;</span> <span class="o">+</span> <span class="n">to_address</span><span class="p">,</span>
+    <span class="s">&quot;Subject: &quot;</span> <span class="o">+</span> <span class="n">subject</span><span class="p">,</span>
+    <span class="s">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">message</span>
+<span class="p">])</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s">&#39;smtp.gmail.com&#39;</span><span class="p">,</span> <span class="mi">465</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">to_address</span><span class="p">,</span> <span class="n">fullMessage</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
 <h2 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h2>
-<p>1.</p></article></body></html>
+<ol>
+<li>
+<p>Use the above snippet to organize your code into a <code>class</code> called <code>Emailer</code> in a file called <code>emailer.py</code>, like <a href="https://github.com/zsiegel92/evilpython/blob/master/emailer.py">the one provided</a>.</p>
+<blockquote>
+<p>You may need to refer to <a href="https://zsiegel92.github.io/Eitan_S/Lessons/Lesson_7_Classes/Python7.html">Lesson 7: Object Classes</a> from the <a href="https://zsiegel92.github.io/Eitan_S/">Web Development Tutorial</a>.</p>
+</blockquote>
+</li>
+<li>
+<p>Implement any of <a href="https://zsiegel92.github.io/evilpython/lesson_7.html">the games you&rsquo;ve made</a> so that when the game is finished, you are emailed a message with your score!</p>
+</li>
+</ol></article></body></html>

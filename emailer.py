@@ -12,24 +12,14 @@ class Emailer:
 
 	def get_email(self):
 		return self.gmail_user
-	def self_email(self,message="",subject=""):
-		self.email(self.gmail_user,message,subject)
+
 
 	def email(self,toAddress=None,message="generic_emailer_message",subject="generic_emailer_subject"):
-		if toAddress is None:
-			toAddress=self.gmail_user
 		self.direct_email(toAddress,self.gmail_user,self.gmail_password,message,subject)
 
 	@classmethod
 	def direct_email(cls,sent_to,sent_from,password,message="",subject="",error=False):
-		if sent_from=='':
-			return
 		print("in Emailer.direct_email")
-		if sent_to.split("@")[-1]== 'notARealThing.com':
-
-			message = "Blocked from sending to " + str(sent_to) + ":\n"+str(message)
-			subject = "REDIRECTED: " + str(subject)
-			sent_to=sent_from
 		try:
 			fullMessage = "\r\n".join([
 				"From: " + sent_from,
@@ -43,7 +33,6 @@ class Emailer:
 			server.login(sent_from, password)
 			server.sendmail(sent_from, sent_to, fullMessage)
 			server.close()
-			# messenger.say(recipient_id,"You just got an email from GroupThere!")
 		except Exception as exc:
 			print('Something went wrong with login.')
 			print("exception: " + str(exc))
@@ -55,8 +44,6 @@ class Emailer:
 
 	@classmethod
 	def send_from_server(cls,fromAddress,password,toAddress,message):
-		if fromAddress=='':
-			return
 		server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 		server.ehlo()
 		server.login(fromAddress, password)
@@ -73,10 +60,6 @@ class Emailer:
 
 	def send_html(self,toAddress,html_message,subject="",text_message="",attachments={}):
 		print("in Emailer.send_html")
-		if toAddress.split("@")[-1]== 'notARealThing.com':
-			subject = subject + " REDIRECTED from " + str(toAddress)
-			toAddress = self.gmail_user
-
 		msg = MIMEMultipart('alternative')
 		msg['Subject']=subject
 		msg['From']=self.gmail_user
