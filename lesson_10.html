@@ -1082,74 +1082,257 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>README</title></head><body><article class="markdown-body"><h1 id="evil-python">Evil Python<a class="headerlink" href="#evil-python" title="Permanent link"></a></h1>
-<p>How to cause a ruckus on a PC using Python.</p>
-<h2 id="lessons">Lessons<a class="headerlink" href="#lessons" title="Permanent link"></a></h2>
+</style><title>lesson_10</title></head><body><article class="markdown-body"><h1 id="evil-python-lesson-10-mail-merge">Evil Python Lesson 10: Mail Merge<a class="headerlink" href="#evil-python-lesson-10-mail-merge" title="Permanent link"></a></h1>
+<p><a href="https://zsiegel92.github.io/evilpython/">All Lessons</a></p>
+<div class="toc">
 <ul>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_1.html">Lesson 1: Creating files and folders</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_2.html">Lesson 2: Using Python to Execute Many Commands</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_3.html">Lesson 3: Sending Emails using Code</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_4.html">Lesson 4: Integer and String Manipulation</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/binary_resources.html">Binary Numbers</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/list_assignments.html">Working with Lists</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_5.html">Lesson 5: Games</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_6.html">Lesson 6: Capturing Keyboard Input with Callbacks</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_7.html">Lesson 7: More Games</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_8.html">Lesson 8: File I/O</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_9.html">Lesson 9: Primes and Binary Search</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_10.html">Lesson 10: Mail Merge</a></li>
+<li><a href="#evil-python-lesson-10-mail-merge">Evil Python Lesson 10: Mail Merge</a><ul>
+<li><a href="#review-sending-emails">Review: Sending Emails</a></li>
+<li><a href="#an-email-package">An Email Package</a><ul>
+<li><a href="#sending-basic-text">Sending Basic Text</a></li>
+<li><a href="#sending-more-complicatedcustomizable-html">Sending (More Complicated/Customizable) HTML</a></li>
+<li><a href="#custom-emailer-package">Custom Emailer Package</a></li>
 </ul>
-<h2 id="running-python">Running Python<a class="headerlink" href="#running-python" title="Permanent link"></a></h2>
-<p>You are ready to run Python! Your computer&rsquo;s Python installation can run in two important ways:</p>
-<h3 id="1-running-python-code-written-in-py-files">1. Running Python Code Written in <code>.py</code> Files<a class="headerlink" href="#1-running-python-code-written-in-py-files" title="Permanent link"></a></h3>
-<p>Python can execute Python code, which is written in <code>.py</code> files, such as <code>app.py</code>. If you write code in a <code>.py</code> file called <code>app.py</code>, you can tell Python to run <strong>all</strong> the code with the following command (without typing <code>&gt;&gt;</code>):</p>
-<div class="codehilite"><pre>        &gt;&gt; python app.py
+</li>
+<li><a href="#merging-mail">Merging Mail</a><ul>
+<li><a href="#merging-mail-in-python">Merging Mail in Python</a></li>
+</ul>
+</li>
+<li><a href="#formatting-with-jinja2">Formatting with Jinja2</a></li>
+<li><a href="#reading-data-from-a-spreadsheet">Reading data from a spreadsheet</a></li>
+<li><a href="#assignments">Assignments</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="review-sending-emails">Review: Sending Emails<a class="headerlink" href="#review-sending-emails" title="Permanent link"></a></h2>
+<p>Please review <a href="https://zsiegel92.github.io/evilpython/lesson_3.html">Lesson 3: Email</a> from this tutorial.</p>
+<p><img alt="xkcd email." src="images/email_settings.png"></p>
+<h2 id="an-email-package">An Email Package<a class="headerlink" href="#an-email-package" title="Permanent link"></a></h2>
+<p>Before running the following code, type the following commands in the shell:</p>
+<div class="codehilite"><pre><span class="nb">set </span><span class="nv">EMAIL</span><span class="o">=</span><span class="s2">&quot;your_email@email_provider.domain&quot;</span>
+<span class="nb">set </span><span class="nv">PASSWORD</span><span class="o">=</span><span class="s2">&quot;your_password&quot;</span>
 </pre></div>
 
+<blockquote>
+<p>This is only for Windows. For Mac or Linux, replace <code>set</code> with <code>export</code>.</p>
+<p><strong>DO NOT</strong> save email passwords directly in your code files. Using environmet variables such as this is the best way.</p>
+</blockquote>
+<h3 id="sending-basic-text">Sending Basic Text<a class="headerlink" href="#sending-basic-text" title="Permanent link"></a></h3>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">smtplib</span>
 
-<p>This command tells Python to execute every line of code written in the <code>app.py</code> file. Try running this command and, if there are no error messages, navigate to <a href="/Users/zach/code/pynaughty/localhost%3A5000">localhost</a>.</p>
-<h3 id="2-running-python-code-in-the-interactive-console">2. Running Python Code in the Interactive Console<a class="headerlink" href="#2-running-python-code-in-the-interactive-console" title="Permanent link"></a></h3>
-<p>Python has an &ldquo;Interactive Console&rdquo; called the &ldquo;Python Interactive Console&rdquo;.</p>
-<p>Any Python commands can be executed one at a time by writing them in the command prompt and hitting the <kbd>Enter</kbd> key. This is called a <strong>Read-Evaluate-Print-Loop (REPL)</strong> environment, because it &ldquo;reads&rdquo; your input, &ldquo;evaluates&rdquo; it, &ldquo;prints&rdquo; the output, and then &ldquo;loops&rdquo; by starting the process over again.</p>
-<p><strong>Type <code>python</code> to start the Python interactive console.</strong> Then try the following Python commands:</p>
+<span class="n">username</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;EMAIL&#39;</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;PASSWORD&#39;</span><span class="p">)</span>
+<span class="n">to_address</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;To whom should a message be sent?&quot;</span><span class="p">)</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="s">&quot;the message&quot;</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s">&quot;the subject&quot;</span>
+
+<span class="n">fullMessage</span> <span class="o">=</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+    <span class="s">&quot;From: &quot;</span> <span class="o">+</span> <span class="n">username</span><span class="p">,</span>
+    <span class="s">&quot;To: &quot;</span> <span class="o">+</span> <span class="n">to_address</span><span class="p">,</span>
+    <span class="s">&quot;Subject: &quot;</span> <span class="o">+</span> <span class="n">subject</span><span class="p">,</span>
+    <span class="s">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">message</span>
+<span class="p">])</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s">&#39;smtp.gmail.com&#39;</span><span class="p">,</span> <span class="mi">465</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">to_address</span><span class="p">,</span> <span class="n">fullMessage</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+<blockquote>
+<p>Make sure this code works with the email account you created</p>
+</blockquote>
+<h3 id="sending-more-complicatedcustomizable-html">Sending (More Complicated/Customizable) HTML<a class="headerlink" href="#sending-more-complicatedcustomizable-html" title="Permanent link"></a></h3>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+
+<span class="n">username</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;EMAIL&#39;</span><span class="p">)</span>
+<span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;PASSWORD&#39;</span><span class="p">)</span>
+<span class="n">to_address</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">&quot;To whom should a message be sent?&quot;</span><span class="p">)</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="s">&quot;the message&quot;</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s">&quot;the subject&quot;</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="n">f</span><span class="s">&quot;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body style=&#39;color:red&#39;&gt;{message}&lt;/body&gt;&lt;/html&gt;&quot;</span>
+
+<span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s">&#39;alternative&#39;</span><span class="p">)</span>
+<span class="n">msg</span><span class="p">[</span><span class="s">&#39;Subject&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">subject</span>
+<span class="n">msg</span><span class="p">[</span><span class="s">&#39;From&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">username</span>
+<span class="n">msg</span><span class="p">[</span><span class="s">&#39;To&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">to_address</span>
+<span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span><span class="s">&#39;html&#39;</span><span class="p">))</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s">&#39;smtp.gmail.com&#39;</span><span class="p">,</span> <span class="mi">465</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">to_address</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+<span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+<blockquote>
+<p>Make sure this is working before doing anything else!</p>
+</blockquote>
+<h3 id="custom-emailer-package">Custom Emailer Package<a class="headerlink" href="#custom-emailer-package" title="Permanent link"></a></h3>
+<p><strong>Create a file called <code>emailer.py</code></strong>. Add this code:</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+
+
+<span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span><span class="n">to_address</span><span class="p">,</span> <span class="n">html_body</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;EMAIL&#39;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;PASSWORD&#39;</span><span class="p">)</span>
+
+    <span class="n">html</span> <span class="o">=</span> <span class="n">f</span><span class="s">&quot;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;{html_body}&lt;/body&gt;&lt;/html&gt;&quot;</span>
+
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s">&#39;alternative&#39;</span><span class="p">)</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;Subject&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">subject</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;From&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">username</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;To&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">to_address</span>
+    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span><span class="s">&#39;html&#39;</span><span class="p">))</span>
+
+    <span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s">&#39;smtp.gmail.com&#39;</span><span class="p">,</span> <span class="mi">465</span><span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">to_address</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+<p>Now, to use this package, create another file called <code>sending_emails.py</code> and use this code:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">emailer</span> <span class="kn">import</span> <span class="n">send_email</span>
+
+<span class="n">send_email</span><span class="p">(</span>
+           <span class="s">&#39;your_own_email@host.domain&#39;</span><span class="p">,</span>
+           <span class="s">&#39;&lt;div style=&quot;color:red&quot;&gt;TESTING&lt;/div&gt;&#39;</span><span class="p">,</span>
+           <span class="s">&quot;THIS IS A TEST! And this is the subject.&quot;</span>
+           <span class="p">)</span>
+</pre></div>
+
+<blockquote>
+<p>Make sure to change <code>'your_own_email@host.domain'</code> to your actual email address so that you can receive this message.</p>
+</blockquote>
+<h2 id="merging-mail">Merging Mail<a class="headerlink" href="#merging-mail" title="Permanent link"></a></h2>
+<p>What is <strong>mail merge</strong>?</p>
 <ul>
-<li><code>x=5</code> to create a variable named <code>x</code> with the value <code>5</code>.<ul>
-<li><code>x = 5</code> will also work. Spaces (made with the <kbd>spacebar</kbd>) are known as <strong>whitespace</strong>, and are generally ignored by Python.</li>
+<li><a href="https://support.office.com/en-us/article/mail-merge-using-an-excel-spreadsheet-858c7d7f-5cc0-4ba1-9a7b-0a948fa3d7d3">How to do mail merge in MS Excel (<span style="color:red">BORING</span>)</a></li>
 </ul>
-</li>
-<li><code>print(x)</code> to print the value of <code>x</code><ul>
-<li><code>x</code> (on its own) is another way to say <code>print(x)</code>, but this only works in the interactive shell.</li>
-</ul>
-</li>
-<li><code>print(x+1)</code><ul>
-<li><code>x+1</code> (on its own) will also work.</li>
-</ul>
-</li>
-<li><code>y = "Eitan"</code><ul>
-<li>(why did we need quotes around <code>Eitan</code> but not around the number <code>5</code>?)</li>
-</ul>
-</li>
-<li><code>z = "Zach"</code></li>
-<li><code>w = y</code></li>
-<li><code>print(y + z)</code><ul>
-<li>How is this different from <code>print(x + 1)</code>? How is it the same?</li>
-</ul>
-</li>
-<li><code>print(y + " " + z)</code></li>
-</ul>
-<h2 id="first-python-script">First Python Script<a class="headerlink" href="#first-python-script" title="Permanent link"></a></h2>
-<p>Create a file called <strong>loops.py</strong> and open it in your favorite text editor (SublimeText is reccommended).</p>
-<p>In this file, add the following code:</p>
-<div class="codehilite"><pre>x = 5
-print(x)
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/OgqTe8NqYu4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<h3 id="merging-mail-in-python">Merging Mail in Python<a class="headerlink" href="#merging-mail-in-python" title="Permanent link"></a></h3>
+<p>Review the concept of <a href="https://zsiegel92.github.io/Eitan_S/Lessons/Lesson_7_Classes/Python7.html">Python <strong>classes</strong></a>. We will create an <code>EmailData</code> class, to create several customized messages.</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">emailer</span> <span class="kn">import</span> <span class="n">send_email</span>
+
+<span class="k">class</span> <span class="nc">EmailData</span><span class="p">:</span>
+    <span class="n">from_name</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="n">about_name</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="n">to_name</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="n">to_address</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="n">occasion</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+    <span class="n">favorite_thing</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">from_name</span><span class="p">,</span><span class="n">about_name</span><span class="p">,</span><span class="n">to_name</span><span class="p">,</span><span class="n">to_address</span><span class="p">,</span><span class="n">occasion</span><span class="p">,</span><span class="n">location</span><span class="p">,</span><span class="n">favorite_thing</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">from_name</span> <span class="o">=</span> <span class="n">from_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">about_name</span> <span class="o">=</span> <span class="n">about_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">to_name</span> <span class="o">=</span> <span class="n">to_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">to_address</span> <span class="o">=</span> <span class="n">to_address</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occasion</span> <span class="o">=</span> <span class="n">occasion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">location</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">favorite_thing</span> <span class="o">=</span> <span class="n">favorite_thing</span>
+
+
+<span class="n">info1</span> <span class="o">=</span> <span class="n">EmailData</span><span class="p">(</span><span class="s">&#39;Zach&#39;</span><span class="p">,</span><span class="s">&#39;Ethan&#39;</span><span class="p">,</span><span class="s">&#39;Michael&#39;</span><span class="p">,</span><span class="s">&#39;michael311@gmail.com&#39;</span><span class="p">,</span><span class="s">&#39;quinceañera&#39;</span><span class="p">,</span><span class="s">&#39;The Cheesecake Factory&#39;</span><span class="p">,</span><span class="s">&#39;their pretty little cupcakes&#39;</span><span class="p">)</span>
+<span class="n">info2</span> <span class="o">=</span> <span class="n">EmailData</span><span class="p">(</span><span class="s">&#39;Elyse&#39;</span><span class="p">,</span><span class="s">&#39;Zach&#39;</span><span class="p">,</span><span class="s">&#39;Ruth&#39;</span><span class="p">,</span><span class="s">&#39;ruth22@gmail.com&#39;</span><span class="p">,</span><span class="s">&#39;first-grade graduation&#39;</span><span class="p">,</span><span class="s">&#39;Chuck-E-Cheese&#39;</span><span class="p">,</span><span class="s">&#39;terrible pizza and sticky booths&#39;</span><span class="p">)</span>
+
+<span class="n">info_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">info1</span><span class="p">,</span> <span class="n">info2</span><span class="p">]</span>
+
+<span class="n">message_template</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">Hi {to_name},</span>
+
+<span class="s">I would like to invite you to {about_name}&#39;s&#39; {occasion}! We will be celebrating at {location} because, as you know, {about_name} loves {favorite_thing}.</span>
+
+<span class="s">Best wishes, Elyse</span>
+<span class="s">&quot;&quot;&quot;</span>
+<span class="n">subject_template</span> <span class="o">=</span> <span class="s">&quot;Hi {to_name}! You&#39;re invited...&quot;</span>
+
+<span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">info_list</span><span class="p">:</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">message_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                              <span class="n">to_name</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">to_name</span><span class="p">,</span>
+                              <span class="n">about_name</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">about_name</span><span class="p">,</span>
+                              <span class="n">occasion</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">occasion</span><span class="p">,</span>
+                              <span class="n">location</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">location</span><span class="p">,</span>
+                              <span class="n">favorite_thing</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">favorite_thing</span>
+                              <span class="p">)</span>
+    <span class="n">subject</span> <span class="o">=</span> <span class="n">subject_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                      <span class="n">to_name</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">to_name</span>
+                                      <span class="p">)</span>
+    <span class="n">send_email</span><span class="p">(</span>
+               <span class="n">info</span><span class="o">.</span><span class="n">to_address</span><span class="p">,</span>
+               <span class="n">message</span><span class="p">,</span>
+               <span class="n">subject</span>
+               <span class="p">)</span>
 </pre></div>
 
-
-<p>Now, navigate to the folder containing this file and type in your command line</p>
-<div class="codehilite"><pre>python loops.py
-</pre></div>
-
-
-<p>You should see the following output:</p>
-<div class="codehilite"><pre>    &gt;&gt; 5
-</pre></div></article></body></html>
+<blockquote>
+<p>Make sure to change the <code>to_address</code> data (such as <code>'michael311@gmail.com'</code>) to <strong>your</strong> email address, so that <strong>you</strong> receive your test emails.</p>
+</blockquote>
+<h2 id="formatting-with-jinja2">Formatting with Jinja2<a class="headerlink" href="#formatting-with-jinja2" title="Permanent link"></a></h2>
+<p>Jinja 2 is a Python package tht allows formatting with much more precision than the Python built-in <code>format</code> function. <strong>More on this next time</strong>!</p>
+<h2 id="reading-data-from-a-spreadsheet">Reading data from a spreadsheet<a class="headerlink" href="#reading-data-from-a-spreadsheet" title="Permanent link"></a></h2>
+<p><strong>More on this next time</strong>!</p>
+<h2 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h2>
+<ol>
+<li>Use your custom mail merge to invite each of your friends to a <strong>custom event</strong>!</li>
+</ol>
+<blockquote>
+<p>Hi <strong>Michael</strong>,</p>
+<p>I would like to invite you to <strong>Ethan</strong>&lsquo;s <strong>quinceañera</strong>!
+We will be celebrating at <strong>The Cheesecake Factory</strong> because, as you know, <strong>Ethan</strong> loves <strong>their pretty little cupcakes</strong>.</p>
+<p>Best wishes,
+<strong>Zach</strong></p>
+</blockquote>
+<p>and</p>
+<blockquote>
+<p>Hi <strong>Ruth</strong>,</p>
+<p>I would like to invite you to <strong>Zach</strong>&lsquo;s <strong>first-grade graduation</strong>!
+We will be celebrating at <strong>Chuck-E-Cheese</strong> because, as you know, <strong>Zach</strong> loves <strong>terrible pizza and sticky booths</strong>.</p>
+<p>Best wishes,
+<strong>Elyse</strong></p>
+</blockquote>
+<p>First you will need to store everyone&rsquo;s information in a data table rougly as follows:</p>
+<table>
+<thead>
+<tr>
+<th>From</th>
+<th>About</th>
+<th>To</th>
+<th>Occasion</th>
+<th>Location</th>
+<th>Favorite Thing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zach</td>
+<td>Ethan</td>
+<td>Michael</td>
+<td>quinceañera</td>
+<td>The Cheesecake Factory</td>
+<td>their pretty little cupcakes</td>
+</tr>
+<tr>
+<td>Elyse</td>
+<td>Zach</td>
+<td>Ruth</td>
+<td>first-grade graduation</td>
+<td>Chuck-E-Cheese</td>
+<td>terrible pizza and sticky booths</td>
+</tr>
+</tbody>
+</table></article></body></html>

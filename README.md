@@ -15,6 +15,7 @@ How to cause a ruckus on a PC using Python.
 * [Lesson 7: More Games](https://zsiegel92.github.io/evilpython/lesson_7.html)
 * [Lesson 8: File I/O](https://zsiegel92.github.io/evilpython/lesson_8.html)
 * [Lesson 9: Primes and Binary Search](https://zsiegel92.github.io/evilpython/lesson_9.html)
+* [Lesson 10: Mail Merge](https://zsiegel92.github.io/evilpython/lesson_10.html)
 
 ## Running Python
 
