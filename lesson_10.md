@@ -36,13 +36,8 @@ to_address = input("To whom should a message be sent?")
 message = "the message"
 subject = "the subject"
 
-fullMessage = "\r\n".join([
-    "From: " + username,
-    "To: " + to_address,
-    "Subject: " + subject,
-    "",
-    message
-])
+fullMessage = "From: {}\nTo: {}\nSubject: {}\n\n{}".format(username, to_address, subject, message)
+
 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 server.ehlo()
 server.login(username, password)

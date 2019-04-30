@@ -1129,13 +1129,8 @@ body .markdown-body
 <span class="n">message</span> <span class="o">=</span> <span class="s">&quot;the message&quot;</span>
 <span class="n">subject</span> <span class="o">=</span> <span class="s">&quot;the subject&quot;</span>
 
-<span class="n">fullMessage</span> <span class="o">=</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
-    <span class="s">&quot;From: &quot;</span> <span class="o">+</span> <span class="n">username</span><span class="p">,</span>
-    <span class="s">&quot;To: &quot;</span> <span class="o">+</span> <span class="n">to_address</span><span class="p">,</span>
-    <span class="s">&quot;Subject: &quot;</span> <span class="o">+</span> <span class="n">subject</span><span class="p">,</span>
-    <span class="s">&quot;&quot;</span><span class="p">,</span>
-    <span class="n">message</span>
-<span class="p">])</span>
+<span class="n">fullMessage</span> <span class="o">=</span> <span class="s">&quot;From: {}</span><span class="se">\n</span><span class="s">To: {}</span><span class="se">\n</span><span class="s">Subject: {}</span><span class="se">\n\n</span><span class="s">{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">to_address</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+
 <span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s">&#39;smtp.gmail.com&#39;</span><span class="p">,</span> <span class="mi">465</span><span class="p">)</span>
 <span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
 <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
