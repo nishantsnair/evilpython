@@ -16,10 +16,10 @@ Please review [Lesson 3: Email](https://zsiegel92.github.io/evilpython/lesson_3.
 Before running the following code, type the following commands in the shell:
 
 ```sh
-set EMAIL="your_email@email_provider.domain"
-set PASSWORD="your_password"
+$Env:EMAIL="your_email@email_provider.domain"
+$Env:PASSWORD="your_password"
 ```
->This is only for Windows. For Mac or Linux, replace `set` with `export`.
+>This is only for Windows. For Mac or Linux, replace `$Env:` with `export `. To test whether you've set a variable correctly, type `echo $Env:EMAIL` or `echo $EMAIL`.
 
 
 > **DO NOT** save email passwords directly in your code files. Using environmet variables such as this is the best way.

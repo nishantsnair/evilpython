@@ -1110,12 +1110,12 @@ body .markdown-body
 <p><img alt="xkcd email." src="images/email_settings.png"></p>
 <h2 id="an-email-package">An Email Package<a class="headerlink" href="#an-email-package" title="Permanent link"></a></h2>
 <p>Before running the following code, type the following commands in the shell:</p>
-<div class="codehilite"><pre><span class="nb">set </span><span class="nv">EMAIL</span><span class="o">=</span><span class="s2">&quot;your_email@email_provider.domain&quot;</span>
-<span class="nb">set </span><span class="nv">PASSWORD</span><span class="o">=</span><span class="s2">&quot;your_password&quot;</span>
+<div class="codehilite"><pre><span class="nv">$Env</span>:EMAIL<span class="o">=</span><span class="s2">&quot;your_email@email_provider.domain&quot;</span>
+<span class="nv">$Env</span>:PASSWORD<span class="o">=</span><span class="s2">&quot;your_password&quot;</span>
 </pre></div>
 
 <blockquote>
-<p>This is only for Windows. For Mac or Linux, replace <code>set</code> with <code>export</code>.</p>
+<p>This is only for Windows. For Mac or Linux, replace <code>$Env:</code> with <code>export</code>. To test whether you&rsquo;ve set a variable correctly, type <code>echo $Env:EMAIL</code> or <code>echo $EMAIL</code>.</p>
 <p><strong>DO NOT</strong> save email passwords directly in your code files. Using environmet variables such as this is the best way.</p>
 </blockquote>
 <h3 id="sending-basic-text">Sending Basic Text<a class="headerlink" href="#sending-basic-text" title="Permanent link"></a></h3>
@@ -1257,7 +1257,7 @@ body .markdown-body
 
 <span class="s">I would like to invite you to {about_name}&#39;s&#39; {occasion}! We will be celebrating at {location} because, as you know, {about_name} loves {favorite_thing}.</span>
 
-<span class="s">Best wishes, Elyse</span>
+<span class="s">Best wishes, {from_name}</span>
 <span class="s">&quot;&quot;&quot;</span>
 <span class="n">subject_template</span> <span class="o">=</span> <span class="s">&quot;Hi {to_name}! You&#39;re invited...&quot;</span>
 
@@ -1267,7 +1267,8 @@ body .markdown-body
                               <span class="n">about_name</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">about_name</span><span class="p">,</span>
                               <span class="n">occasion</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">occasion</span><span class="p">,</span>
                               <span class="n">location</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">location</span><span class="p">,</span>
-                              <span class="n">favorite_thing</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">favorite_thing</span>
+                              <span class="n">favorite_thing</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">favorite_thing</span><span class="p">,</span>
+                              <span class="n">from_name</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">from_name</span>
                               <span class="p">)</span>
     <span class="n">subject</span> <span class="o">=</span> <span class="n">subject_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                                       <span class="n">to_name</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">to_name</span>
