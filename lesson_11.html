@@ -1082,75 +1082,151 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>README</title></head><body><article class="markdown-body"><h1 id="evil-python">Evil Python<a class="headerlink" href="#evil-python" title="Permanent link"></a></h1>
-<p>How to cause a ruckus on a PC using Python.</p>
-<h2 id="lessons">Lessons<a class="headerlink" href="#lessons" title="Permanent link"></a></h2>
+</style><title>lesson_11</title></head><body><article class="markdown-body"><h1 id="evil-python-lesson-11-user-engagement">Evil Python Lesson 11: User Engagement<a class="headerlink" href="#evil-python-lesson-11-user-engagement" title="Permanent link"></a></h1>
+<p><a href="https://zsiegel92.github.io/evilpython/">All Lessons</a></p>
+<div class="toc">
 <ul>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_1.html">Lesson 1: Creating files and folders</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_2.html">Lesson 2: Using Python to Execute Many Commands</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_3.html">Lesson 3: Sending Emails using Code</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_4.html">Lesson 4: Integer and String Manipulation</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/binary_resources.html">Binary Numbers</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/list_assignments.html">Working with Lists</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_5.html">Lesson 5: Games</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_6.html">Lesson 6: Capturing Keyboard Input with Callbacks</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_7.html">Lesson 7: More Games</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_8.html">Lesson 8: File I/O</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_9.html">Lesson 9: Primes and Binary Search</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_10.html">Lesson 10: Mail Merge</a></li>
-<li><a href="https://zsiegel92.github.io/evilpython/lesson_11.html">Lesson 11: User Engagement</a></li>
+<li><a href="#evil-python-lesson-11-user-engagement">Evil Python Lesson 11: User Engagement</a><ul>
+<li><a href="#review-sending-emails">Review: Sending Emails</a></li>
+<li><a href="#tracking-user-engagement">Tracking User Engagement</a><ul>
+<li><a href="#sending-customized-emails">Sending Customized Emails</a></li>
+<li><a href="#server-responses-to-clicked-links">Server Responses to Clicked Links</a><ul>
+<li><a href="#custom-links">Custom Links</a></li>
 </ul>
-<h2 id="running-python">Running Python<a class="headerlink" href="#running-python" title="Permanent link"></a></h2>
-<p>You are ready to run Python! Your computer&rsquo;s Python installation can run in two important ways:</p>
-<h3 id="1-running-python-code-written-in-py-files">1. Running Python Code Written in <code>.py</code> Files<a class="headerlink" href="#1-running-python-code-written-in-py-files" title="Permanent link"></a></h3>
-<p>Python can execute Python code, which is written in <code>.py</code> files, such as <code>app.py</code>. If you write code in a <code>.py</code> file called <code>app.py</code>, you can tell Python to run <strong>all</strong> the code with the following command (without typing <code>&gt;&gt;</code>):</p>
-<div class="codehilite"><pre>        &gt;&gt; python app.py
+</li>
+</ul>
+</li>
+<li><a href="#storing-user-interactions-in-a-database">Storing User Interactions in a Database</a></li>
+<li><a href="#formatting-with-jinja2">Formatting with Jinja2</a></li>
+<li><a href="#reading-data-from-a-spreadsheet">Reading data from a spreadsheet</a></li>
+<li><a href="#assignments">Assignments</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="review-sending-emails">Review: Sending Emails<a class="headerlink" href="#review-sending-emails" title="Permanent link"></a></h2>
+<p>Please review <a href="https://zsiegel92.github.io/evilpython/lesson_3.html">Lesson 3: Email</a> and <a href="https://zsiegel92.github.io/evilpython/lesson_10.html">Lesson 10: Mail Merge</a> from this tutorial.</p>
+<h2 id="tracking-user-engagement">Tracking User Engagement<a class="headerlink" href="#tracking-user-engagement" title="Permanent link"></a></h2>
+<p>Now that you can mail-merge some content to your users (or customers, or friends, <em>or enemies</em>), you can start to manage their engagement with your services. We will send unique links with mail-merged emails so that you can track</p>
+<h3 id="sending-customized-emails">Sending Customized Emails<a class="headerlink" href="#sending-customized-emails" title="Permanent link"></a></h3>
+<p>Make sure you have an emailing interface set up:</p>
+<p><strong>Create a file called <code>emailer.py</code></strong>. Add this code:</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+
+
+<span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span><span class="n">to_address</span><span class="p">,</span> <span class="n">html_body</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;EMAIL&#39;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;PASSWORD&#39;</span><span class="p">)</span>
+
+    <span class="n">html</span> <span class="o">=</span> <span class="n">f</span><span class="s">&quot;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;{html_body}&lt;/body&gt;&lt;/html&gt;&quot;</span>
+
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s">&#39;alternative&#39;</span><span class="p">)</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;Subject&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">subject</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;From&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">username</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;To&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">to_address</span>
+    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span><span class="s">&#39;html&#39;</span><span class="p">))</span>
+
+    <span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s">&#39;smtp.gmail.com&#39;</span><span class="p">,</span> <span class="mi">465</span><span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">to_address</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 
+<p>Then, run this code from another file in the same directory to send an email:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">emailer</span> <span class="kn">import</span> <span class="n">send_email</span>
 
-<p>This command tells Python to execute every line of code written in the <code>app.py</code> file. Try running this command and, if there are no error messages, navigate to <a href="/Users/zach/code/pynaughty/localhost%3A5000">localhost</a>.</p>
-<h3 id="2-running-python-code-in-the-interactive-console">2. Running Python Code in the Interactive Console<a class="headerlink" href="#2-running-python-code-in-the-interactive-console" title="Permanent link"></a></h3>
-<p>Python has an &ldquo;Interactive Console&rdquo; called the &ldquo;Python Interactive Console&rdquo;.</p>
-<p>Any Python commands can be executed one at a time by writing them in the command prompt and hitting the <kbd>Enter</kbd> key. This is called a <strong>Read-Evaluate-Print-Loop (REPL)</strong> environment, because it &ldquo;reads&rdquo; your input, &ldquo;evaluates&rdquo; it, &ldquo;prints&rdquo; the output, and then &ldquo;loops&rdquo; by starting the process over again.</p>
-<p><strong>Type <code>python</code> to start the Python interactive console.</strong> Then try the following Python commands:</p>
-<ul>
-<li><code>x=5</code> to create a variable named <code>x</code> with the value <code>5</code>.<ul>
-<li><code>x = 5</code> will also work. Spaces (made with the <kbd>spacebar</kbd>) are known as <strong>whitespace</strong>, and are generally ignored by Python.</li>
-</ul>
-</li>
-<li><code>print(x)</code> to print the value of <code>x</code><ul>
-<li><code>x</code> (on its own) is another way to say <code>print(x)</code>, but this only works in the interactive shell.</li>
-</ul>
-</li>
-<li><code>print(x+1)</code><ul>
-<li><code>x+1</code> (on its own) will also work.</li>
-</ul>
-</li>
-<li><code>y = "Eitan"</code><ul>
-<li>(why did we need quotes around <code>Eitan</code> but not around the number <code>5</code>?)</li>
-</ul>
-</li>
-<li><code>z = "Zach"</code></li>
-<li><code>w = y</code></li>
-<li><code>print(y + z)</code><ul>
-<li>How is this different from <code>print(x + 1)</code>? How is it the same?</li>
-</ul>
-</li>
-<li><code>print(y + " " + z)</code></li>
-</ul>
-<h2 id="first-python-script">First Python Script<a class="headerlink" href="#first-python-script" title="Permanent link"></a></h2>
-<p>Create a file called <strong>loops.py</strong> and open it in your favorite text editor (SublimeText is reccommended).</p>
-<p>In this file, add the following code:</p>
-<div class="codehilite"><pre>x = 5
-print(x)
+<span class="n">message</span> <span class="o">=</span> <span class="s">&quot;Click this link: http://127.0.0.1:5000/&quot;</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s">&quot;THIS IS A TEST! And this is the subject.&quot;</span>
+
+<span class="n">send_email</span><span class="p">(</span>
+           <span class="s">&#39;your_own_email@host.domain&#39;</span><span class="p">,</span>
+           <span class="n">message</span><span class="p">,</span>
+           <span class="n">subject</span>
+           <span class="p">)</span>
 </pre></div>
 
+<h3 id="server-responses-to-clicked-links">Server Responses to Clicked Links<a class="headerlink" href="#server-responses-to-clicked-links" title="Permanent link"></a></h3>
+<p>Before sending your email, create and run a Python file called <code>app.py</code> with the following code:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
-<p>Now, navigate to the folder containing this file and type in your command line</p>
-<div class="codehilite"><pre>python loops.py
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">basic_response</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Someone clicked this link!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">&quot;This is a website!&quot;</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;0.0.0.0&#39;</span><span class="p">)</span>
 </pre></div>
 
+<blockquote>
+<p>Run this using <code>python app.py</code> or by setting environment variables using the following commands:</p>
+<p><code>export FLASK_APP=app.py</code> (mac)
+<code>$env:FLASK_APP = "hello.py"</code> (Windows Powershell)
+<code>set FLASK_APP=app.py</code> (Windows Command Prompt)</p>
+<p>Then, you can run the app with the command:
+<code>flask run</code></p>
+<p><strong>Note</strong>: If the <em>Flask</em> micro-framework package is not installed on your computer, run the following command then repeat the steps above:
+<code>pip install flask</code></p>
+</blockquote>
+<p>When you run this script, you will be hosting a website! It will only be visible on your home network, which makes it safer. You should see something in your console like:</p>
+<div class="codehilite"><pre><span class="nv">$ </span>python app.py
+ * Tip: There are .env files present. Do <span class="s2">&quot;pip install python-dotenv&quot;</span> to use them.
+ * Serving Flask app <span class="s2">&quot;app&quot;</span> <span class="o">(</span>lazy loading<span class="o">)</span>
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on http://127.0.0.1:5000/ <span class="o">(</span>Press CTRL+C to quit<span class="o">)</span>
+</pre></div>
 
-<p>You should see the following output:</p>
-<div class="codehilite"><pre>    &gt;&gt; 5
-</pre></div></article></body></html>
+<p>If your URL, in this case <code>https://127.0.0.1:5000/</code> is different from the one here, make sure to include the correct link in the email you send.</p>
+<h4 id="custom-links">Custom Links<a class="headerlink" href="#custom-links" title="Permanent link"></a></h4>
+<p>Your emails are customizable in many ways (see previous lesson), and we can tell the server exactly who clicked the emailed link.</p>
+<p>Change your email to the following:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">emailer</span> <span class="kn">import</span> <span class="n">send_email</span>
+<span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">parse</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="s">&quot;Zach Siegel&quot;</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s">&quot;Click this link: http://127.0.0.1:5000/click/{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s">&quot;THIS IS A TEST! And this is the subject.&quot;</span>
+
+<span class="n">send_email</span><span class="p">(</span>
+           <span class="s">&#39;your_own_email@host.domain&#39;</span><span class="p">,</span>
+           <span class="n">message</span><span class="p">,</span>
+           <span class="n">subject</span>
+           <span class="p">)</span>
+</pre></div>
+
+<blockquote>
+<p>The function <code>urllib.parse.quote</code> turns a Python <code>str</code> variable into a valid URL argument. For example, URLs typically do not include spaces (although they can), so the url <code>http://127.0.0.1:5000/click/Zach Siegel</code> would be changed to <code>http://localhost:5000/click/Zach%20Siegel</code>, which the Flask server decodes automatically.</p>
+</blockquote>
+<p>Now, change your app to have the following code:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">basic_response</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Someone clicked this link!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">&quot;This is a Website!&quot;</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/click/&lt;user&gt;&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">name_response</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;{} clicked this link!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s">&quot;This is a Website!&quot;</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;0.0.0.0&#39;</span><span class="p">)</span>
+</pre></div>
+
+<h2 id="storing-user-interactions-in-a-database">Storing User Interactions in a Database<a class="headerlink" href="#storing-user-interactions-in-a-database" title="Permanent link"></a></h2>
+<p><strong>More on this next time</strong>!</p>
+<h2 id="formatting-with-jinja2">Formatting with Jinja2<a class="headerlink" href="#formatting-with-jinja2" title="Permanent link"></a></h2>
+<p>Jinja 2 is a Python package tht allows formatting with much more precision than the Python built-in <code>format</code> function. <strong>More on this next time</strong>!</p>
+<h2 id="reading-data-from-a-spreadsheet">Reading data from a spreadsheet<a class="headerlink" href="#reading-data-from-a-spreadsheet" title="Permanent link"></a></h2>
+<p><strong>More on this next time</strong>!</p>
+<h2 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h2></article></body></html>
