@@ -1092,6 +1092,7 @@ body .markdown-body
 <li><a href="#sending-customized-emails">Sending Customized Emails</a></li>
 <li><a href="#server-responses-to-clicked-links">Server Responses to Clicked Links</a><ul>
 <li><a href="#custom-links">Custom Links</a></li>
+<li><a href="#using-html">Using HTML</a></li>
 </ul>
 </li>
 </ul>
@@ -1223,10 +1224,28 @@ body .markdown-body
 <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;0.0.0.0&#39;</span><span class="p">)</span>
 </pre></div>
 
+<h4 id="using-html">Using HTML<a class="headerlink" href="#using-html" title="Permanent link"></a></h4>
+<p>To send a link that looks <a href="/Users/zach/code/pynaughty/google.com">like this</a> and takes you, like that link, to <code>google.com</code>, you need to use an HTML <em>anchor tag</em> with an <code>href</code> <em>attribute</em>:</p>
+<div class="codehilite"><pre><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;google.com&quot;</span><span class="p">&gt;</span>like this<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</pre></div>
+
 <h2 id="storing-user-interactions-in-a-database">Storing User Interactions in a Database<a class="headerlink" href="#storing-user-interactions-in-a-database" title="Permanent link"></a></h2>
 <p><strong>More on this next time</strong>!</p>
 <h2 id="formatting-with-jinja2">Formatting with Jinja2<a class="headerlink" href="#formatting-with-jinja2" title="Permanent link"></a></h2>
 <p>Jinja 2 is a Python package tht allows formatting with much more precision than the Python built-in <code>format</code> function. <strong>More on this next time</strong>!</p>
 <h2 id="reading-data-from-a-spreadsheet">Reading data from a spreadsheet<a class="headerlink" href="#reading-data-from-a-spreadsheet" title="Permanent link"></a></h2>
 <p><strong>More on this next time</strong>!</p>
-<h2 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h2></article></body></html>
+<h2 id="assignments">Assignments<a class="headerlink" href="#assignments" title="Permanent link"></a></h2>
+<ol>
+<li>Review <a href="https://zsiegel92.github.io/evilpython/lesson_8.html">Lesson 8: File I/O</a> and change the <code>app.py</code> script so that every time a user clicks the link you sent, a file is updated with their name
+. If the users &ldquo;Joseph Biden&rdquo;, &ldquo;Bernie Sanders&rdquo;, &ldquo;Beto O&rsquo;Rourke&rdquo;, and &ldquo;Kamila Harris&rdquo; all click the links you sent (in that order), the file should look like this:</li>
+</ol>
+<div class="codehilite"><pre>Joseph Biden
+Bernie Sanders
+Beto O&#39;Rourke
+Kamila Harris
+</pre></div>
+
+<blockquote>
+<p>Note that you&rsquo;ll have to send URL-encoded links, such as <code>http://localhost:5000/click/Joseph%20Biden</code> to make this happen.</p>
+</blockquote></article></body></html>

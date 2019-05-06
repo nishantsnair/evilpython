@@ -148,6 +148,14 @@ def name_response(user):
 app.run(host='0.0.0.0')
 ```
 
+#### Using HTML
+
+To send a link that looks [like this](google.com) and takes you, like that link, to `google.com`, you need to use an HTML *anchor tag* with an `href` *attribute*:
+
+```html
+<a href="google.com">like this</a>
+```
+
 ## Storing User Interactions in a Database
 
 **More on this next time**!
@@ -161,3 +169,14 @@ Jinja 2 is a Python package tht allows formatting with much more precision than 
 **More on this next time**!
 
 ## Assignments
+
+1. Review [Lesson 8: File I/O](https://zsiegel92.github.io/evilpython/lesson_8.html) and change the `app.py` script so that every time a user clicks the link you sent, a file is updated with their name
+. If the users "Joseph Biden", "Bernie Sanders", "Beto O'Rourke", and "Kamila Harris" all click the links you sent (in that order), the file should look like this:
+
+```
+Joseph Biden
+Bernie Sanders
+Beto O'Rourke
+Kamila Harris
+```
+> Note that you'll have to send URL-encoded links, such as `http://localhost:5000/click/Joseph%20Biden` to make this happen.
