@@ -83,7 +83,13 @@ app.run()
 ```
 > You may need to type `pip install flask` before typing `python app.py` to install Flask.
 
-Make sure this runs properly on your computer. Now, to run properly on Heroku, we will need to change it to this:
+Make sure this runs properly on your computer:
+
+* Type `python app.py` into your command prompt.
+* Visit the URL listed in the command prompt, which should be something like `https://127.0.0.1:5000/`
+
+
+Now, to run properly on Heroku, we will need to change it to this:
 
 
 ```python
@@ -100,6 +106,10 @@ port = int(os.environ.get("PORT", 33507))
 app.run(host='0.0.0.0', port=port)
 ```
 > Changing the `host` and `port` are necessary to make the app work properly on Heroku.
+>
+> Port 33507 is the preferred port for Heroku apps.
+>
+> host "`0.0.0.0`" is known as "`localhost`". You can type `https://localhost:33507` into the browser to access the app (`https://0.0.0.0...` will not work!).
 
 ### Giving "Run Instructions" for Heroku
 

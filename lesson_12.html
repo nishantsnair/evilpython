@@ -1189,7 +1189,12 @@ body .markdown-body
 <blockquote>
 <p>You may need to type <code>pip install flask</code> before typing <code>python app.py</code> to install Flask.</p>
 </blockquote>
-<p>Make sure this runs properly on your computer. Now, to run properly on Heroku, we will need to change it to this:</p>
+<p>Make sure this runs properly on your computer:</p>
+<ul>
+<li>Type <code>python app.py</code> into your command prompt.</li>
+<li>Visit the URL listed in the command prompt, which should be something like <code>https://127.0.0.1:5000/</code></li>
+</ul>
+<p>Now, to run properly on Heroku, we will need to change it to this:</p>
 <div class="codehilite"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
@@ -1205,6 +1210,8 @@ body .markdown-body
 
 <blockquote>
 <p>Changing the <code>host</code> and <code>port</code> are necessary to make the app work properly on Heroku.</p>
+<p>Port 33507 is the preferred port for Heroku apps.</p>
+<p>host &ldquo;<code>0.0.0.0</code>&rdquo; is known as &ldquo;<code>localhost</code>&rdquo;. You can type <code>https://localhost:33507</code> into the browser to access the app (<code>https://0.0.0.0...</code> will not work!).</p>
 </blockquote>
 <h3 id="giving-run-instructions-for-heroku">Giving &ldquo;Run Instructions&rdquo; for Heroku<a class="headerlink" href="#giving-run-instructions-for-heroku" title="Permanent link"></a></h3>
 <p>Heroku mainly uses two files to run your code on its cloud computers: a <strong>procfile</strong> (&ldquo;process file&rdquo;) and a <strong>requirements file</strong>.</p>
