@@ -253,6 +253,13 @@ owner: Zach Siegel
 var1:  value1
 ```
 
+#### Local Environment Variables
+
+You should always be running and testing your code *locally* before pushing changes to GitHub (and Heroku). You'll also need to set environment variables locally for that.
+
+* `export var1="value1"` (Mac)
+* `$Env:var1="value1"` (Windows)
+
 ## Assignment
 
 1. Create a Heroku webapp. Set the environment variables `EMAIL` and `PASSWORD` to the email and password of the "*burner*" email account you made. not an email address you care about! 

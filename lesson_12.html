@@ -1086,7 +1086,10 @@ body .markdown-body
 <li><a href="#fully-utlizing-the-cli-command-line-interface">Fully Utlizing the CLI (Command Line Interface)</a></li>
 </ul>
 </li>
-<li><a href="#setting-environment-variables-in-the-heroku-cli">Setting Environment Variables in the Heroku CLI</a></li>
+<li><a href="#setting-environment-variables-in-the-heroku-cli">Setting Environment Variables in the Heroku CLI</a><ul>
+<li><a href="#local-environment-variables">Local Environment Variables</a></li>
+</ul>
+</li>
 <li><a href="#assignment">Assignment</a></li>
 </ul>
 </li>
@@ -1323,6 +1326,12 @@ owner: Zach Siegel
 var1:  value1
 </pre></div>
 
+<h4 id="local-environment-variables">Local Environment Variables<a class="headerlink" href="#local-environment-variables" title="Permanent link"></a></h4>
+<p>You should always be running and testing your code <em>locally</em> before pushing changes to GitHub (and Heroku). You&rsquo;ll also need to set environment variables locally for that.</p>
+<ul>
+<li><code>export var1="value1"</code> (Mac)</li>
+<li><code>$Env:var1="value1"</code> (Windows)</li>
+</ul>
 <h2 id="assignment">Assignment<a class="headerlink" href="#assignment" title="Permanent link"></a></h2>
 <ol>
 <li>
