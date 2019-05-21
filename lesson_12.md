@@ -257,9 +257,9 @@ var1:  value1
 
 You should always be running and testing your code *locally* before pushing changes to GitHub (and Heroku). You'll also need to set environment variables locally for that.
 
-* `export var1="value1"` (Mac)
-* `$Env:var1="value1"` (Windows Powershell)
-* `@set var1="value1"` (Windows `cmder` shell)
+* `export var1=value1` (Mac)
+* `$Env:var1=value1` (Windows Powershell)
+* `@set var1=value1` (Windows `cmder` shell)
 
 ## Assignment
 
