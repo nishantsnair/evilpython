@@ -18,6 +18,7 @@ How to cause a ruckus on a PC using Python.
 * [Lesson 10: Mail Merge](https://zsiegel92.github.io/evilpython/lesson_10.html)
 * [Lesson 11: User Engagement](https://zsiegel92.github.io/evilpython/lesson_11.html)
 * [Lesson 12: Cloud-Hosted App](https://zsiegel92.github.io/evilpython/lesson_12.html)
+* [Lesson 13: Cloud-Hosted App Fun](https://zsiegel92.github.io/evilpython/lesson_13.html)
 
 ## Running Python
 

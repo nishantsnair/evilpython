@@ -1082,4 +1082,225 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>lesson_12</title></head><body><article class="markdown-body"><p>Git</p></article></body></html>
+</style><title>lesson_13</title></head><body><article class="markdown-body"><h1 id="evil-python-lesson-3-cloud-hosted-app-fun">Evil Python Lesson 3: Cloud-Hosted App FUn<a class="headerlink" href="#evil-python-lesson-3-cloud-hosted-app-fun" title="Permanent link"></a></h1>
+<p><a href="https://zsiegel92.github.io/evilpython/">All Lessons</a></p>
+<div class="toc">
+<ul>
+<li><a href="#evil-python-lesson-3-cloud-hosted-app-fun">Evil Python Lesson 3: Cloud-Hosted App FUn</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#app-setup">App Setup</a></li>
+<li><a href="#emailer-package">Emailer Package</a></li>
+<li><a href="#app-so-far">App So Far</a></li>
+<li><a href="#custom-emails-based-on-url">Custom Emails based on URL</a></li>
+<li><a href="#html-template-with-a-custom-link">HTML Template with a custom link!</a></li>
+<li><a href="#pushing-changes-with-versioning">Pushing changes - with versioning!</a></li>
+<li><a href="#variable-versioning-with-environment-variables">Variable Versioning with Environment Variables!</a></li>
+<li><a href="#assignment">Assignment</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
+<p>In this lesson, we will configure some interactions between a cloud-hosted webapp and a user.</p>
+<h2 id="app-setup">App Setup<a class="headerlink" href="#app-setup" title="Permanent link"></a></h2>
+<p>At this point you should have the following:</p>
+<ul>
+<li><strong>Git repository</strong> on GitHub containing a Flask webapp<ul>
+<li>Use these commands to upload changes:<ul>
+<li><code>git add .</code></li>
+<li><code>git commit -m "commit message here"</code></li>
+<li>git push origin master</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Heroku app</strong> configured to run the code in your GitHub repository<ul>
+<li>To set the default app (so you don&rsquo;t have to type <code>--app appname</code> all the time):<ul>
+<li><code>heroku git:remote -a appname</code></li>
+<li>(replace <code>appname</code> with your app&rsquo;s name)</li>
+</ul>
+</li>
+<li>To view environment variables:<ul>
+<li><code>heroku config</code></li>
+</ul>
+</li>
+<li>To navigate your server using the command prompt:<ul>
+<li><code>heroku run bash -- app appname</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Environment variables</strong> set called &ldquo;EMAIL&rdquo; and &ldquo;PASSWORD&rdquo; for a gmail account that you <em>do not use for anything important</em><ul>
+<li>These should be set <em>locally</em> (on your computer) using one of the following:<ul>
+<li><code>export var1=value1</code> (Mac)</li>
+<li><code>$Env:var1=value1</code> (Windows Powershell)</li>
+<li><code>@set var1=value1</code> (Windows <code>cmder</code> shell)</li>
+</ul>
+</li>
+<li>These should be set <em>remotely</em> (on your Heroku server) using the following (here for an app called <code>appname</code>):<ul>
+<li><code>heroku config:set var1=value1 --app appname</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="emailer-package">Emailer Package<a class="headerlink" href="#emailer-package" title="Permanent link"></a></h2>
+<p>You should have created a Python package called <code>emailer</code> in a file called <code>emailer.py</code> that can send emails with a simple command. It should look something like this:</p>
+<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+
+
+<span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span><span class="n">to_address</span><span class="p">,</span> <span class="n">html_body</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;EMAIL&#39;</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;PASSWORD&#39;</span><span class="p">)</span>
+
+    <span class="n">html</span> <span class="o">=</span> <span class="n">f</span><span class="s">&quot;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;{html_body}&lt;/body&gt;&lt;/html&gt;&quot;</span>
+
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s">&#39;alternative&#39;</span><span class="p">)</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;Subject&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">subject</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;From&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">username</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;To&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">to_address</span>
+    <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">MIMEText</span><span class="p">(</span><span class="n">html</span><span class="p">,</span><span class="s">&#39;html&#39;</span><span class="p">))</span>
+
+    <span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s">&#39;smtp.gmail.com&#39;</span><span class="p">,</span> <span class="mi">465</span><span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">to_address</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">())</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+<h2 id="app-so-far">App So Far<a class="headerlink" href="#app-so-far" title="Permanent link"></a></h2>
+<p>Your app should have the ability to shoot off an email when you visit a URL:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">emailer</span> <span class="kn">import</span> <span class="n">send_email</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">basic_response</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Someone clicked this link!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">      Click this link to get a cool email: &lt;a href=&#39;http://127.0.0.1:33507/send_something&#39;&gt;LINK&lt;/a&gt;</span>
+<span class="s">    &quot;&quot;&quot;</span>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/click/&lt;user&gt;&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">name_response</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;{} clicked this link!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s">&quot;This is a Website!&quot;</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/send_something&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">send_something</span><span class="p">():</span>
+  <span class="n">subject</span> <span class="o">=</span> <span class="s">&quot;THIS IS A TEST! And this is the subject.&quot;</span>
+  <span class="n">message</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">    Click &lt;a href=&quot;http://127.0.0.1:33507/&quot;&gt;this link&lt;/a&gt; to return to our website.</span>
+<span class="s">  &quot;&quot;&quot;</span>
+  <span class="n">send_email</span><span class="p">(</span>
+             <span class="s">&#39;your_email@domain.com&#39;</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+  <span class="k">return</span> <span class="s">&quot;OKAY - email sent.&quot;</span>
+
+
+<span class="n">port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;PORT&quot;</span><span class="p">,</span> <span class="mi">33507</span><span class="p">))</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+</pre></div>
+
+<h2 id="custom-emails-based-on-url">Custom Emails based on URL<a class="headerlink" href="#custom-emails-based-on-url" title="Permanent link"></a></h2>
+<p>Change your <code>/send_something</code> route to the following:</p>
+<div class="codehilite"><pre><span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/send_something/&lt;user_email&gt;&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">send_something</span><span class="p">(</span><span class="n">user_email</span><span class="p">):</span>
+  <span class="n">subject</span> <span class="o">=</span> <span class="n">f</span><span class="s">&quot;Hello, {user_email}&quot;</span>
+  <span class="n">message</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">    Hi, {username},</span>
+
+
+<span class="s">    Click &lt;a href=&quot;http://127.0.0.1:33507/&quot;&gt;this link&lt;/a&gt; to return to our website.</span>
+<span class="s">  &quot;&quot;&quot;</span>
+  <span class="n">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">user_email</span><span class="p">)</span>
+  <span class="n">send_email</span><span class="p">(</span>
+             <span class="n">user_email</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">f</span><span class="s">&quot;OKAY - email sent to {user_email}&quot;</span>
+</pre></div>
+
+<p>Make sure you successfully receive an email when you visit <code>http://127.0.0.1:33507/send_something/YOUR_EMAIL_HERE</code> (with <code>YOUR_EMAIL_HERE</code> replaced with your email).</p>
+<h2 id="html-template-with-a-custom-link">HTML Template with a custom link!<a class="headerlink" href="#html-template-with-a-custom-link" title="Permanent link"></a></h2>
+<p>Create a folder called <code>templates</code> in the same folder as <code>app.py</code>. In that folder, save the following HTML webpage in a file called <code>linker.html</code>:</p>
+<div class="codehilite"><pre>    <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Click my link!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;input&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;thebutton&quot;</span><span class="p">&gt;</span>Click Me!<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;thebutton&quot;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">travel_to_email_link</span><span class="p">);</span>
+            <span class="kd">function</span> <span class="nx">travel_to_email_link</span><span class="p">(){</span>
+           <span class="kd">var</span> <span class="nx">inputValue</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+           <span class="kd">var</span> <span class="nx">base_url</span> <span class="o">=</span> <span class="s2">&quot;http://127.0.0.1:33507&quot;</span><span class="p">;</span> <span class="c1">//Local version</span>
+           <span class="c1">// var base_url = &quot;http://test-app-zsze.herokuapp.com/&quot;; // Cloud version</span>
+           <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">base_url</span> <span class="o">+</span> <span class="s2">&quot;/send_to/&quot;</span><span class="o">+</span><span class="nx">inputValue</span><span class="p">);</span>
+             <span class="p">}</span>
+        <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+<p>Now, create a route called <code>/contact</code> that looks like this:</p>
+<div class="codehilite"><pre><span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/contact&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">name_response</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;linker.html&#39;</span><span class="p">)</span>
+</pre></div>
+
+<p>Run your app using <code>python app.py</code> and visit the url with the route <code>/contact</code>. <strong>Make sure you receive an email when you click the button!!</strong></p>
+<h2 id="pushing-changes-with-versioning">Pushing changes - with versioning!<a class="headerlink" href="#pushing-changes-with-versioning" title="Permanent link"></a></h2>
+<p>Change the <code>linker.html</code> file to include the link to the <em>cloud</em> version (some URL with <code>.herokuapp.com</code>) instead of the <em>local</em> version (some URL with <code>.0.0.1:33507</code>) by un-commenting that line.</p>
+<p>Push your changes to the GitHub repository that your app is using and try out all the routes!</p>
+<h2 id="variable-versioning-with-environment-variables">Variable Versioning with Environment Variables!<a class="headerlink" href="#variable-versioning-with-environment-variables" title="Permanent link"></a></h2>
+<p>We can use environment variables to automatically set our <code>base_url</code> in our cloud-hosted and locally-hosted app.</p>
+<p><strong>Create a local environment variable called <code>base_url</code></strong>. It will look like this:</p>
+<ul>
+<li><code>export base_url=http://127.0.0.1:33507</code> (Mac)</li>
+<li><code>$Env:base_url=http://127.0.0.1:33507</code> (Windows Powershell)</li>
+<li><code>@set base_url=http://127.0.0.1:33507</code> (Windows <code>cmder</code> shell)</li>
+</ul>
+<p>Now, set this on your Heroku server (change <code>test-app-zeze</code> to your app&rsquo;s name):</p>
+<ul>
+<li><code>heroku config:set base_url=https://test-app-zsze.herokuapp.com --app test-app-zsze</code></li>
+</ul>
+<p>Now, change your <code>/contact</code> route function to the following:</p>
+<div class="codehilite"><pre><span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/contact&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">name_response</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">&#39;linker.html&#39;</span><span class="p">,</span><span class="n">base_url</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s">&#39;base_url&#39;</span><span class="p">])</span>
+</pre></div>
+
+<p>and change your <code>linker.html</code> file to the following:</p>
+<div class="codehilite"><pre><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Click my link!<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+    Enter your email here to receive a cool email: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;input&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;thebutton&quot;</span><span class="p">&gt;</span>Click Me!<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/javascript&quot;</span><span class="p">&gt;</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;thebutton&quot;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="nx">travel_to_email_link</span><span class="p">);</span>
+        <span class="kd">function</span> <span class="nx">travel_to_email_link</span><span class="p">(){</span>
+       <span class="kd">var</span> <span class="nx">inputValue</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+       <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&quot;{{base_url}}&quot;</span> <span class="o">+</span> <span class="s2">&quot;/send_something/&quot;</span><span class="o">+</span><span class="nx">inputValue</span><span class="p">);</span>
+         <span class="p">}</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+<p>Run this code locally, upload your changes to GitHub and test in on Heroku!</p>
+<p>Now you don&rsquo;t need to maintain separate versions of your code for the <em>local</em> and <em>remote</em> (/<em>cloud</em>) versions of your app!</p>
+<h2 id="assignment">Assignment<a class="headerlink" href="#assignment" title="Permanent link"></a></h2>
+<ol>
+<li>Make the HTML page display soemthing like: &ldquo;You have entered: zsiegel@gmai&rdquo; as you are entering text into the text box. Use <a href="https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_oninput">this example</a> for inspiration and guidance.</li>
+</ol></article></body></html>
