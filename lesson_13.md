@@ -158,6 +158,16 @@ Now, create a route called `/contact` that looks like this:
 def name_response():
     return render_template('linker.html')
 ```
+> Make sure to add `render_template` to your imports:
+> `from flask import Flask, render_template, redirect, url_for`
+
+Also change your `/` route to simply redirect to `/contact`:
+
+```python
+@app.route("/")
+def basic_response():
+    return redirect(url_for('name_response'))
+```
 
 Run your app using `python app.py` and visit the url with the route `/contact`. **Make sure you receive an email when you click the button!!**
 
@@ -212,6 +222,42 @@ and change your `linker.html` file to the following:
 	</script>
 </body>
 </html>
+```
+
+At this point, your `app.py` should look roughly like this:
+
+```python
+from flask import Flask, render_template, redirect, url_for
+import os
+from emailer import send_email
+
+
+app = Flask(__name__)
+
+@app.route("/")
+def basic_response():
+    return redirect(url_for('name_response'))
+
+@app.route("/contact")
+def name_response():
+    return render_template('linker.html',base_url=os.environ['base_url'])
+
+@app.route("/send_something/<user_email>")
+def send_something(user_email):
+  subject = f"Hello, {user_email}"
+  message = """
+    Hi, {username},
+
+
+    Click <a href="http://127.0.0.1:33507/">this link</a> to return to our website.
+  """
+  message = message.format(username=user_email)
+  send_email(
+             user_email, message, subject)
+  return f"OKAY - email sent to {user_email}"
+
+port = int(os.environ.get("PORT", 33507))
+app.run(host='0.0.0.0', port=port)
 ```
 
 Run this code locally, upload your changes to GitHub and test in on Heroku!
