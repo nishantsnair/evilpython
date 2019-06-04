@@ -1182,13 +1182,11 @@ body .markdown-body
 </li>
 <li>Click &ldquo;<strong>Create Repository</strong>&ldquo;</li>
 <li>You will see some on-screen instructions to &ldquo;<strong>push an existing repository from the command line</strong>&rdquo;. That&rsquo;s what you want to do! The instructions will be easy to spot on GitHub, with the correct URL, so you should copy them from there.<ul>
-<li>If your GitHub username is <code>&lt;username&gt;</code> and your repository is called <code>&lt;my_repo&gt;</code>, you&rsquo;ll be asked to use these commands:</li>
-<li>
-<div class="codehilite"><pre>    git remote add origin https://github.com/&lt;username&gt;/&lt;my_repo&gt;.git
+<li>If your GitHub username is <code>&lt;username&gt;</code> and your repository is called <code>&lt;my_repo&gt;</code>, you&rsquo;ll be asked to use these commands:
+*
+    <div class="codehilite"><pre>    git remote add origin https://github.com/&lt;username&gt;/&lt;my_repo&gt;.git
     git push -u origin master
-</pre></div>
-
-</li>
+</pre></div></li>
 <li>You may be asked to log into GitHub the first time you use the command line interface.</li>
 </ul>
 </li>
@@ -1363,8 +1361,10 @@ var1:  value1
 <h2 id="assignment">Assignment<a class="headerlink" href="#assignment" title="Permanent link"></a></h2>
 <ol>
 <li>
-<p>Create a Heroku webapp. Set the environment variables <code>EMAIL</code> and <code>PASSWORD</code> to the email and password of the &ldquo;<em>burner</em>&rdquo; email account you made. not an email address you care about! 
-    &gt; What we&rsquo;re doing is safe, but it&rsquo;s very easy to accidentally save a password in a Git repository and upload it for the whole world. There are bots that are constantly prowling GitHub for password to steal.</p>
+<p>Create a Heroku webapp. Set the environment variables <code>EMAIL</code> and <code>PASSWORD</code> to the email and password of the &ldquo;<em>burner</em>&rdquo; email account you made. not an email address you care about!</p>
+<blockquote>
+<p>What we&rsquo;re doing is safe, but it&rsquo;s very easy to accidentally save a password in a Git repository and upload it for the whole world. There are bots that are constantly prowling GitHub for password to steal.</p>
+</blockquote>
 <p>In your app, you can access environment variables by using <code>import os</code> and, for example:</p>
 <div class="codehilite"><pre><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;EMAIL&quot;</span><span class="p">)</span>
 </pre></div>

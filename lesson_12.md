@@ -51,7 +51,7 @@ In this lesson, we will create a cloud-hosted webapp that collects user engageme
 * Click "**Create Repository**"
 * You will see some on-screen instructions to "**push an existing repository from the command line**". That's what you want to do! The instructions will be easy to spot on GitHub, with the correct URL, so you should copy them from there.
 	* If your GitHub username is `<username>` and your repository is called `<my_repo>`, you'll be asked to use these commands:
-	* 
+	*
 		```
 			git remote add origin https://github.com/<username>/<my_repo>.git
 			git push -u origin master
@@ -263,7 +263,8 @@ You should always be running and testing your code *locally* before pushing chan
 
 ## Assignment
 
-1. Create a Heroku webapp. Set the environment variables `EMAIL` and `PASSWORD` to the email and password of the "*burner*" email account you made. not an email address you care about! 
+1. Create a Heroku webapp. Set the environment variables `EMAIL` and `PASSWORD` to the email and password of the "*burner*" email account you made. not an email address you care about!
+
 	> What we're doing is safe, but it's very easy to accidentally save a password in a Git repository and upload it for the whole world. There are bots that are constantly prowling GitHub for password to steal.
 
 	In your app, you can access environment variables by using `import os` and, for example:
