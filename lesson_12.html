@@ -1082,4 +1082,299 @@ body .markdown-body
 .codehilite .vi{color:teal}
 .codehilite .il{color:#009999}
 .codehilite .gc{color:#999;background-color:#EAF2F5}
-</style><title>lesson_12</title></head><body><article class="markdown-body"><p>Git</p></article></body></html>
+</style><title>lesson_12</title></head><body><article class="markdown-body"><h1 id="evil-python-lesson-12-cloud-based-user-engagement-platform">Evil Python Lesson 12: Cloud-Based User Engagement Platform<a class="headerlink" href="#evil-python-lesson-12-cloud-based-user-engagement-platform" title="Permanent link"></a></h1>
+<p><a href="https://zsiegel92.github.io/evilpython/">All Lessons</a></p>
+<div class="toc">
+<ul>
+<li><a href="#evil-python-lesson-12-cloud-based-user-engagement-platform">Evil Python Lesson 12: Cloud-Based User Engagement Platform</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#install-necessary-software">Install Necessary Software</a><ul>
+<li><a href="#set-up-git">Set up Git</a></li>
+<li><a href="#set-up-heroku">Set up Heroku</a></li>
+</ul>
+</li>
+<li><a href="#create-a-new-repository">Create a New Repository</a><ul>
+<li><a href="#local-repository">Local Repository</a></li>
+<li><a href="#upload-to-github">Upload to GitHub</a></li>
+</ul>
+</li>
+<li><a href="#create-an-app-associate-it-with-your-repository">Create an App, Associate it with your Repository</a></li>
+<li><a href="#create-a-basic-web-application">Create a Basic Web Application</a><ul>
+<li><a href="#giving-run-instructions-for-heroku">Giving &ldquo;Run Instructions&rdquo; for Heroku</a><ul>
+<li><a href="#procfile">Procfile</a></li>
+<li><a href="#requirements-file">Requirements File</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#push-your-webapp">Push Your Webapp!</a></li>
+<li><a href="#scale-your-webapp">Scale Your Webapp</a><ul>
+<li><a href="#visit-apptroubleshooting">Visit App/Troubleshooting</a></li>
+<li><a href="#fully-utlizing-the-cli-command-line-interface">Fully Utlizing the CLI (Command Line Interface)</a></li>
+</ul>
+</li>
+<li><a href="#setting-environment-variables-in-the-heroku-cli">Setting Environment Variables in the Heroku CLI</a><ul>
+<li><a href="#local-environment-variables">Local Environment Variables</a></li>
+</ul>
+</li>
+<li><a href="#assignment">Assignment</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link"></a></h2>
+<p>In this lesson, we will create a cloud-hosted webapp that collects user engagement.</p>
+<h2 id="install-necessary-software">Install Necessary Software<a class="headerlink" href="#install-necessary-software" title="Permanent link"></a></h2>
+<h3 id="set-up-git">Set up Git<a class="headerlink" href="#set-up-git" title="Permanent link"></a></h3>
+<ul>
+<li>Create a <a href="https://github.com/">GitHub</a> account<ul>
+<li>Follow the on-screen instructions to create your GitHub account.</li>
+</ul>
+</li>
+<li>Install Git<ul>
+<li><a href="https://git-scm.com/downloads">Download Git</a></li>
+<li>Follow instructions to install Git, a command-line tool for version control.</li>
+</ul>
+</li>
+</ul>
+<h3 id="set-up-heroku">Set up Heroku<a class="headerlink" href="#set-up-heroku" title="Permanent link"></a></h3>
+<ul>
+<li>Sign up for <a href="heroku.com">Heroku</a></li>
+<li>Install Heroku CLI (<em>Command Line Interface</em>)<ul>
+<li><a href="https://devcenter.heroku.com/articles/heroku-cli">Download</a></li>
+<li>Follow instructions to install Heroku CLIS</li>
+</ul>
+</li>
+</ul>
+<h2 id="create-a-new-repository">Create a New Repository<a class="headerlink" href="#create-a-new-repository" title="Permanent link"></a></h2>
+<h3 id="local-repository">Local Repository<a class="headerlink" href="#local-repository" title="Permanent link"></a></h3>
+<ul>
+<li>Create a folder called <code>app</code> or <code>webapp</code></li>
+<li>Make it into a <strong>git repository</strong> (&ldquo;repo&rdquo;) by typing <code>git init</code>.<ul>
+<li>This will create an invisible folder called <code>/.git</code> and an invisible</li>
+</ul>
+</li>
+<li>Type <code>echo &gt;&gt; .gitignore</code>. <strong>This will create an empty (invisible) file that keeps track of the stuff you don&rsquo;t want to sync with Git</strong>.</li>
+<li>Type <code>echo # Test App! &gt;&gt; README</code><ul>
+<li>This will create a basic <code>README</code> file with only a header taht says &ldquo;Test App!&rdquo;. You can make it say whatever you want.<ul>
+<li>The <code>README</code> file will be interpreted in the <strong>Markdown</strong> language. <a href="https://en.wikipedia.org/wiki/Markdown">Read more about Markdown here</a>. (This website was created using Markdown.)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Type <code>git add .</code><ul>
+<li>the &ldquo;<code>.</code>&rdquo; refers to <em>the current directory</em>. The command <code>git add .</code> adds all files in the current directory (only the <code>README</code> at this point) to the git file tracking. Changes to those files will be eligible for commitment to the repository.</li>
+</ul>
+</li>
+<li>Type <code>git commit -m "First commit!"</code><ul>
+<li>The command <code>git commit</code> is how you commit changes to the local (not online) version of your repository</li>
+<li>The <code>-m "some message"</code> is how you give an informative &ldquo;commit message&rdquo; for your commit, describing the changes. This is actually necessary (if you omit the <code>-m "some message"</code>, you will be forced to write one in your command prompt&rsquo;s default text editor, which is usually a pain).</li>
+</ul>
+</li>
+</ul>
+<h3 id="upload-to-github">Upload to GitHub<a class="headerlink" href="#upload-to-github" title="Permanent link"></a></h3>
+<ul>
+<li>Visit <a href="https://github.com">Github</a>, click the &ldquo;<strong>+</strong>&rdquo; sign and click &ldquo;<strong>New Repository</strong>&rdquo;.</li>
+<li>Name the repository something similar (or identical) to the folder you created (like &ldquo;app&rdquo; or &ldquo;webapp&rdquo;).</li>
+<li>Give an informative description for the repository.<ul>
+<li>For this repo, the following works well: &ldquo;A web application hosted on Heroku&rdquo;.</li>
+</ul>
+</li>
+<li>Click &ldquo;<strong>Create Repository</strong>&ldquo;</li>
+<li>You will see some on-screen instructions to &ldquo;<strong>push an existing repository from the command line</strong>&rdquo;. That&rsquo;s what you want to do! The instructions will be easy to spot on GitHub, with the correct URL, so you should copy them from there.<ul>
+<li>If your GitHub username is <code>&lt;username&gt;</code> and your repository is called <code>&lt;my_repo&gt;</code>, you&rsquo;ll be asked to use these commands:</li>
+<li>
+<div class="codehilite"><pre>    git remote add origin https://github.com/&lt;username&gt;/&lt;my_repo&gt;.git
+    git push -u origin master
+</pre></div>
+
+</li>
+<li>You may be asked to log into GitHub the first time you use the command line interface.</li>
+</ul>
+</li>
+</ul>
+<h2 id="create-an-app-associate-it-with-your-repository">Create an App, Associate it with your Repository<a class="headerlink" href="#create-an-app-associate-it-with-your-repository" title="Permanent link"></a></h2>
+<ul>
+<li>Visit the <a href="https://dashboard.heroku.com">Heroku Dashboard</a></li>
+<li>Click on &ldquo;<strong>New</strong>&rdquo; and select &ldquo;<strong>Create new app</strong>&ldquo;<ul>
+<li>Follow the directions - enter an app name. Unlike GitHub repositories, different users can&rsquo;t create Heroku apps with the same name. So, you may need to call your app something like <code>testapp-may-2019</code> or add a number at the end.</li>
+</ul>
+</li>
+<li>Once you&rsquo;ve created the app, click on &ldquo;<strong>Connect to GitHub</strong>&rdquo; and connect your account. Then, type in the name of your repository in the box that says <code>repo-name</code>, and select it.</li>
+<li>Click the box that says &ldquo;<strong>Enable Automatic Deploys</strong>&rdquo;, then click &ldquo;<strong>Deploy Branch</strong>&rdquo;. At this point, deployment should fail. Our goal is to make it succeed.</li>
+</ul>
+<h2 id="create-a-basic-web-application">Create a Basic Web Application<a class="headerlink" href="#create-a-basic-web-application" title="Permanent link"></a></h2>
+<p>Create the <strong>most basic possible web application</strong> using Python&rsquo;s Flask. Copy the following into a file called <code>app.py</code>:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">&quot;Success! Welcome to this web app.&quot;</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+
+<blockquote>
+<p>You may need to type <code>pip install flask</code> before typing <code>python app.py</code> to install Flask.</p>
+</blockquote>
+<p>Make sure this runs properly on your computer:</p>
+<ul>
+<li>Type <code>python app.py</code> into your command prompt.</li>
+<li>Visit the URL listed in the command prompt, which should be something like <code>https://127.0.0.1:5000/</code></li>
+</ul>
+<p>Now, to run properly on Heroku, we will need to change it to this:</p>
+<div class="codehilite"><pre><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">home</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s">&quot;Success! Welcome to this web app.&quot;</span>
+
+<span class="n">port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;PORT&quot;</span><span class="p">,</span> <span class="mi">33507</span><span class="p">))</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+</pre></div>
+
+<blockquote>
+<p>Changing the <code>host</code> and <code>port</code> are necessary to make the app work properly on Heroku.</p>
+<p>Port 33507 is the preferred port for Heroku apps.</p>
+<p>host &ldquo;<code>0.0.0.0</code>&rdquo; is known as &ldquo;<code>localhost</code>&rdquo;. You can type <code>https://localhost:33507</code> into the browser to access the app (<code>https://0.0.0.0...</code> will not work!).</p>
+</blockquote>
+<h3 id="giving-run-instructions-for-heroku">Giving &ldquo;Run Instructions&rdquo; for Heroku<a class="headerlink" href="#giving-run-instructions-for-heroku" title="Permanent link"></a></h3>
+<p>Heroku mainly uses two files to run your code on its cloud computers: a <strong>procfile</strong> (&ldquo;process file&rdquo;) and a <strong>requirements file</strong>.</p>
+<h4 id="procfile">Procfile<a class="headerlink" href="#procfile" title="Permanent link"></a></h4>
+<p>Heroku machines have several different &ldquo;process types&rdquo;, but we will only use one: a &ldquo;web dyno&rdquo;, which runs a web application.</p>
+<p>To tell Heroku how to run your code on a web dyno, create a file called <code>Procfile</code> (not <code>Procfile.txt</code> or anything with a file extension or a lowercase &ldquo;p&rdquo;!). Open your procfile and add only the following command:</p>
+<div class="codehilite"><pre>web: python app.py
+</pre></div>
+
+<blockquote>
+<p>This just means &ldquo;run my code with the command <code>python app.py</code> on a web dyno type of machine&rdquo;.</p>
+</blockquote>
+<h4 id="requirements-file">Requirements File<a class="headerlink" href="#requirements-file" title="Permanent link"></a></h4>
+<p>Type <code>pip freeze</code> and you should see a list of Python packages (and their versions) installed on your machine. We want the cloud machine to install all of these packages so that it can run your code the same way you do. Create a file called <code>requirements.txt</code> and copy the output of <code>pip freeze</code> into that file.</p>
+<p>You can do this with one slick command:</p>
+<p><code>pip freeze &gt;&gt; requirements.txt</code></p>
+<h2 id="push-your-webapp">Push Your Webapp!<a class="headerlink" href="#push-your-webapp" title="Permanent link"></a></h2>
+<p>Push your changes to GitHub. If you turned on &ldquo;Automatic Deploy&rdquo; on Heroku, Heroku will immmediately start updating your app on its server.</p>
+<ul>
+<li>Type <code>git add .</code></li>
+<li>Type <code>git commit -m "app is set up"</code></li>
+<li>Type <code>git push origin master</code></li>
+</ul>
+<p>If you are at the <a href="dashboard.heroku.com">Heroku Dashboard</a> and click on your app, you should see some activity that says your app is being &ldquo;built&rdquo;.</p>
+<h2 id="scale-your-webapp">Scale Your Webapp<a class="headerlink" href="#scale-your-webapp" title="Permanent link"></a></h2>
+<p>Our procfile notes what type of machine our app should run on. If you click on &ldquo;Resources&rdquo; in the <a href="dashboard.heroku.com">Heroku Dashboard</a>, you should see the contents of your <code>Procfile</code>. By default, your app will be running on a &ldquo;free Heroku web dyno&rdquo;, which means that when you don&rsquo;t access it for 30 minutes, it goes to sleep, and it will then take 2-15 seconds to start back up when you visit it. It can be awake no more than 18 hours per day or so.</p>
+<p>Note the slider - you can upgrade  your cloud machine to be (much, much) more powerful than the most powerful home computers. You could technically use Heroku to run a full instance of Windows or Linux and host a game server that you connect to with your friends!</p>
+<blockquote>
+<p>Potentially great for those who don&rsquo;t want to buy Xbox Live.</p>
+</blockquote>
+<h3 id="visit-apptroubleshooting">Visit App/Troubleshooting<a class="headerlink" href="#visit-apptroubleshooting" title="Permanent link"></a></h3>
+<p>Click on &ldquo;Activity&rdquo; and you should see the option to &ldquo;View build log&rdquo; for the most recent upload. At the bottom of that build log, you&rsquo;ll see a URL where you can visit your application.</p>
+<p>If your app is called <code>&lt;my-app&gt;</code>, your URL will be</p>
+<div class="codehilite"><pre>https://&lt;my-app&gt;.herokuapp.com/
+</pre></div>
+
+<h3 id="fully-utlizing-the-cli-command-line-interface">Fully Utlizing the CLI (Command Line Interface)<a class="headerlink" href="#fully-utlizing-the-cli-command-line-interface" title="Permanent link"></a></h3>
+<p>Note that on <a href="https://blog.heroku.com/python_and_django">blog.heroku.com</a> there are instructions to launch a Flask web application like we did <strong>fully from the command line</strong>:</p>
+<div class="codehilite"><pre><span class="nv">$ </span>heroku create --stack cedar
+Creating young-fire-2556... <span class="k">done</span>, stack is cedar
+http://young-fire-2556.herokuapp.com/ <span class="p">|</span> git@heroku.com:young-fire-2556.git
+Git remote heroku added
+
+<span class="nv">$ </span>git push heroku master
+Counting objects: 5, <span class="k">done</span>.
+Delta compression using up to <span class="m">4</span> threads.
+Compressing objects: 100% <span class="o">(</span>3/3<span class="o">)</span>, <span class="k">done</span>.
+Writing objects: 100% <span class="o">(</span>5/5<span class="o">)</span>, <span class="m">495</span> bytes, <span class="k">done</span>.
+Total <span class="m">5</span> <span class="o">(</span>delta 0<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
+
+<span class="nv">$ </span>git push heroku master
+Counting objects: 5, <span class="k">done</span>.
+Delta compression using up to <span class="m">4</span> threads.
+Compressing objects: 100% <span class="o">(</span>3/3<span class="o">)</span>, <span class="k">done</span>.
+Writing objects: 100% <span class="o">(</span>5/5<span class="o">)</span>, <span class="m">495</span> bytes, <span class="k">done</span>.
+Total <span class="m">5</span> <span class="o">(</span>delta 0<span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta 0<span class="o">)</span>
+
+-----&gt; Heroku receiving push
+-----&gt; Python app detected
+-----&gt; Preparing virtualenv version 1.6.1
+   New python executable in ./bin/python2.7
+   Also creating executable in ./bin/python
+   Installing setuptools............done.
+   Installing pip...............done.
+-----&gt; Installing dependencies using pip version 1.0.1
+   Downloading/unpacking <span class="nv">Flask</span><span class="o">==</span>0.7.2 <span class="o">(</span>from -r requirements.txt <span class="o">(</span>line 1<span class="o">))</span>
+   ...
+   Successfully installed Flask Werkzeug Jinja2
+   Cleaning up...
+-----&gt; Discovering process types
+   Procfile declares types -&gt; web
+-----&gt; Compiled slug size is 3.5MB
+-----&gt; Launching... <span class="k">done</span>, v2
+   http://young-fire-2556.herokuapp.com deployed to Heroku
+
+To git@heroku.com:young-fire-2556.git
+ * <span class="o">[</span>new branch<span class="o">]</span>      master -&gt; master
+</pre></div>
+
+<blockquote>
+<p><code>heroku create --stack cedar</code> creates an app with a random name (in this case it turned out to be &ldquo;<code>young-fire-2556</code>&rdquo;) on Heroku&rsquo;s &ldquo;cedar&rdquo; servers.</p>
+<p>If you want to create an app called `example and you don&rsquo;t care what servers it&rsquo;s on (you probably don&rsquo;t), juse use the command:</p>
+<p><code>heroku create example</code></p>
+</blockquote>
+<p>You can even access your app from the command line! If your app is called <code>my-app</code>, you would enter the following, and see the following output from our app:</p>
+<div class="codehilite"><pre>$ curl http://my-app.herokuapp.com/
+&quot;Success! Welcome to this web app.&quot;
+</pre></div>
+
+<h2 id="setting-environment-variables-in-the-heroku-cli">Setting Environment Variables in the Heroku CLI<a class="headerlink" href="#setting-environment-variables-in-the-heroku-cli" title="Permanent link"></a></h2>
+<p>Type <code>heroku login</code> in your command prompt to ensure you are logged in.</p>
+<p>Type <code>heroku apps</code> to view a list of your current applications. You should see the name of your app. Every command that refers to a specific app called <code>my-app</code> needs to contain the option <code>--app my-app</code> somewhere.</p>
+<p>To set an environment variable called <code>var1</code> to have the value <code>value1</code> on an app called <code>my-app</code>, you will have to type:</p>
+<p><code>heroku config:set var1=value1 --app my-app</code></p>
+<blockquote>
+<p>If <code>value1</code> was instead a value with multiple space-separated words, you&rsquo;d have to wrap it in quotes.</p>
+<p>For example, on my app <code>testapp-may2019</code>, to change the <code>owner</code> environment variable to <code>Zach Siegel</code>, I&rsquo;d type:
+<div class="codehilite"><pre>heroku config:set owner=&quot;Zach Siegel&quot; --app testapp-may2019
+</pre></div></p>
+</blockquote>
+<p>To view your environment variables for the app <code>my-app</code>, you have to type:</p>
+<div class="codehilite"><pre>heroku config --app my-app
+</pre></div>
+
+<p>For example, running this for <code>testapp-may2019</code> gives the following output:</p>
+<div class="codehilite"><pre>heroku config --app testapp-may2019
+=== testapp-may2019 Config Vars
+owner: Zach Siegel
+var1:  value1
+</pre></div>
+
+<h4 id="local-environment-variables">Local Environment Variables<a class="headerlink" href="#local-environment-variables" title="Permanent link"></a></h4>
+<p>You should always be running and testing your code <em>locally</em> before pushing changes to GitHub (and Heroku). You&rsquo;ll also need to set environment variables locally for that.</p>
+<ul>
+<li><code>export var1=value1</code> (Mac)</li>
+<li><code>$Env:var1=value1</code> (Windows Powershell)</li>
+<li><code>@set var1=value1</code> (Windows <code>cmder</code> shell)</li>
+</ul>
+<h2 id="assignment">Assignment<a class="headerlink" href="#assignment" title="Permanent link"></a></h2>
+<ol>
+<li>
+<p>Create a Heroku webapp. Set the environment variables <code>EMAIL</code> and <code>PASSWORD</code> to the email and password of the &ldquo;<em>burner</em>&rdquo; email account you made. not an email address you care about! 
+    &gt; What we&rsquo;re doing is safe, but it&rsquo;s very easy to accidentally save a password in a Git repository and upload it for the whole world. There are bots that are constantly prowling GitHub for password to steal.</p>
+<p>In your app, you can access environment variables by using <code>import os</code> and, for example:</p>
+<div class="codehilite"><pre><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;EMAIL&quot;</span><span class="p">)</span>
+</pre></div>
+
+<p>Make the webapp send some emails (any emails) when you visit the link with route <code>/send_emails</code>.</p>
+<p>Push your changes using:</p>
+<div class="codehilite"><pre>git add .
+git commit -m &quot;commit messaage&quot;
+git push origin master
+</pre></div>
+
+</li>
+</ol></article></body></html>
