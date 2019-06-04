@@ -159,6 +159,7 @@ def name_response():
     return render_template('linker.html')
 ```
 > Make sure to add `render_template` to your imports:
+>
 > `from flask import Flask, render_template, redirect, url_for`
 
 Also change your `/` route to simply redirect to `/contact`:
