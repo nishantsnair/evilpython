@@ -16,7 +16,7 @@ At this point you should have the following:
 	* Use these commands to upload changes:
 		* `git add .`
 		* `git commit -m "commit message here"`
-		* git push origin master
+		* `git push origin master`
 * **Heroku app** configured to run the code in your GitHub repository
 	* To set the default app (so you don't have to type `--app appname` all the time):
 		* `heroku git:remote -a appname`
