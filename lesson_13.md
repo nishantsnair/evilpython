@@ -124,7 +124,7 @@ def send_something(user_email):
 
 Make sure you successfully receive an email when you visit `http://127.0.0.1:33507/send_something/YOUR_EMAIL_HERE` (with `YOUR_EMAIL_HERE` replaced with your email).
 
-## HTML Template with a custom link!
+## HTML Template with a Custom Link!
 
 Create a folder called `templates` in the same folder as `app.py`. In that folder, save the following HTML webpage in a file called `linker.html`:
 
