@@ -27,7 +27,7 @@ At this point you should have the following:
 		* `heroku run bash --app appname`
 * **Environment variables** set called "EMAIL" and "PASSWORD" for a gmail account that you *do not use for anything important*
 	* These should be set *locally* (on your computer) using one of the following:
-		* `export var1=value1` (Mac)
+		* `export var1=value1` (Unix: Linux/Mac)
 		* `$Env:var1=value1` (Windows Powershell)
 		* `@set var1=value1` (Windows cmder shell)
 	* These should be set *remotely* (on your Heroku server) using the following (here for an app called `appname`):
@@ -183,7 +183,7 @@ We can use environment variables to automatically set our `base_url` in our clou
 
 **Create a local environment variable called `base_url`**. It will look like this:
 
-* `export base_url=http://127.0.0.1:33507` (Mac)
+* `export base_url=http://127.0.0.1:33507` (Unix: Linux/Mac)
 * `$Env:base_url=http://127.0.0.1:33507` (Windows Powershell)
 * `@set base_url=http://127.0.0.1:33507` (Windows cmder shell)
 
