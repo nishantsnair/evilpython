@@ -22,14 +22,14 @@ At this point you should have the following:
 		* `heroku git:remote -a appname`
 		* (replace `appname` with your app's name)
 	* To view environment variables:
-		* `heroku config`
+		* `heroku config --app appname` (or just `heroku config`)
 	* To navigate your server using the command prompt:
-		* `heroku run bash -- app appname`
+		* `heroku run bash --app appname`
 * **Environment variables** set called "EMAIL" and "PASSWORD" for a gmail account that you *do not use for anything important*
 	* These should be set *locally* (on your computer) using one of the following:
 		* `export var1=value1` (Mac)
 		* `$Env:var1=value1` (Windows Powershell)
-		* `@set var1=value1` (Windows `cmder` shell)
+		* `@set var1=value1` (Windows cmder shell)
 	* These should be set *remotely* (on your Heroku server) using the following (here for an app called `appname`):
 		* `heroku config:set var1=value1 --app appname`
 
@@ -185,7 +185,7 @@ We can use environment variables to automatically set our `base_url` in our clou
 
 * `export base_url=http://127.0.0.1:33507` (Mac)
 * `$Env:base_url=http://127.0.0.1:33507` (Windows Powershell)
-* `@set base_url=http://127.0.0.1:33507` (Windows `cmder` shell)
+* `@set base_url=http://127.0.0.1:33507` (Windows cmder shell)
 
 
 Now, set this on your Heroku server (change `test-app-zeze` to your app's name):

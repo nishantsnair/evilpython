@@ -1121,11 +1121,11 @@ body .markdown-body
 </ul>
 </li>
 <li>To view environment variables:<ul>
-<li><code>heroku config</code></li>
+<li><code>heroku config --app appname</code> (or just <code>heroku config</code>)</li>
 </ul>
 </li>
 <li>To navigate your server using the command prompt:<ul>
-<li><code>heroku run bash -- app appname</code></li>
+<li><code>heroku run bash --app appname</code></li>
 </ul>
 </li>
 </ul>
@@ -1134,7 +1134,7 @@ body .markdown-body
 <li>These should be set <em>locally</em> (on your computer) using one of the following:<ul>
 <li><code>export var1=value1</code> (Mac)</li>
 <li><code>$Env:var1=value1</code> (Windows Powershell)</li>
-<li><code>@set var1=value1</code> (Windows <code>cmder</code> shell)</li>
+<li><code>@set var1=value1</code> (Windows cmder shell)</li>
 </ul>
 </li>
 <li>These should be set <em>remotely</em> (on your Heroku server) using the following (here for an app called <code>appname</code>):<ul>
@@ -1274,7 +1274,7 @@ body .markdown-body
 <ul>
 <li><code>export base_url=http://127.0.0.1:33507</code> (Mac)</li>
 <li><code>$Env:base_url=http://127.0.0.1:33507</code> (Windows Powershell)</li>
-<li><code>@set base_url=http://127.0.0.1:33507</code> (Windows <code>cmder</code> shell)</li>
+<li><code>@set base_url=http://127.0.0.1:33507</code> (Windows cmder shell)</li>
 </ul>
 <p>Now, set this on your Heroku server (change <code>test-app-zeze</code> to your app&rsquo;s name):</p>
 <ul>
